@@ -14,7 +14,7 @@
   /* =================================================================
      LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
      ================================================================= */
-  @layer reset, tokens, base, type, layout, components, utilities;
+  @layer reset, tokens, base, type, layout, components;
 
   /* ---------- RESET ---------- */
   @layer reset {
@@ -152,14 +152,6 @@
       color: var(--sage-deep);
     }
 
-    .kicker {
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--clay);
-    }
   }
 
   /* ---------- LAYOUT ---------- */
@@ -678,14 +670,6 @@
     .colophon-end::after  { content: "  —"; color: var(--clay); }
   }
 
-  /* ---------- UTILITIES ---------- */
-  @layer utilities {
-    .visually-hidden {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-    }
-  }
-
   /* ---------- MOTION RESPECT ---------- */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -718,7 +702,7 @@
 
 <section class="lede col">
   <p><span class="dropcap">O</span>n January 21, 2026, with no public ceremony, the State Water Resources Control Board closed cleanup case <span class="smallcaps">1NSO266</span>. The property in question is roughly 266 acres of rolling oak and grassland east of Asti Road and the Russian River, bisected by the old Northwestern Pacific rail line. In the regulatory ledger it is identified as <em>Masonite's Former Wood Preserve, T0609793185</em>. In local memory it is the mill — a place that for forty years employed Cloverdale residents, fouled the groundwater under their feet, was abandoned by its corporate owners, became a project of speculation, and is now the proposed site of a 605-unit village called Esmeralda.</p>
-  <p>The case is closed. The legacy is not. What follows is a chronological record assembled from the <em>Cloverdale Reveille</em> across five decades, the Regional Water Board's GeoTracker file, the Environmental Impact Report and its addenda, and contemporary reporting in the <em>Press Democrat</em>, the <em>San Francisco Chronicle</em>, and the <em>Mercury News</em>. Where the documents are silent we have said so.</p>
+  <p>The case is closed. The legacy is not. What follows is a chronological record assembled from the <em>Cloverdale Reveille</em> across five decades, the Regional Water Board's GeoTracker file, the Environmental Impact Report and its addenda, and contemporary reporting in the <em>Press Democrat</em>, the <em>San Francisco Chronicle</em>, and the <em>Mercury News</em>. Where the documents are silent we have said so.<a href="https://groundtruth.watch/sources.html">See a full list of sources and documents.</a></p>
 </section>
 
 <!-- ============= ORNAMENT — botanical fern ============= -->
