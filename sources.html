@@ -10,19 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- CSS_PLACEHOLDER -->
-
-  <style>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A long-form chronicle of the 266-acre Asti Road parcel in Cloverdale — from Masonite's wood-treatment plant to the proposed Esmeralda development.">
-  <meta name="theme-color" content="#fcfcff">
-  <title>Ground Truth · 266 Acres South of Town</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
   <style>
   /* =================================================================
      LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
@@ -316,8 +303,16 @@
       text-transform: uppercase;
       color: var(--clay);
       margin-bottom: 0.75rem;
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .chapter-num::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--clay-light), transparent);
+      max-width: 8rem;
     }
 
     .chapter-title {
@@ -329,7 +324,7 @@
     }
     .chapter-title em {
       font-style: italic;
-      color: var(--clay);
+      color: var(--sage-deep);
       font-variation-settings: "opsz" 96, "wght" 500, "SOFT" 90;
     }
 
@@ -1011,4 +1006,3 @@
 </main>
 </body>
 </html>
-
