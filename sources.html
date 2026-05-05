@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A working bibliography of every public record cited in the Ground Truth dispatch on the 266-acre Asti Road parcel in Cloverdale, California — and a note on what is hosted publicly, what isn't, and why it matters.">
+  <meta name="theme-color" content="#fcfcff">
+  <title>Sources &amp; Documents · Ground Truth · Dispatch No. 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS_PLACEHOLDER -->
+
+  <style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A long-form chronicle of the 266-acre Asti Road parcel in Cloverdale — from Masonite's wood-treatment plant to the proposed Esmeralda development.">
+  <meta name="theme-color" content="#fcfcff">
+  <title>Ground Truth · 266 Acres South of Town</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* =================================================================
+     LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
+     ================================================================= */
+  @layer reset, tokens, base, type, layout, components, utilities;
+
+  /* ---------- RESET ---------- */
+  @layer reset {
+    *, *::before, *::after { box-sizing: border-box; min-width: 0; }
+    * { margin: 0; padding: 0; }
+    html, body { overflow-x: clip; max-width: 100%; }
+    img, picture, svg { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; }
+    a { color: inherit; overflow-wrap: anywhere; word-break: break-word; }
+    :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; border-radius: 2px; }
+  }
+
+  /* ---------- DESIGN TOKENS ---------- */
+  @layer tokens {
+    :root {
+      /* Earth-mama palette — clay, cream, sage, ochre */
+      --paper:        #fcfcff;
+      --paper-soft:   #ffffff;
+      --paper-deep:   #eef0fa;
+      --shell:        #ffffff;
+
+      --ink:          #0a0a14;
+      --ink-soft:     #1a1d2e;
+      --ink-faded:    #4a4f63;
+
+      --clay:         #1340e0;
+      --clay-deep:    #001a80;
+      --clay-light:   color-mix(in oklab, var(--clay) 55%, var(--paper));
+
+      --sage:         #2a4378;
+      --sage-deep:    #0f1f4a;
+      --sage-light:   color-mix(in oklab, var(--sage) 35%, var(--paper));
+
+      --ochre:        #1860c4;
+      --ochre-deep:   #0a4090;
+
+      --rule:         #c8cde0;
+
+      /* Type scale — fluid via clamp */
+      --fs-xs:    clamp(0.75rem, 0.72rem + 0.15vw, 0.825rem);
+      --fs-sm:    clamp(0.875rem, 0.85rem + 0.15vw, 0.95rem);
+      --fs-base:  clamp(1.0625rem, 1.0rem + 0.35vw, 1.2rem);
+      --fs-md:    clamp(1.2rem, 1.1rem + 0.5vw, 1.35rem);
+      --fs-lg:    clamp(1.5rem, 1.3rem + 1vw, 1.85rem);
+      --fs-xl:    clamp(1.85rem, 1.5rem + 1.75vw, 2.6rem);
+      --fs-2xl:   clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+      --fs-3xl:   clamp(3.25rem, 2.5rem + 3.75vw, 5.5rem);
+
+      /* Spacing — soft rhythm */
+      --space-xs:  0.5rem;
+      --space-sm:  1rem;
+      --space-md:  1.75rem;
+      --space-lg:  3rem;
+      --space-xl:  5rem;
+      --space-2xl: 7rem;
+
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-organic: 28px 36px 32px 24px / 36px 28px 40px 30px;
+
+      --measure: 38rem;        /* readable line length */
+      --measure-wide: 52rem;
+      --measure-narrow: 30rem;
+
+      /* Soft warm shadows */
+      --shadow-soft:   0 1px 2px rgba(74, 50, 30, 0.06),
+                       0 8px 24px rgba(74, 50, 30, 0.08);
+      --shadow-warm:   0 2px 4px rgba(184, 92, 44, 0.08),
+                       0 12px 32px rgba(122, 57, 25, 0.10);
+    }
+  }
+
+  /* ---------- BASE ---------- */
+  @layer base {
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--paper);
+      background-image:
+        radial-gradient(circle at 12% 18%, color-mix(in oklab, var(--clay) 3%, transparent) 0%, transparent 45%),
+        radial-gradient(circle at 88% 78%, color-mix(in oklab, var(--sage) 3%, transparent) 0%, transparent 50%),
+        radial-gradient(circle at 50% 110%, color-mix(in oklab, var(--ochre) 2%, transparent) 0%, transparent 60%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0 0.08 0 0 0 0.025 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+      font-optical-sizing: auto;
+      font-variation-settings: "opsz" 18;
+      font-size: var(--fs-base);
+      line-height: 1.7;
+      font-feature-settings: "kern" 1, "liga" 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      background: color-mix(in oklab, var(--clay) 30%, transparent);
+      color: var(--ink);
+    }
+  }
+
+  /* ---------- TYPOGRAPHY ---------- */
+  @layer type {
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', serif;
+      color: var(--ink);
+      text-wrap: balance;
+      line-height: 1.1;
+    }
+    h1 { font-variation-settings: "opsz" 144, "wght" 700, "SOFT" 50; }
+    h2 { font-variation-settings: "opsz" 96, "wght" 600, "SOFT" 60; }
+    h3 { font-variation-settings: "opsz" 36, "wght" 600, "SOFT" 40; }
+
+    p { text-wrap: pretty; hyphens: auto; }
+
+    em { font-style: italic; }
+    strong { font-weight: 600; color: var(--ink); }
+
+    a:not([class]) {
+      color: var(--clay-deep);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in oklab, var(--clay) 50%, transparent);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+      transition: text-decoration-color .2s ease;
+    }
+    a:not([class]):hover { text-decoration-color: var(--clay); }
+
+    .smallcaps {
+      font-variant: all-small-caps;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      color: var(--sage-deep);
+    }
+
+    .kicker {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+  }
+
+  /* ---------- LAYOUT ---------- */
+  @layer layout {
+    .page {
+      max-width: 70rem;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 3rem);
+      padding-block: clamp(2rem, 5vw, 4rem) var(--space-2xl);
+    }
+
+    .col {
+      max-width: var(--measure);
+      margin-inline: auto;
+    }
+
+    .col-wide {
+      max-width: var(--measure-wide);
+      margin-inline: auto;
+    }
+  }
+
+  /* ---------- COMPONENTS ---------- */
+  @layer components {
+
+    /* ============= MASTHEAD ============= */
+    .masthead {
+      position: relative;
+      padding-block: var(--space-md) var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .masthead-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm) var(--space-md);
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--rule);
+    }
+    .masthead-meta > :first-child { color: var(--clay); }
+
+    .masthead .title {
+      font-size: var(--fs-3xl);
+      font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 60;
+      letter-spacing: -0.025em;
+      line-height: 0.92;
+      color: var(--ink);
+      margin-block: clamp(1.5rem, 4vw, 2.5rem) var(--space-sm);
+    }
+    .masthead .title em {
+      font-style: italic;
+      color: var(--clay);
+      font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 100;
+    }
+
+    .masthead .subtitle {
+      font-family: 'Fraunces', serif;
+      font-size: var(--fs-md);
+      font-variation-settings: "opsz" 32, "wght" 400, "SOFT" 70;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--ink-soft);
+      max-width: var(--measure);
+      margin-bottom: var(--space-md);
+    }
+
+    .masthead .dateline {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      padding: 0.5em 1em 0.5em 0;
+      border-left: 4px solid var(--clay);
+      padding-left: 1em;
+      margin-top: var(--space-xs);
+    }
+
+    /* ============= LEDE ============= */
+    .lede {
+      margin-block: var(--space-lg) var(--space-xl);
+    }
+
+    .lede p:first-of-type {
+      font-family: 'Newsreader', serif;
+      font-size: var(--fs-md);
+      font-variation-settings: "opsz" 32, "wght" 400;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .lede p + p {
+      font-style: italic;
+      color: var(--ink-soft);
+      font-size: var(--fs-base);
+      margin-top: 1.25em;
+    }
+
+    .dropcap {
+      float: left;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 30;
+      font-size: 6.2em;
+      line-height: 0.78;
+      color: var(--clay);
+      margin: 0.08em 0.12em -0.05em 0;
+      padding: 0;
+      text-shadow:
+        2px 2px 0 var(--paper-deep),
+        -1px -1px 0 color-mix(in oklab, var(--clay) 30%, transparent);
+    }
+
+    /* ============= CHAPTER ============= */
+    .chapter {
+      margin-block: var(--space-xl);
+      max-width: var(--measure);
+      margin-inline: auto;
+      position: relative;
+    }
+    .chapter.wide { max-width: var(--measure-wide); }
+
+    .chapter-head {
+      margin-bottom: var(--space-md);
+    }
+
+    .chapter-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .chapter-title {
+      font-size: var(--fs-xl);
+      font-variation-settings: "opsz" 96, "wght" 700, "SOFT" 50;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .chapter-title em {
+      font-style: italic;
+      color: var(--clay);
+      font-variation-settings: "opsz" 96, "wght" 500, "SOFT" 90;
+    }
+
+    .chapter-years {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-sm);
+      letter-spacing: 0.1em;
+      color: var(--clay-deep);
+    }
+
+    .chapter p {
+      margin-bottom: 1em;
+    }
+    .chapter p + p { text-indent: 1.4em; margin-top: -0.3em; }
+
+    /* ============= ORNAMENT — botanical fern divider ============= */
+    .ornament {
+      display: flex;
+      justify-content: center;
+      margin-block: var(--space-xl);
+      color: var(--sage);
+      opacity: 0.65;
+    }
+    .ornament svg { width: 96px; height: auto; }
+
+    /* ============= PULLQUOTE ============= */
+    .pullquote {
+      margin-block: var(--space-lg);
+      padding: var(--space-md);
+      background: var(--paper-soft);
+      border-left: 5px solid var(--clay);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      box-shadow: var(--shadow-soft);
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 60, "wght" 450, "SOFT" 80;
+      font-style: italic;
+      font-size: var(--fs-md);
+      line-height: 1.5;
+      color: var(--ink);
+      text-indent: 0;
+    }
+    .pullquote::before { content: none; }
+    .pullquote-cite {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--clay-deep);
+    }
+
+    /* ============= DATA BLOCK ============= */
+    .data-block {
+      margin-block: var(--space-md);
+      padding: var(--space-md);
+      background: var(--shell);
+      border-radius: var(--radius-md);
+      border: 1px solid color-mix(in oklab, var(--clay) 12%, var(--paper-deep));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .data-block-label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: var(--space-sm);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed color-mix(in oklab, var(--clay) 30%, transparent);
+    }
+
+    .data-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding: 0.55rem 0;
+      align-items: baseline;
+      border-bottom: 1px dotted color-mix(in oklab, var(--ink) 15%, transparent);
+      font-size: var(--fs-sm);
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-row .key {
+      font-family: 'Newsreader', serif;
+      color: var(--ink-soft);
+    }
+    .data-row .val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95em;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: right;
+    }
+    .data-row .val.alarm { color: var(--clay-deep); }
+    .data-row .val.warn { color: var(--ochre-deep); }
+
+    /* ============= SVG FRAME / CHEM CARDS ============= */
+    .svg-frame {
+      margin-block: var(--space-lg);
+      padding: var(--space-md) 0;
+    }
+    .svg-frame-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: var(--space-md);
+      text-align: center;
+    }
+    .chem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: var(--space-sm);
+    }
+    .chem-card {
+      padding: var(--space-md);
+      background: linear-gradient(165deg, var(--paper-soft) 0%, var(--paper-deep) 110%);
+      border-radius: var(--radius-organic);
+      box-shadow: var(--shadow-warm);
+      position: relative;
+      isolation: isolate;
+      border-top: 4px solid var(--clay);
+      transition: transform .25s ease;
+    }
+    .chem-card:hover { transform: translateY(-2px); }
+    .chem-card.severe { border-top-color: var(--clay-deep); }
+    .chem-card.moderate { border-top-color: var(--ochre); }
+
+    .chem-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-variation-settings: "opsz" 36, "wght" 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .chem-formula {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      margin-bottom: 0.85rem;
+    }
+    .chem-detail {
+      font-size: var(--fs-sm);
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .chem-stat {
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed color-mix(in oklab, var(--clay) 25%, transparent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .chem-stat strong {
+      color: var(--clay-deep);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95em;
+    }
+
+    /* ============= FIGURE ============= */
+    figure {
+      margin-block: var(--space-lg);
+    }
+    figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-warm);
+      filter: contrast(1.04) saturate(0.94);
+    }
+    figcaption {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: var(--fs-sm);
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin-top: 0.85rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--sage-light);
+    }
+    figcaption .src {
+      display: block;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-top: 0.4rem;
+    }
+    figcaption a {
+      color: var(--clay-deep);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in oklab, var(--clay) 40%, transparent);
+      text-underline-offset: 2px;
+    }
+
+    /* ============= AGENCY NOTE / SIDEBAR ============= */
+    .sidebar-note {
+      margin-block: var(--space-md);
+      padding: var(--space-md);
+      background: linear-gradient(135deg,
+        color-mix(in oklab, var(--sage) 8%, var(--paper-soft)),
+        var(--paper-soft));
+      border-radius: var(--radius-organic);
+      border-left: 4px solid var(--sage);
+      box-shadow: var(--shadow-soft);
+      font-size: var(--fs-sm);
+      line-height: 1.6;
+    }
+    .sidebar-note h4 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 24, "wght" 700, "SOFT" 70;
+      font-size: var(--fs-md);
+      color: var(--sage-deep);
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-note p { color: var(--ink-soft); }
+
+    /* ============= SOURCES BLOCK ============= */
+    .sources {
+      margin-top: var(--space-md);
+      padding-top: var(--space-sm);
+      border-top: 1px dashed color-mix(in oklab, var(--ink) 20%, transparent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+    .sources-label {
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .sources em { font-family: 'Newsreader', serif; }
+
+    /* ============= ACTION BLOCK ============= */
+    .action {
+      margin-block: var(--space-xl);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: var(--paper-soft);
+      color: var(--ink);
+      border-radius: var(--radius-md);
+      border-left: 6px solid var(--clay);
+      box-shadow: var(--shadow-soft);
+    }
+    .action::before { content: none; }
+
+    .action-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clay-deep);
+      margin-bottom: 0.85rem;
+    }
+    .action-title {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 96, "wght" 700, "SOFT" 50;
+      font-size: var(--fs-xl);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      margin-bottom: var(--space-md);
+      color: var(--ink);
+    }
+    .action-title em {
+      font-style: italic;
+      color: var(--clay);
+      font-variation-settings: "opsz" 96, "wght" 500, "SOFT" 80;
+    }
+
+    .action ol {
+      list-style: none;
+      counter-reset: step;
+      padding-left: 0;
+    }
+    .action li {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      counter-increment: step;
+    }
+    .action li:last-child { border-bottom: none; }
+    .action li::before {
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--clay);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .action li h4 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 36, "wght" 700, "SOFT" 50;
+      font-size: var(--fs-md);
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .action li p {
+      font-family: 'Newsreader', serif;
+      font-size: var(--fs-base);
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    /* ============= COLOPHON ============= */
+    .colophon {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--rule);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+    .colophon h4 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 24, "wght" 600, "SOFT" 60;
+      font-size: var(--fs-md);
+      color: var(--clay-deep);
+      margin-block: var(--space-md) 0.5rem;
+    }
+    .colophon p { margin-bottom: 0.75rem; }
+    .colophon em { font-style: italic; }
+    .colophon-end {
+      margin-top: var(--space-lg);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.18em;
+      color: var(--ink-faded);
+    }
+    .colophon-end::before { content: "—  "; color: var(--clay); }
+    .colophon-end::after  { content: "  —"; color: var(--clay); }
+  }
+
+  /* ---------- UTILITIES ---------- */
+  @layer utilities {
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  }
+
+  /* ---------- MOTION RESPECT ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+  </style>
+</head>
+
+<body>
+<main class="page">
+
+<!-- ============= MASTHEAD ============= -->
+<header class="masthead">
+  <div class="masthead-meta">
+    <span>Volume I · Dispatch No. 2</span>
+    <span>Cloverdale, Sonoma County</span>
+    <span>Sources &amp; Documents</span>
+  </div>
+  <h1 class="title">Sources &amp; <em>Documents</em></h1>
+  <p class="subtitle">A working bibliography of every public record cited in the Ground Truth dispatch — and a note on what is hosted publicly, what isn't, and why that matters.</p>
+  <div class="dateline">Compiled · May 2026</div>
+</header>
+
+<!-- ============= LEDE ============= -->
+<section class="lede col">
+  <p>This page is the documentary spine of <a href="/">the dispatch</a>. Every claim made there about the 266 acres south of Cloverdale rests on a public record. Some of those records are hosted on durable, government-run servers and will outlast the project. Some are hosted on the developer's law firm's commercial file-sharing platform and could vanish without notice. Some — including the 2009 Final Environmental Impact Report that the city is currently relying on for the Esmeralda Project's CEQA compliance — are not posted online by the City of Cloverdale at all.</p>
+  <p>What follows is the working bibliography, organized by source, with archival notes where they matter. Where a document is not currently online, the path to obtaining it as a public record is given. Where a document is hosted on a non-durable server, the reader is encouraged to mirror it.</p>
+</section>
+
+<div class="ornament" aria-hidden="true">
+  <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 20 Q30 15 60 20 T115 20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+    <g stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none">
+      <path d="M20 20 Q22 14 28 13"/><path d="M20 20 Q22 26 28 27"/>
+      <path d="M35 20 Q37 13 44 12"/><path d="M35 20 Q37 27 44 28"/>
+      <path d="M50 20 Q52 12 60 11"/><path d="M50 20 Q52 28 60 29"/>
+      <path d="M70 20 Q68 12 60 11"/><path d="M70 20 Q68 28 60 29"/>
+      <path d="M85 20 Q83 13 76 12"/><path d="M85 20 Q83 27 76 28"/>
+      <path d="M100 20 Q98 14 92 13"/><path d="M100 20 Q98 26 92 27"/>
+    </g>
+    <circle cx="60" cy="20" r="1.6" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ============= I. REGULATORY ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">I · Regulatory case files</div>
+    <h2 class="section-title">The state's <em>own record</em></h2>
+  </header>
+
+  <p>These are the files maintained by California state agencies in the ordinary course of regulating the parcel. They are durable, indexed, and unlikely to disappear.</p>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">GeoTracker case T0609793185 · <em>Masonite's Former Wood Preserve</em></span>
+      <span class="doc-meta">North Coast Regional Water Quality Control Board case 1NSO266. Full regulatory file: 22 years of monitoring well data, analytical results, submittal history, and the January 2026 case-closure determination.</span>
+      <span class="doc-url"><a href="https://geotracker.waterboards.ca.gov/profile_report.asp?global_id=T0609793185">geotracker.waterboards.ca.gov/profile_report.asp?global_id=T0609793185</a></span>
+    </li>
+    <li>
+      <span class="doc-title">CEQAnet record SCH 2003072142 · <em>Alexander Valley Resort Project</em></span>
+      <span class="doc-meta">State Clearinghouse listing for the original 2003 Notice of Preparation, the 2004 Draft EIR, the 2008 Recirculated Draft EIR, and the 2009 Final EIR. The state hosts the index but not the document attachments.</span>
+      <span class="doc-url"><a href="https://ceqanet.lci.ca.gov/Project/2003072142">ceqanet.lci.ca.gov/Project/2003072142</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= II. CITY OF CLOVERDALE ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">II · City of Cloverdale</div>
+    <h2 class="section-title">What the city <em>has chosen to post</em></h2>
+  </header>
+
+  <p>The city's official pages on the project. The omissions are as informative as the inclusions: the 2009 FEIR, the 2016 First Addendum, the 2018 Second Addendum, and the referenced 2025 Addendum to the AVR Specific Plan EIR are not hosted on cloverdale.net.</p>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">Esmeralda Project Information</span>
+      <span class="doc-meta">The official city page for the project, with developer-prepared FAQ responses noted as "not independently reviewed by the City."</span>
+      <span class="doc-url"><a href="https://www.cloverdale.net/644/Esmeralda-Project-Information">cloverdale.net/644/Esmeralda-Project-Information</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Long-Range Planning</span>
+      <span class="doc-meta">The city's planning page. Hosts the AVR Specific Plan but not the AVR Final EIR or any of its addenda.</span>
+      <span class="doc-url"><a href="https://www.cloverdale.net/243/Long-Range-Planning">cloverdale.net/243/Long-Range-Planning</a></span>
+    </li>
+    <li>
+      <span class="doc-title">City Council Resolution 048-2018</span>
+      <span class="doc-meta">Adopted the Second Addendum to the AVR Final Environmental Impact Report.</span>
+      <span class="doc-url"><a href="https://www.cloverdale.net/DocumentCenter/View/2377">cloverdale.net/DocumentCenter/View/2377</a></span>
+    </li>
+    <li>
+      <span class="doc-title">City Manager Weekly Report · October 19, 2018</span>
+      <span class="doc-meta">References the 2018 Planning Commission action that preceded Resolution 048.</span>
+      <span class="doc-url"><a href="https://www.cloverdale.net/DocumentCenter/View/2953">cloverdale.net/DocumentCenter/View/2953</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= III. DEVELOPER ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">III · Esmeralda Land Company</div>
+    <h2 class="section-title">The developer's <em>own framing</em></h2>
+  </header>
+
+  <p>Esmeralda Land Company's public-facing pages and event platform. These are the only place where the developer's confirmation of the addendum-only CEQA pathway appears in writing — until and unless the city's eventual Notice of Determination is filed.</p>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">Esmeralda Land Company · main site</span>
+      <span class="doc-url"><a href="https://www.esmeralda.org">esmeralda.org</a></span>
+    </li>
+    <li>
+      <span class="doc-title">FAQ · including the "Environmental Review" section</span>
+      <span class="doc-meta">The developer's confirmation that the project will proceed under "a 200+ page Addendum, which must be completed before the City can approve the Revised Plan."</span>
+      <span class="doc-url"><a href="https://esmeralda.org/faq">esmeralda.org/faq</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Public Process · workshop &amp; town hall schedule</span>
+      <span class="doc-url"><a href="https://esmeralda.org/public-process">esmeralda.org/public-process</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Site description</span>
+      <span class="doc-url"><a href="https://esmeralda.org/site">esmeralda.org/site</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Soils &amp; Groundwater Workshop · virtual, hosted by Devon Zuegel <span class="tag warn">developer-hosted</span></span>
+      <span class="doc-meta">Luma event platform. Notable for the choice of venue — a Silicon Valley event tool — for what is effectively the developer's response to public concern about the contamination history.</span>
+      <span class="doc-url"><a href="https://luma.com/c4hyo7z7">luma.com/c4hyo7z7</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= IV. EIR DOCUMENTS ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">IV · The EIR documents themselves</div>
+    <h2 class="section-title">Hosted by <em>the developer's law firm</em></h2>
+  </header>
+
+  <p>The four core CEQA documents underpinning the entire planning entitlement of this site are not hosted on the City of Cloverdale's website, the State Clearinghouse, or any government server. They are hosted on Egnyte, a commercial file-sharing platform, by Reuben, Junius &amp; Rose LLP — the developer's San Francisco land-use law firm. The links below are functional today and may not be functional tomorrow.</p>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">2004 Draft EIR <span class="tag warn">developer-hosted</span></span>
+      <span class="doc-url"><a href="https://reubenlaw.egnyte.com/dl/9pBD4DRYXJpr">reubenlaw.egnyte.com/dl/9pBD4DRYXJpr</a></span>
+    </li>
+    <li>
+      <span class="doc-title">2008 Recirculated Draft EIR <span class="tag warn">developer-hosted</span></span>
+      <span class="doc-url"><a href="https://reubenlaw.egnyte.com/dl/hyRGtJFXJmtc">reubenlaw.egnyte.com/dl/hyRGtJFXJmtc</a></span>
+    </li>
+    <li>
+      <span class="doc-title">2009 Final EIR · certified May 2009 <span class="tag warn">developer-hosted</span></span>
+      <span class="doc-url"><a href="https://reubenlaw.egnyte.com/dl/BRFkjtDjcy8d">reubenlaw.egnyte.com/dl/BRFkjtDjcy8d</a></span>
+    </li>
+    <li>
+      <span class="doc-title">2018 Second Addendum to the FEIR <span class="tag warn">developer-hosted</span></span>
+      <span class="doc-url"><a href="https://reubenlaw.egnyte.com/dl/8mtj67vXwTtM">reubenlaw.egnyte.com/dl/8mtj67vXwTtM</a></span>
+    </li>
+  </ul>
+
+</article>
+
+<div class="ornament" aria-hidden="true">
+  <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 20 Q30 15 60 20 T115 20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+    <g stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none">
+      <path d="M20 20 Q22 14 28 13"/><path d="M20 20 Q22 26 28 27"/>
+      <path d="M35 20 Q37 13 44 12"/><path d="M35 20 Q37 27 44 28"/>
+      <path d="M50 20 Q52 12 60 11"/><path d="M50 20 Q52 28 60 29"/>
+      <path d="M70 20 Q68 12 60 11"/><path d="M70 20 Q68 28 60 29"/>
+      <path d="M85 20 Q83 13 76 12"/><path d="M85 20 Q83 27 76 28"/>
+      <path d="M100 20 Q98 14 92 13"/><path d="M100 20 Q98 26 92 27"/>
+    </g>
+    <circle cx="60" cy="20" r="1.6" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ============= V. NEWS ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">V · News coverage</div>
+    <h2 class="section-title">What the <em>regional press</em> has reported</h2>
+  </header>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">Press Democrat · "Cloverdale residents demand full environmental review of proposed 605-home Esmeralda resort development"</span>
+      <span class="doc-meta">April 9, 2026. The April 8 council meeting where more than a dozen residents demanded a new EIR.</span>
+      <span class="doc-url"><a href="https://www.pressdemocrat.com/2026/04/09/cloverdale-residents-demand-full-environmental-review-of-proposed-mega-development/">pressdemocrat.com/2026/04/09/cloverdale-residents-demand-full-environmental-review-of-proposed-mega-development/</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Press Democrat archive search · Cloverdale + Esmeralda</span>
+      <span class="doc-url"><a href="https://www.pressdemocrat.com/?s=cloverdale+esmeralda">pressdemocrat.com/?s=cloverdale+esmeralda</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Mercury News · "Are you trying to pull a fast one?"</span>
+      <span class="doc-meta">November 14, 2025. Tech-backed autonomy rumors and the early backlash to the Cloverdale megaproject.</span>
+      <span class="doc-url"><a href="https://www.mercurynews.com/2025/11/14/are-you-trying-to-pull-a-fast-one-rumors-of-techbacked-autonomy-stir-backlash-to-cloverdale-megaproject/">mercurynews.com/2025/11/14/are-you-trying-to-pull-a-fast-one-rumors-of-techbacked-autonomy-stir-backlash-to-cloverdale-megaproject/</a></span>
+    </li>
+    <li>
+      <span class="doc-title">San Francisco Chronicle archive search</span>
+      <span class="doc-url"><a href="https://www.sfchronicle.com/?s=cloverdale+esmeralda">sfchronicle.com/?s=cloverdale+esmeralda</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= VI. COMMENTS & ADVOCACY ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">VI · Public comments &amp; advocacy</div>
+    <h2 class="section-title">What's been <em>filed in the record</em></h2>
+  </header>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">Dry Creek Rancheria Band of Pomo Indians · Comment letter to the City of Cloverdale</span>
+      <span class="doc-meta">Submitted by Chairman Chris Wright. Argues that the project requires a new full Environmental Impact Report — not an addendum — based on changed conditions including contamination findings, Potter Valley Project decommissioning, cumulative impacts, wildfire risk, and project-description changes. Hosted publicly on Adina Flores's Substack.</span>
+      <span class="doc-url"><a href="https://adinaflores.substack.com/p/cloverdale-dry-creek-rancheria-reacts">adinaflores.substack.com/p/cloverdale-dry-creek-rancheria-reacts</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= VII. ARCHIVAL & HISTORICAL ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">VII · Archival &amp; historical</div>
+    <h2 class="section-title">The <em>print record</em></h2>
+  </header>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">Sonoma County Library · Newspapers.com access</span>
+      <span class="doc-meta">Free access for Sonoma County Library cardholders. Covers all <em>Cloverdale Reveille</em> articles cited in Dispatch No. 1 (1974–2004), including the November 1975 Masonite discharge hearing, the 1977–78 strike, the January 1987 Prop 65 listing, and the 2002 Tyris luau coverage.</span>
+      <span class="doc-url"><a href="https://sonomalibrary.org/elibrary/a-z/newspaperscom">sonomalibrary.org/elibrary/a-z/newspaperscom</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Cloverdale Historical Society</span>
+      <span class="doc-meta">215 N. Cloverdale Boulevard. Print collection of the <em>Reveille</em> and other Cloverdale newspapers; 65,000+ photographs in their physical archive.</span>
+      <span class="doc-url"><a href="https://www.cloverdalehistoricalsociety.org/">cloverdalehistoricalsociety.org</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Don Meacham · Louisiana-Pacific lumber yard, Cloverdale, 1977</span>
+      <span class="doc-meta">Sonoma County Library Digital Collections, record cstr_pho_019705. The only known publicly-digitized photograph of mill operations at this site.</span>
+      <span class="doc-url"><a href="https://digital.sonomalibrary.org/documents/detail/79643">digital.sonomalibrary.org/documents/detail/79643</a></span>
+    </li>
+  </ul>
+</article>
+
+<!-- ============= VIII. STATE REFERENCE ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">VIII · State-level reference</div>
+    <h2 class="section-title">Background <em>frameworks</em></h2>
+  </header>
+
+  <ul class="doc-list">
+    <li>
+      <span class="doc-title">California Office of Environmental Health Hazard Assessment · Proposition 65</span>
+      <span class="doc-meta">Statutory background for the 1987 listing of pentachlorophenol, arsenic, and other contaminants documented at this site.</span>
+      <span class="doc-url"><a href="https://oehha.ca.gov/proposition-65">oehha.ca.gov/proposition-65</a></span>
+    </li>
+    <li>
+      <span class="doc-title">CalEnviroScreen 4.0</span>
+      <span class="doc-meta">Pollution-burden mapping including census tract 6097154201, which contains the parcel.</span>
+      <span class="doc-url"><a href="https://oehha.ca.gov/calenviroscreen">oehha.ca.gov/calenviroscreen</a></span>
+    </li>
+    <li>
+      <span class="doc-title">Wikipedia · Cloverdale, California</span>
+      <span class="doc-meta">General reference. Source for the 1993 Louisiana-Pacific mill closure and the 1994 Highway 101 bypass dates cited in Dispatch No. 1.</span>
+      <span class="doc-url"><a href="https://en.wikipedia.org/wiki/Cloverdale,_California">en.wikipedia.org/wiki/Cloverdale,_California</a></span>
+    </li>
+  </ul>
+</article>
+
+<div class="ornament" aria-hidden="true">
+  <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 20 Q30 15 60 20 T115 20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+    <g stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none">
+      <path d="M20 20 Q22 14 28 13"/><path d="M20 20 Q22 26 28 27"/>
+      <path d="M35 20 Q37 13 44 12"/><path d="M35 20 Q37 27 44 28"/>
+      <path d="M50 20 Q52 12 60 11"/><path d="M50 20 Q52 28 60 29"/>
+      <path d="M70 20 Q68 12 60 11"/><path d="M70 20 Q68 28 60 29"/>
+      <path d="M85 20 Q83 13 76 12"/><path d="M85 20 Q83 27 76 28"/>
+      <path d="M100 20 Q98 14 92 13"/><path d="M100 20 Q98 26 92 27"/>
+    </g>
+    <circle cx="60" cy="20" r="1.6" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ============= ON RETENTION ============= -->
+<article class="section">
+  <header class="section-head">
+    <div class="section-num">A note on retention</div>
+    <h2 class="section-title">Why these documents <em>cannot lawfully be lost</em></h2>
+  </header>
+
+  <p>California Public Resources Code § 21167.6(e)(10) defines what must be in the administrative record for any CEQA action. Among the listed contents: <em>"the initial study, any drafts of any environmental document, or portions thereof, that have been released for public review, and copies of studies or other documents relied upon in any environmental document prepared for the project and either made available to the public during the public review period or included in the respondent public agency's files on the project, and all internal agency communications, including staff notes and memoranda related to the project or to compliance with this division."</em></p>
+
+  <p>In <em>Golden Door Properties, LLC v. Superior Court</em> (2020) 52 Cal.App.5th 837, the Fourth District Court of Appeal held that this language is "explicitly mandatory" and "broadly inclusive" — that a lead agency may not destroy documents within § 21167.6's scope, even where the agency's own retention policies would otherwise allow it. The court reasoned that to permit destruction would let a lead agency "intentionally destroy a document that section 21167.6 mandates be included in the record, and then claim the document should be excluded because, by the very act of wrongful destruction, it was not before the decisionmaker."</p>
+
+  <p>The 2009 Final EIR, the 2016 First Addendum, the 2018 Second Addendum, and the 2025 Addendum to the AVR Specific Plan EIR are all documents within § 21167.6's scope. The City of Cloverdale, as lead agency, is legally required to retain them. They cannot lawfully be lost. They can, however, be quietly absent from the city's website — which is the situation as of this writing, and which is itself a fact about how this project is being administered.</p>
+</article>
+
+<!-- ============= COLOPHON ============= -->
+<footer class="colophon col">
+  <h4>About this dispatch</h4>
+  <p>Sources &amp; Documents is the second dispatch in the Unraveling project. The first, "Ground Truth: 266 Acres South of Town," is the substantive chronology of the parcel and is at <a href="/">groundtruth.watch</a>. Future dispatches will follow as the regulatory and entitlement processes unfold.</p>
+  <p>This dispatch will be updated as documents become available. If you have a public document, comment letter, or piece of regulatory correspondence relating to this site that should be linked here, the dispatch's compilers welcome the addition. Errors of fact, omission, or emphasis should be reported back so that subsequent versions can incorporate them. Distribute freely; correct generously.</p>
+  <p class="colophon-end">end of dispatch · 2 of 2</p>
+</footer>
+
+</main>
+</body>
+</html>
