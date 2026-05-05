@@ -8,7 +8,7 @@
 <title>The Public Record · 266 Acres South of Town · Comments &amp; Responses</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
   /* =================================================================
      LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
@@ -302,8 +302,16 @@
       text-transform: uppercase;
       color: var(--clay);
       margin-bottom: 0.75rem;
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .chapter-num::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--clay-light), transparent);
+      max-width: 8rem;
     }
 
     .chapter-title {
@@ -315,7 +323,7 @@
     }
     .chapter-title em {
       font-style: italic;
-      color: var(--clay);
+      color: var(--sage-deep);
       font-variation-settings: "opsz" 96, "wght" 500, "SOFT" 90;
     }
 
