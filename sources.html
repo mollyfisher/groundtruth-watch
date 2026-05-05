@@ -14,7 +14,7 @@
   /* =================================================================
      LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
      ================================================================= */
-  @layer reset, tokens, base, type, layout, components, utilities;
+  @layer reset, tokens, base, type, layout, components;
 
   /* ---------- RESET ---------- */
   @layer reset {
@@ -144,22 +144,6 @@
       transition: text-decoration-color .2s ease;
     }
     a:not([class]):hover { text-decoration-color: var(--clay); }
-
-    .smallcaps {
-      font-variant: all-small-caps;
-      letter-spacing: 0.04em;
-      font-weight: 600;
-      color: var(--sage-deep);
-    }
-
-    .kicker {
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--clay);
-    }
   }
 
   /* ---------- LAYOUT ---------- */
@@ -173,11 +157,6 @@
 
     .col {
       max-width: var(--measure);
-      margin-inline: auto;
-    }
-
-    .col-wide {
-      max-width: var(--measure-wide);
       margin-inline: auto;
     }
   }
@@ -268,20 +247,6 @@
       margin-top: 1.25em;
     }
 
-    .dropcap {
-      float: left;
-      font-family: 'Fraunces', serif;
-      font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 30;
-      font-size: 6.2em;
-      line-height: 0.78;
-      color: var(--clay);
-      margin: 0.08em 0.12em -0.05em 0;
-      padding: 0;
-      text-shadow:
-        2px 2px 0 var(--paper-deep),
-        -1px -1px 0 color-mix(in oklab, var(--clay) 30%, transparent);
-    }
-
     /* ============= CHAPTER ============= */
     .chapter {
       margin-block: var(--space-xl);
@@ -350,302 +315,91 @@
     }
     .ornament svg { width: 96px; height: auto; }
 
-    /* ============= PULLQUOTE ============= */
-    .pullquote {
-      margin-block: var(--space-lg);
-      padding: var(--space-md);
-      background: var(--paper-soft);
-      border-left: 5px solid var(--clay);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      box-shadow: var(--shadow-soft);
-      font-family: 'Fraunces', serif;
-      font-variation-settings: "opsz" 60, "wght" 450, "SOFT" 80;
-      font-style: italic;
-      font-size: var(--fs-md);
-      line-height: 1.5;
-      color: var(--ink);
-      text-indent: 0;
-    }
-    .pullquote::before { content: none; }
-    .pullquote-cite {
-      display: block;
-      margin-top: 1rem;
-      font-style: normal;
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--clay-deep);
-    }
-
-    /* ============= DATA BLOCK ============= */
-    .data-block {
-      margin-block: var(--space-md);
-      padding: var(--space-md);
-      background: var(--shell);
-      border-radius: var(--radius-md);
-      border: 1px solid color-mix(in oklab, var(--clay) 12%, var(--paper-deep));
-      box-shadow: var(--shadow-soft);
-    }
-
-    .data-block-label {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--clay);
-      margin-bottom: var(--space-sm);
-      padding-bottom: 0.5rem;
-      border-bottom: 1px dashed color-mix(in oklab, var(--clay) 30%, transparent);
-    }
-
-    .data-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      padding: 0.55rem 0;
-      align-items: baseline;
-      border-bottom: 1px dotted color-mix(in oklab, var(--ink) 15%, transparent);
-      font-size: var(--fs-sm);
-    }
-    .data-row:last-child { border-bottom: none; }
-    .data-row .key {
-      font-family: 'Newsreader', serif;
-      color: var(--ink-soft);
-    }
-    .data-row .val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95em;
-      font-weight: 700;
-      color: var(--ink);
-      text-align: right;
-    }
-    .data-row .val.alarm { color: var(--clay-deep); }
-    .data-row .val.warn { color: var(--ochre-deep); }
-
-    /* ============= SVG FRAME / CHEM CARDS ============= */
-    .svg-frame {
-      margin-block: var(--space-lg);
-      padding: var(--space-md) 0;
-    }
-    .svg-frame-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-bottom: var(--space-md);
-      text-align: center;
-    }
-    .chem-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-      gap: var(--space-sm);
-    }
-    .chem-card {
-      padding: var(--space-md);
-      background: linear-gradient(165deg, var(--paper-soft) 0%, var(--paper-deep) 110%);
-      border-radius: var(--radius-organic);
-      box-shadow: var(--shadow-warm);
-      position: relative;
-      isolation: isolate;
-      border-top: 4px solid var(--clay);
-      transition: transform .25s ease;
-    }
-    .chem-card:hover { transform: translateY(-2px); }
-    .chem-card.severe { border-top-color: var(--clay-deep); }
-    .chem-card.moderate { border-top-color: var(--ochre); }
-
-    .chem-name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.25rem;
-      font-variation-settings: "opsz" 36, "wght" 700;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
-    }
-    .chem-formula {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: var(--fs-xs);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faded);
-      margin-bottom: 0.85rem;
-    }
-    .chem-detail {
-      font-size: var(--fs-sm);
-      line-height: 1.55;
-      color: var(--ink-soft);
-    }
-    .chem-stat {
-      margin-top: 0.85rem;
-      padding-top: 0.85rem;
-      border-top: 1px dashed color-mix(in oklab, var(--clay) 25%, transparent);
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      color: var(--ink-soft);
-    }
-    .chem-stat strong {
-      color: var(--clay-deep);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95em;
-    }
-
-    /* ============= FIGURE ============= */
-    figure {
-      margin-block: var(--space-lg);
-    }
-    figure img {
-      width: 100%;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-warm);
-      filter: contrast(1.04) saturate(0.94);
-    }
-    figcaption {
-      font-family: 'Newsreader', serif;
-      font-style: italic;
-      font-size: var(--fs-sm);
-      line-height: 1.5;
-      color: var(--ink-soft);
-      margin-top: 0.85rem;
-      padding-left: 1rem;
-      border-left: 3px solid var(--sage-light);
-    }
-    figcaption .src {
-      display: block;
-      font-style: normal;
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-top: 0.4rem;
-    }
-    figcaption a {
-      color: var(--clay-deep);
-      text-decoration: underline;
-      text-decoration-color: color-mix(in oklab, var(--clay) 40%, transparent);
-      text-underline-offset: 2px;
-    }
-
-    /* ============= AGENCY NOTE / SIDEBAR ============= */
-    .sidebar-note {
-      margin-block: var(--space-md);
-      padding: var(--space-md);
-      background: linear-gradient(135deg,
-        color-mix(in oklab, var(--sage) 8%, var(--paper-soft)),
-        var(--paper-soft));
-      border-radius: var(--radius-organic);
-      border-left: 4px solid var(--sage);
-      box-shadow: var(--shadow-soft);
-      font-size: var(--fs-sm);
-      line-height: 1.6;
-    }
-    .sidebar-note h4 {
-      font-family: 'Fraunces', serif;
-      font-variation-settings: "opsz" 24, "wght" 700, "SOFT" 70;
-      font-size: var(--fs-md);
-      color: var(--sage-deep);
-      margin-bottom: 0.5rem;
-    }
-    .sidebar-note p { color: var(--ink-soft); }
-
-    /* ============= SOURCES BLOCK ============= */
-    .sources {
-      margin-top: var(--space-md);
-      padding-top: var(--space-sm);
-      border-top: 1px dashed color-mix(in oklab, var(--ink) 20%, transparent);
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      line-height: 1.7;
-      color: var(--ink-soft);
-    }
-    .sources-label {
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--clay);
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-    .sources em { font-family: 'Newsreader', serif; }
-
-    /* ============= ACTION BLOCK ============= */
-    .action {
-      margin-block: var(--space-xl);
+    /* ============= DOC LIST (action-callout treatment) ============= */
+    .doc-list {
+      list-style: none;
+      counter-reset: doc;
       padding: clamp(1.5rem, 4vw, 2.5rem);
+      margin-block: var(--space-md) var(--space-xl);
       background: var(--paper-soft);
-      color: var(--ink);
       border-radius: var(--radius-md);
       border-left: 6px solid var(--clay);
       box-shadow: var(--shadow-soft);
     }
-    .action::before { content: none; }
-
-    .action-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--clay-deep);
-      margin-bottom: 0.85rem;
-    }
-    .action-title {
-      font-family: 'Fraunces', serif;
-      font-variation-settings: "opsz" 96, "wght" 700, "SOFT" 50;
-      font-size: var(--fs-xl);
-      line-height: 1.05;
-      letter-spacing: -0.018em;
-      margin-bottom: var(--space-md);
-      color: var(--ink);
-    }
-    .action-title em {
-      font-style: italic;
-      color: var(--clay);
-      font-variation-settings: "opsz" 96, "wght" 500, "SOFT" 80;
-    }
-
-    .action ol {
-      list-style: none;
-      counter-reset: step;
-      padding-left: 0;
-    }
-    .action li {
-      padding: 1.5rem 0;
+    .doc-list li {
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--rule);
-      counter-increment: step;
+      counter-increment: doc;
     }
-    .action li:last-child { border-bottom: none; }
-    .action li::before {
-      content: counter(step, decimal-leading-zero);
+    .doc-list li:first-child { padding-top: 0; }
+    .doc-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .doc-list li::before {
+      content: counter(doc, decimal-leading-zero);
       display: block;
       font-family: 'JetBrains Mono', monospace;
       font-size: var(--fs-xs);
       font-weight: 700;
       color: var(--clay);
       letter-spacing: 0.1em;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
-    .action li h4 {
+    .doc-title {
+      display: block;
       font-family: 'Fraunces', serif;
       font-variation-settings: "opsz" 36, "wght" 700, "SOFT" 50;
       font-size: var(--fs-md);
       line-height: 1.25;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
       letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
     }
-    .action li p {
+    .doc-title em {
+      font-style: italic;
+      color: var(--sage-deep);
+      font-variation-settings: "opsz" 36, "wght" 500, "SOFT" 80;
+    }
+    .doc-meta {
+      display: block;
       font-family: 'Newsreader', serif;
-      font-size: var(--fs-base);
+      font-size: var(--fs-sm);
       line-height: 1.55;
       color: var(--ink-soft);
+      margin-bottom: 0.55rem;
+    }
+    .doc-url {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--fs-xs);
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    .doc-url a {
+      color: var(--clay-deep);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in oklab, var(--clay) 35%, transparent);
+      text-underline-offset: 2px;
+    }
+    .doc-url a:hover { text-decoration-color: var(--clay); }
+
+    /* ============= TAG / PILL ============= */
+    .tag {
+      display: inline-block;
+      vertical-align: middle;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25em 0.7em;
+      border-radius: 999px;
+      margin-left: 0.5em;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .tag.warn {
+      background: color-mix(in oklab, var(--clay) 12%, var(--paper));
+      color: var(--clay-deep);
+      border: 1px solid color-mix(in oklab, var(--clay) 35%, transparent);
     }
 
     /* ============= COLOPHON ============= */
@@ -676,14 +430,6 @@
     }
     .colophon-end::before { content: "—  "; color: var(--clay); }
     .colophon-end::after  { content: "  —"; color: var(--clay); }
-  }
-
-  /* ---------- UTILITIES ---------- */
-  @layer utilities {
-    .visually-hidden {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-    }
   }
 
   /* ---------- MOTION RESPECT ---------- */
@@ -734,10 +480,10 @@
 </div>
 
 <!-- ============= I. REGULATORY ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">I · Regulatory case files</div>
-    <h2 class="section-title">The state's <em>own record</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">I · Regulatory case files</div>
+    <h2 class="chapter-title">The state's <em>own record</em></h2>
   </header>
 
   <p>These are the files maintained by California state agencies in the ordinary course of regulating the parcel. They are durable, indexed, and unlikely to disappear.</p>
@@ -757,10 +503,10 @@
 </article>
 
 <!-- ============= II. CITY OF CLOVERDALE ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">II · City of Cloverdale</div>
-    <h2 class="section-title">What the city <em>has chosen to post</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">II · City of Cloverdale</div>
+    <h2 class="chapter-title">What the city <em>has chosen to post</em></h2>
   </header>
 
   <p>The city's official pages on the project. The omissions are as informative as the inclusions: the 2009 FEIR, the 2016 First Addendum, the 2018 Second Addendum, and the referenced 2025 Addendum to the AVR Specific Plan EIR are not hosted on cloverdale.net.</p>
@@ -790,10 +536,10 @@
 </article>
 
 <!-- ============= III. DEVELOPER ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">III · Esmeralda Land Company</div>
-    <h2 class="section-title">The developer's <em>own framing</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">III · Esmeralda Land Company</div>
+    <h2 class="chapter-title">The developer's <em>own framing</em></h2>
   </header>
 
   <p>Esmeralda Land Company's public-facing pages and event platform. These are the only place where the developer's confirmation of the addendum-only CEQA pathway appears in writing — until and unless the city's eventual Notice of Determination is filed.</p>
@@ -825,10 +571,10 @@
 </article>
 
 <!-- ============= IV. EIR DOCUMENTS ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">IV · The EIR documents themselves</div>
-    <h2 class="section-title">Hosted by <em>the developer's law firm</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">IV · The EIR documents themselves</div>
+    <h2 class="chapter-title">Hosted by <em>the developer's law firm</em></h2>
   </header>
 
   <p>The four core CEQA documents underpinning the entire planning entitlement of this site are not hosted on the City of Cloverdale's website, the State Clearinghouse, or any government server. They are hosted on Egnyte, a commercial file-sharing platform, by Reuben, Junius &amp; Rose LLP — the developer's San Francisco land-use law firm. The links below are functional today and may not be functional tomorrow.</p>
@@ -870,10 +616,10 @@
 </div>
 
 <!-- ============= V. NEWS ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">V · News coverage</div>
-    <h2 class="section-title">What the <em>regional press</em> has reported</h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">V · News coverage</div>
+    <h2 class="chapter-title">What the <em>regional press</em> has reported</h2>
   </header>
 
   <ul class="doc-list">
@@ -899,10 +645,10 @@
 </article>
 
 <!-- ============= VI. COMMENTS & ADVOCACY ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">VI · Public comments &amp; advocacy</div>
-    <h2 class="section-title">What's been <em>filed in the record</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">VI · Public comments &amp; advocacy</div>
+    <h2 class="chapter-title">What's been <em>filed in the record</em></h2>
   </header>
 
   <ul class="doc-list">
@@ -915,10 +661,10 @@
 </article>
 
 <!-- ============= VII. ARCHIVAL & HISTORICAL ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">VII · Archival &amp; historical</div>
-    <h2 class="section-title">The <em>print record</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">VII · Archival &amp; historical</div>
+    <h2 class="chapter-title">The <em>print record</em></h2>
   </header>
 
   <ul class="doc-list">
@@ -941,10 +687,10 @@
 </article>
 
 <!-- ============= VIII. STATE REFERENCE ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">VIII · State-level reference</div>
-    <h2 class="section-title">Background <em>frameworks</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">VIII · State-level reference</div>
+    <h2 class="chapter-title">Background <em>frameworks</em></h2>
   </header>
 
   <ul class="doc-list">
@@ -982,10 +728,10 @@
 </div>
 
 <!-- ============= ON RETENTION ============= -->
-<article class="section">
-  <header class="section-head">
-    <div class="section-num">A note on retention</div>
-    <h2 class="section-title">Why these documents <em>cannot lawfully be lost</em></h2>
+<article class="chapter">
+  <header class="chapter-head">
+    <div class="chapter-num">A note on retention</div>
+    <h2 class="chapter-title">Why these documents <em>cannot lawfully be lost</em></h2>
   </header>
 
   <p>California Public Resources Code § 21167.6(e)(10) defines what must be in the administrative record for any CEQA action. Among the listed contents: <em>"the initial study, any drafts of any environmental document, or portions thereof, that have been released for public review, and copies of studies or other documents relied upon in any environmental document prepared for the project and either made available to the public during the public review period or included in the respondent public agency's files on the project, and all internal agency communications, including staff notes and memoranda related to the project or to compliance with this division."</em></p>
