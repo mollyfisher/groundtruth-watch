@@ -25,16 +25,18 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink)}
 #landuse .hd b{font-family:'Fraunces',serif;font-size:14.5px;color:var(--cobalt-deep)}
 .xbtn{cursor:pointer;border:none;background:#eef0fa;color:var(--cobalt-deep);width:26px;height:26px;border-radius:7px;font-size:16px;line-height:1;font-weight:700}
 .xbtn:hover{background:#e0e4f5}
+.cardx{position:absolute;top:7px;right:7px;width:24px;height:24px;font-size:15px;z-index:3}
+#showAll{top:14px;left:50%;transform:translateX(-50%);display:none;padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--cobalt-deep);cursor:pointer;z-index:6}
 #landuse img{width:100%;display:block;border-radius:9px}
 #luBtn{top:158px;left:14px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--cobalt-deep);cursor:pointer;display:none}
-#panel{top:50%;right:14px;transform:translateY(-50%);width:312px;max-height:72vh;overflow:auto;padding:15px 17px}
+#panel{top:50%;right:14px;transform:translateY(-50%);width:312px;max-height:72vh;overflow:auto;padding:15px 17px;padding-right:34px}
 #panel h2{font-family:'Fraunces',serif;font-weight:700;font-size:16.5px;color:var(--ink);margin-bottom:9px;line-height:1.15}
 #panel h2 .k{color:var(--cobalt)}
 #panel .pt{display:flex;gap:9px;margin:9px 0;font-size:12.6px;line-height:1.46;color:var(--ink-soft)}
 #panel .pt b{color:var(--ink)}
 #panel .num{flex:none;width:19px;height:19px;border-radius:50%;background:var(--cobalt);color:#fff;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
 #panel .foot{margin-top:10px;padding-top:9px;border-top:1px dashed var(--rule);font-size:11px;line-height:1.5;color:var(--ink-faded)}
-#legend{bottom:14px;left:14px;padding:12px 15px;font-size:12.6px;color:var(--ink-soft)}
+#legend{bottom:14px;left:14px;padding:12px 15px;padding-right:34px;font-size:12.6px;color:var(--ink-soft)}
 #legend .lh{font-size:11px;letter-spacing:1.4px;font-weight:700;color:var(--cobalt);text-transform:uppercase;margin-bottom:7px}
 #legend .row{display:flex;align-items:center;gap:9px;margin:5px 0}
 .sw{width:22px;height:14px;flex:none;border-radius:3px}
@@ -56,6 +58,16 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink)}
 .mapboxgl-popup-content b{color:var(--ink)}
 .hotelmk{width:19px;height:19px;background:var(--cobalt-deep);transform:rotate(45deg);box-shadow:0 0 0 4px rgba(0,26,128,.22);border:1.8px solid #fff}
 .cap{left:14px;bottom:118px;position:absolute;font-size:10px;color:var(--ink-faded);background:rgba(252,252,255,.82);padding:3px 8px;border-radius:6px}
+@media (max-width:640px){
+  #wind{top:8px;right:8px;width:144px;padding:9px 10px}
+  #panel{top:auto;bottom:62px;left:8px;right:8px;width:auto;max-height:40vh;transform:none}
+  #legend{left:8px;bottom:8px;font-size:11.5px}
+  #landuse{top:8px;left:8px;width:94vw;max-height:80vh}
+  #luBtn{top:8px;left:8px}
+  #pstat{max-width:92vw;bottom:8px}
+  #showAll{top:8px}
+  .cap{display:none}
+}
 </style></head><body>
 <div id="map"></div>
 <div id="landuse" class="card">
@@ -182,4 +194,22 @@ map.on('load',()=>{
 const _lu=document.getElementById('landuse'),_luBtn=document.getElementById('luBtn');
 document.getElementById('luX').addEventListener('click',()=>{_lu.style.display='none';_luBtn.style.display='block';});
 _luBtn.addEventListener('click',()=>{_lu.style.display='block';_luBtn.style.display='none';});
+
+// dismissable info panels (mobile-friendly) — close any panel, restore them all
+(function(){
+  const ids=['wind','panel','legend'];
+  const hidden=new Set();
+  const showAll=document.createElement('button');
+  showAll.id='showAll';showAll.className='card';showAll.type='button';showAll.textContent='▦ Panels';
+  document.body.appendChild(showAll);
+  const refresh=()=>{showAll.style.display=hidden.size?'block':'none';};
+  ids.forEach(id=>{
+    const card=document.getElementById(id);if(!card)return;
+    const b=document.createElement('button');
+    b.className='xbtn cardx';b.type='button';b.textContent='×';b.title='Hide';b.setAttribute('aria-label','Hide panel');
+    b.addEventListener('click',()=>{card.style.display='none';hidden.add(id);refresh();});
+    card.appendChild(b);
+  });
+  showAll.addEventListener('click',()=>{hidden.forEach(id=>{const c=document.getElementById(id);if(c)c.style.display='';});hidden.clear();refresh();});
+})();
 </script></body></html>
