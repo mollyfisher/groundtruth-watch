@@ -154,6 +154,10 @@
       padding-inline: clamp(1.25rem, 4vw, 3rem);
       padding-block: clamp(2rem, 5vw, 4rem) var(--space-2xl);
     }
+    /* widen only when the two chapters sit side by side */
+    @media (min-width: 60rem) {
+      .page.is-wide { max-width: 84rem; }
+    }
 
     .col {
       max-width: var(--measure);
@@ -255,6 +259,24 @@
       position: relative;
     }
     .chapter.wide { max-width: var(--measure-wide); }
+
+    /* two chapters side by side on wide screens */
+    .chapters-grid { display: block; }
+    @media (min-width: 60rem) {
+      .chapters-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: clamp(2rem, 4vw, 4rem);
+        align-items: start;
+      }
+      .chapters-grid .chapter {
+        max-width: none;
+        margin-inline: 0;
+        margin-block: 0;
+      }
+      /* the framed list should fill the column and stretch to equal height */
+      .chapters-grid .doc-list { margin-block: var(--space-md) 0; height: 100%; }
+    }
 
     .chapter-head {
       margin-bottom: var(--space-md);
@@ -443,7 +465,7 @@
   </style>
 </head>
 <body>
-<main class="page">
+<main class="page is-wide">
 
   <header class="masthead">
     <div class="masthead-meta">
@@ -457,10 +479,11 @@
   </header>
 
   <section class="lede col">
-    <p>Eight dispatches make up this record. The first four set down what the public documents say; the last four let you see the ground itself. Start anywhere &mdash; but if you read only one, read <a href="/chronicle.html">the chronicle</a>.</p>
+    <p>Nine dispatches make up this record. The first four set down what the public documents say; the last five let you see the ground itself. Start anywhere &mdash; but if you read only one, read <a href="/chronicle.html">the chronicle</a>.</p>
   </section>
 
-  <article class="chapter">
+  <div class="chapters-grid">
+<article class="chapter">
     <header class="chapter-head">
       <div class="chapter-num">I · In the record</div>
       <h2 class="chapter-title">What the <em>documents say</em></h2>
@@ -468,22 +491,22 @@
     <ul class="doc-list">
       <li>
         <span class="doc-title"><a href="/chronicle.html">The Chronicle · <em>266 Acres South of Town</em></a></span>
-        <span class="doc-meta">The full documentary history — Masonite&rsquo;s wood-treatment plant, four decades of mill work, the copper-chromium-arsenic-and-PCP contamination, two decades of groundwater monitoring, the quiet January 2026 case closure under a deed covenant, and the 605-unit Esmeralda village now proposed for the parcel.</span>
+        <span class="doc-meta">The full documentary history, from Masonite&rsquo;s wood-treatment plant to the 605-unit Esmeralda village now proposed for the parcel.</span>
         <span class="doc-url"><a href="/chronicle.html">groundtruth.watch/chronicle.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/telling.html">Telling the <em>Ground Truth</em></a></span>
-        <span class="doc-meta">A plain-language telling for the neighbors — what the record actually means, read through an older idea: that a poisoned place you cannot leave must be kept in living memory, not merely filed in a county drawer.</span>
+        <span class="doc-meta">A plain-language telling for the neighbors of what the record actually means.</span>
         <span class="doc-url"><a href="/telling.html">groundtruth.watch/telling.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/sources.html">Sources &amp; <em>Documents</em></a></span>
-        <span class="doc-meta">The documentary spine. Every public record the chronicle rests on, with notes on what is hosted durably on government servers, what sits on the developer&rsquo;s law-firm file-share, and what the City of Cloverdale has not posted online at all.</span>
+        <span class="doc-meta">Every public record the chronicle rests on, with notes on where each one lives.</span>
         <span class="doc-url"><a href="/sources.html">groundtruth.watch/sources.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/comments.html">The <em>Public Record</em></a></span>
-        <span class="doc-meta">Every comment submitted on the 2009 Alexander Valley Resort EIR — the earlier project for this same ground — paraphrased into plain present-day language, with the City&rsquo;s formal responses kept verbatim.</span>
+        <span class="doc-meta">Every comment on the 2009 Alexander Valley Resort EIR, paraphrased into plain language with the City&rsquo;s responses kept verbatim.</span>
         <span class="doc-url"><a href="/comments.html">groundtruth.watch/comments.html</a></span>
       </li>
     </ul>
@@ -496,27 +519,33 @@
     </header>
     <ul class="doc-list">
       <li>
+        <span class="doc-title"><a href="/destroyed.html">The <em>Wells</em></a></span>
+        <span class="doc-meta">An interactive map of the 45 monitoring wells, their contamination readings, and the two destroyed weeks before the case closed.</span>
+        <span class="doc-url"><a href="/destroyed.html">groundtruth.watch/destroyed.html</a></span>
+      </li>
+      <li>
         <span class="doc-title"><a href="/viewing.html">A View from <em>Above</em></a></span>
-        <span class="doc-meta">Historical aerials of the parcel &mdash; 1961, 1971, 1983, 2005, and 2009 &mdash; set against the 2026 Esmeralda site plan. Drag to pan; scroll or pinch to zoom; switch years to watch the mill appear and vanish.</span>
+        <span class="doc-meta">Historical aerials of the parcel set against the 2026 Esmeralda site plan, year by year.</span>
         <span class="doc-url"><a href="/viewing.html">groundtruth.watch/viewing.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/underfoot.html">Molalla / Masonite Mill, <em>1965</em></a></span>
-        <span class="doc-meta">A single annotated aerial frame of the wood-treating plant and sawmill at work, with zoomable callouts marking the tanks, ponds, and treated-wood yard &mdash; the Restricted Soil Area the 2013 land-use covenant now governs.</span>
+        <span class="doc-meta">A single annotated aerial of the plant at work, marking the ground the 2013 covenant now restricts.</span>
         <span class="doc-url"><a href="/underfoot.html">groundtruth.watch/underfoot.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/status-quo.html">Cloverdale, <em>2018 / 2024</em></a></span>
-        <span class="doc-meta">A side-by-side wipe of USDA imagery six years apart &mdash; the parcel as it actually sits today, the do-nothing baseline against which the proposal is measured. One finger wipes; pinch to zoom.</span>
+        <span class="doc-meta">A side-by-side wipe of USDA imagery six years apart, the do-nothing baseline the proposal is measured against.</span>
         <span class="doc-url"><a href="/status-quo.html">groundtruth.watch/status-quo.html</a></span>
       </li>
       <li>
         <span class="doc-title"><a href="/dust.html">About <em>Construction Dust</em></a></span>
-        <span class="doc-meta">An interactive wind model showing how arsenic- and dioxin-bearing dust can drift past a fully OSHA-compliant work site during Phase 1 grading, beside the capped contaminated soil. Plausibility, not measurement &mdash; no off-site air samples exist.</span>
+        <span class="doc-meta">An interactive wind model of how contaminated dust can drift off-site during Phase 1 grading.</span>
         <span class="doc-url"><a href="/dust.html">groundtruth.watch/dust.html</a></span>
       </li>
     </ul>
   </article>
+  </div>
 
   <footer class="colophon col">
     <h4>About this index</h4>
