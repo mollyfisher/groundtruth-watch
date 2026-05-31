@@ -594,6 +594,14 @@
     return Math.min((w - pad) / nat.w, (h - pad - 80) / nat.h);
   }
 
+  function computeCoverScale() {
+    const { w, h } = viewportSize();
+    const nat = imgNatural(state.activeIdx);
+    if (!nat.w || !nat.h) return 1;
+    // Fill the viewport entirely (cover); the longer dimension is cropped slightly.
+    return Math.max(w / nat.w, h / nat.h);
+  }
+
   function applyTransform() {
     const el = activeImg();
     const nat = imgNatural(state.activeIdx);
@@ -628,7 +636,7 @@
       state.imgEls[idx].classList.add('active');
       yearButtons.forEach((b, i) => b.classList.toggle('active', i === idx));
       captionText.innerHTML = IMAGES[idx].caption;
-      fitToView();
+      coverView();
     }
     // Always re-show caption when a year button is pressed
     showCaption();
@@ -644,9 +652,22 @@
     applyTransform();
   }
 
+  function coverView() {
+    // Keep the 100% reference anchored to the whole frame (fit), but display at cover.
+    state.fitScale = computeFitScale();
+    const cover = computeCoverScale();
+    // Let zoom-out reach the whole frame; min scale below fit so the full image is reachable.
+    state.minScale = state.fitScale * 0.5;
+    state.maxScale = state.fitScale * 16;
+    state.scale = cover;
+    state.tx = 0;
+    state.ty = 0;
+    applyTransform();
+  }
+
   function onImagesReady() {
     captionText.innerHTML = IMAGES[state.activeIdx].caption;
-    fitToView();
+    coverView();
   }
 
   let loadedCount = 0;
@@ -800,13 +821,18 @@
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      const wasFit = Math.abs(state.scale - state.fitScale) < 0.001 &&
-                     Math.abs(state.tx) < 1 && Math.abs(state.ty) < 1;
+      const atOrigin = Math.abs(state.tx) < 1 && Math.abs(state.ty) < 1;
+      const wasFit = Math.abs(state.scale - state.fitScale) < 0.001 && atOrigin;
+      const wasCover = Math.abs(state.scale - computeCoverScale()) < 0.001 && atOrigin;
       const newFit = computeFitScale();
       state.fitScale = newFit;
       state.minScale = newFit * 0.5;
       state.maxScale = newFit * 16;
-      if (wasFit) {
+      if (wasCover) {
+        state.scale = computeCoverScale();
+        state.tx = 0;
+        state.ty = 0;
+      } else if (wasFit) {
         state.scale = newFit;
         state.tx = 0;
         state.ty = 0;
