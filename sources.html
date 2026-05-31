@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A working bibliography of every public record cited in the Ground Truth dispatch on the 266-acre Asti Road parcel in Cloverdale, California — and a note on what is hosted publicly, what isn't, and why it matters.">
+  <meta name="description" content="A working bibliography of every public record cited in the Ground Truth dispatch on the 266-acre Asti Road parcel in Cloverdale, California—and a note on what is hosted publicly, what isn't, and why it matters.">
   <meta name="theme-color" content="#fcfcff">
-  <title>Sources &amp; Documents · Ground Truth · Dispatch No. 2</title>
+  <title>Sources &amp; Documents · Ground Truth · Dispatch No. 3</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
   /* =================================================================
-     LAYERED CSS — earth-mama Makhamo aesthetic, modern stack
+     LAYERED CSS—earth-mama Makhamo aesthetic, modern stack
      ================================================================= */
   @layer reset, tokens, base, type, layout, components;
 
@@ -30,7 +30,7 @@
   /* ---------- DESIGN TOKENS ---------- */
   @layer tokens {
     :root {
-      /* Earth-mama palette — clay, cream, sage, ochre */
+      /* Earth-mama palette—clay, cream, sage, ochre */
       --paper:        #fcfcff;
       --paper-soft:   #ffffff;
       --paper-deep:   #eef0fa;
@@ -53,7 +53,7 @@
 
       --rule:         #c8cde0;
 
-      /* Type scale — fluid via clamp */
+      /* Type scale—fluid via clamp */
       --fs-xs:    clamp(0.75rem, 0.72rem + 0.15vw, 0.825rem);
       --fs-sm:    clamp(0.875rem, 0.85rem + 0.15vw, 0.95rem);
       --fs-base:  clamp(1.0625rem, 1.0rem + 0.35vw, 1.2rem);
@@ -63,7 +63,7 @@
       --fs-2xl:   clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
       --fs-3xl:   clamp(3.25rem, 2.5rem + 3.75vw, 5.5rem);
 
-      /* Spacing — soft rhythm */
+      /* Spacing—soft rhythm */
       --space-xs:  0.5rem;
       --space-sm:  1rem;
       --space-md:  1.75rem;
@@ -305,7 +305,7 @@
     }
     .chapter p + p { text-indent: 1.4em; margin-top: -0.3em; }
 
-    /* ============= ORNAMENT — botanical fern divider ============= */
+    /* ============= ORNAMENT—botanical fern divider ============= */
     .ornament {
       display: flex;
       justify-content: center;
@@ -440,27 +440,108 @@
     }
     html { scroll-behavior: auto; }
   }
-  </style>
+  
+/* ===== Ground Truth shared chrome: site nav + dispatch-index footer ===== */
+.sitenav { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 0.75rem var(--space-md); flex-wrap: wrap;
+  margin-bottom: var(--space-md); padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--rule); }
+.sitenav-brand { font-family: 'Fraunces', serif;
+  font-variation-settings: "opsz" 40, "wght" 700, "SOFT" 30;
+  font-size: var(--fs-md); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.sitenav-brand em { font-style: italic; color: var(--cobalt, #1340e0);
+  font-variation-settings: "opsz" 40, "wght" 500, "SOFT" 100; }
+.sitenav-menu { position: relative; }
+.sitenav-menu > summary { list-style: none; cursor: pointer; user-select: none;
+  font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobalt, #1340e0);
+  display: inline-flex; align-items: center; gap: 0.5rem; }
+.sitenav-menu > summary::-webkit-details-marker { display: none; }
+.sitenav-menu > summary::after { content: "\25BE"; font-size: 0.78em; transition: transform .2s ease; }
+.sitenav-menu[open] > summary::after { transform: rotate(180deg); }
+.sitenav-panel { position: absolute; right: 0; top: calc(100% + 0.7rem); z-index: 30;
+  width: max-content; max-width: calc(100vw - 2.5rem);
+  display: flex; flex-direction: column;
+  background: var(--paper-soft, #ffffff); border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-accent, 0 2px 4px rgba(19,64,224,.10), 0 12px 32px rgba(0,26,128,.12));
+  padding: var(--space-sm) var(--space-md); }
+.sitenav-panel a { font-family: 'Newsreader', serif; font-size: var(--fs-base);
+  color: var(--ink-soft); text-decoration: none; padding: 0.32rem 0; }
+.sitenav-panel a:hover { color: var(--cobalt-deep, #001a80); }
+.sitenav-panel a.is-current { color: var(--cobalt, #1340e0); font-style: italic; }
+.sitenav-group { font-family: 'JetBrains Mono', monospace; font-size: var(--fs-xs);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faded);
+  margin: 0.7rem 0 0.25rem; }
+.sitenav-group:first-child { margin-top: 0; }
+
+.sitefoot { max-width: var(--measure-wide); margin-inline: auto;
+  margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--rule); }
+.sitefoot-top { display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.4rem 1rem; margin-bottom: var(--space-lg); }
+.sitefoot-brand { font-family: 'Fraunces', serif;
+  font-variation-settings: "opsz" 48, "wght" 700, "SOFT" 30;
+  font-size: var(--fs-lg); letter-spacing: -0.015em; color: var(--ink); text-decoration: none; }
+.sitefoot-brand em { font-style: italic; color: var(--cobalt, #1340e0);
+  font-variation-settings: "opsz" 48, "wght" 500, "SOFT" 100; }
+.sitefoot-tag { font-family: 'Newsreader', serif; font-style: italic;
+  font-size: var(--fs-base); color: var(--ink-faded); }
+.sitefoot-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-lg); }
+.sitefoot-head { font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobalt, #1340e0);
+  margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+.sitefoot-col a { display: block; font-family: 'Newsreader', serif; font-size: var(--fs-base);
+  color: var(--ink-soft); text-decoration: none; padding: 0.34rem 0; }
+.sitefoot-col a:hover { color: var(--cobalt-deep, #001a80); text-decoration: underline; text-underline-offset: 3px; }
+.sitefoot-col a.is-current { color: var(--cobalt, #1340e0); font-style: italic; }
+.sitefoot-note { margin-top: var(--space-lg); font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs);
+  letter-spacing: 0.04em; color: var(--ink-faded); }
+@media (max-width: 34rem) { .sitefoot-cols { grid-template-columns: 1fr; } }
+@media print { .sitenav { display: none; } .sitefoot { box-shadow: none; } }
+
+</style>
 </head>
 
 <body>
 <main class="page">
+  <nav class="sitenav" aria-label="Ground Truth dispatches">
+    <a class="sitenav-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+    <details class="sitenav-menu">
+      <summary>Dispatches</summary>
+      <div class="sitenav-panel">
+        <p class="sitenav-group">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
+        <p class="sitenav-group">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </details>
+  </nav>
+
 
 <!-- ============= MASTHEAD ============= -->
 <header class="masthead">
   <div class="masthead-meta">
-    <span>Volume I · Dispatch No. 2</span>
+    <span>Volume I · Dispatch No. 3</span>
     <span>Cloverdale, Sonoma County</span>
     <span>Sources &amp; Documents</span>
   </div>
   <h1 class="title">Sources &amp; <em>Documents</em></h1>
-  <p class="subtitle">A working bibliography of every public record cited in the Ground Truth dispatch — and a note on what is hosted publicly, what isn't, and why that matters.</p>
+  <p class="subtitle">A working bibliography of every public record cited in the Ground Truth dispatch—and a note on what is hosted publicly, what isn't, and why that matters.</p>
   <div class="dateline">Compiled · May 2026</div>
 </header>
 
 <!-- ============= LEDE ============= -->
 <section class="lede col">
-  <p>This page is the documentary spine of <a href="/">the dispatch</a>. Every claim made there about the 266 acres south of Cloverdale rests on a public record. Some of those records are hosted on durable, government-run servers and will outlast the project. Some are hosted on the developer's law firm's commercial file-sharing platform and could vanish without notice. Some — including the 2009 Final Environmental Impact Report that the city is currently relying on for the Esmeralda Project's CEQA compliance — are not posted online by the City of Cloverdale at all.</p>
+  <p>This page is the documentary spine of <a href="/">the dispatch</a>. Every claim made there about the 266 acres south of Cloverdale rests on a public record. Some of those records are hosted on durable, government-run servers and will outlast the project. Some are hosted on the developer's law firm's commercial file-sharing platform and could vanish without notice. Some—including the 2009 Final Environmental Impact Report that the city is currently relying on for the Esmeralda Project's CEQA compliance—are not posted online by the City of Cloverdale at all.</p>
   <p>What follows is the working bibliography, organized by source, with archival notes where they matter. Where a document is not currently online, the path to obtaining it as a public record is given. Where a document is hosted on a non-durable server, the reader is encouraged to mirror it.</p>
 </section>
 
@@ -542,7 +623,7 @@
     <h2 class="chapter-title">The developer's <em>own framing</em></h2>
   </header>
 
-  <p>Esmeralda Land Company's public-facing pages and event platform. These are the only place where the developer's confirmation of the addendum-only CEQA pathway appears in writing — until and unless the city's eventual Notice of Determination is filed.</p>
+  <p>Esmeralda Land Company's public-facing pages and event platform. These are the only place where the developer's confirmation of the addendum-only CEQA pathway appears in writing—until and unless the city's eventual Notice of Determination is filed.</p>
 
   <ul class="doc-list">
     <li>
@@ -564,7 +645,7 @@
     </li>
     <li>
       <span class="doc-title">Soils &amp; Groundwater Workshop · virtual, hosted by Devon Zuegel <span class="tag warn">developer-hosted</span></span>
-      <span class="doc-meta">Luma event platform. Notable for the choice of venue — a Silicon Valley event tool — for what is effectively the developer's response to public concern about the contamination history.</span>
+      <span class="doc-meta">Luma event platform. Notable for the choice of venue—a Silicon Valley event tool—for what is effectively the developer's response to public concern about the contamination history.</span>
       <span class="doc-url"><a href="https://luma.com/c4hyo7z7">luma.com/c4hyo7z7</a></span>
     </li>
   </ul>
@@ -577,7 +658,7 @@
     <h2 class="chapter-title">Hosted by <em>the developer's law firm</em></h2>
   </header>
 
-  <p>The four core CEQA documents underpinning the entire planning entitlement of this site are not hosted on the City of Cloverdale's website, the State Clearinghouse, or any government server. They are hosted on Egnyte, a commercial file-sharing platform, by Reuben, Junius &amp; Rose LLP — the developer's San Francisco land-use law firm. The links below are functional today and may not be functional tomorrow.</p>
+  <p>The four core CEQA documents underpinning the entire planning entitlement of this site are not hosted on the City of Cloverdale's website, the State Clearinghouse, or any government server. They are hosted on Egnyte, a commercial file-sharing platform, by Reuben, Junius &amp; Rose LLP—the developer's San Francisco land-use law firm. The links below are functional today and may not be functional tomorrow.</p>
 
   <ul class="doc-list">
     <li>
@@ -654,7 +735,7 @@
   <ul class="doc-list">
     <li>
       <span class="doc-title">Dry Creek Rancheria Band of Pomo Indians · Comment letter to the City of Cloverdale</span>
-      <span class="doc-meta">Submitted by Chairman Chris Wright. Argues that the project requires a new full Environmental Impact Report — not an addendum — based on changed conditions including contamination findings, Potter Valley Project decommissioning, cumulative impacts, wildfire risk, and project-description changes. Hosted publicly on Adina Flores's Substack.</span>
+      <span class="doc-meta">Submitted by Chairman Chris Wright. Argues that the project requires a new full Environmental Impact Report—not an addendum—based on changed conditions including contamination findings, Potter Valley Project decommissioning, cumulative impacts, wildfire risk, and project-description changes. Hosted publicly on Adina Flores's Substack.</span>
       <span class="doc-url"><a href="https://adinaflores.substack.com/p/cloverdale-dry-creek-rancheria-reacts">adinaflores.substack.com/p/cloverdale-dry-creek-rancheria-reacts</a></span>
     </li>
   </ul>
@@ -738,7 +819,7 @@
 
   <p class="lede">
     Six historical aerials and the Esmeralda Specific Plan figure, used in
-    <a href="/viewing.html">Dispatch No. 4 — The Aerial Record</a>. All of
+    <a href="/viewing.html">Dispatch No. 7—The Aerial Record</a>. All of
     the aerial photography originates with federal agencies (USDA Farm
     Service Agency, USDA NHAP, USGS) and is in the public domain. The
     scans were obtained through a commercial historical-aerials reseller
@@ -754,7 +835,7 @@
         <span class="tag">1961</span>
         <span class="tag">USDA</span>
       </div>
-      <div class="doc-title">266-acre parcel — aerial, wider view</div>
+      <div class="doc-title">266-acre parcel—aerial, wider view</div>
       <div class="doc-note">
         USDA aerial photography, flight window <span class="mono">1961-05-03 &ndash; 1961-09-19</span>.
         Black-and-white panchromatic. Source scan 3,600 × 3,600 px;
@@ -767,7 +848,7 @@
         <span class="tag">1971</span>
         <span class="tag">USGS</span>
       </div>
-      <div class="doc-title">266-acre parcel — aerial, wider view (AI-upscaled)</div>
+      <div class="doc-title">266-acre parcel—aerial, wider view (AI-upscaled)</div>
       <div class="doc-note">
         USGS aerial photograph, single frame dated <span class="mono">1971-10-21</span>.
         Black-and-white. Source scan 3,072 × 3,072 px, upscaled 2× to
@@ -781,7 +862,7 @@
         <span class="tag">1983</span>
         <span class="tag">USDA · NHAP82</span>
       </div>
-      <div class="doc-title">266-acre parcel — aerial, wider view</div>
+      <div class="doc-title">266-acre parcel—aerial, wider view</div>
       <div class="doc-note">
         USDA <em>National High Altitude Photography</em> program, 1982
         cycle (flown into 1983). Single frame dated <span class="mono">1983-07-03</span>.
@@ -795,7 +876,7 @@
         <span class="tag">2005</span>
         <span class="tag">USDA</span>
       </div>
-      <div class="doc-title">266-acre parcel — aerial, wider view &amp; close view</div>
+      <div class="doc-title">266-acre parcel—aerial, wider view &amp; close view</div>
       <div class="doc-note">
         USDA aerial photography (<em>National Agriculture Imagery
         Program</em>, California 2005 cycle), flight window
@@ -811,7 +892,7 @@
         <span class="tag">2009</span>
         <span class="tag">USDA</span>
       </div>
-      <div class="doc-title">266-acre parcel — aerial, close view</div>
+      <div class="doc-title">266-acre parcel—aerial, close view</div>
       <div class="doc-note">
         USDA aerial photography (<em>National Agriculture Imagery
         Program</em>, California 2009 cycle), flight window
@@ -825,12 +906,12 @@
         <span class="tag">2026</span>
         <span class="tag">City of Cloverdale</span>
       </div>
-      <div class="doc-title">Esmeralda Specific Plan — illustrative land-use diagram</div>
+      <div class="doc-title">Esmeralda Specific Plan—illustrative land-use diagram</div>
       <div class="doc-note">
         Figure from the <em>Draft Esmeralda Specific Plan, Version 2</em>
         (draft date <span class="mono">2026-02-20</span>), City of Cloverdale.
         Shows the five Land Use Districts (VH, VR, VMU, OSR, OSC) and
-        five Special Overlays — including the red-hatched <em>Restricted
+        five Special Overlays—including the red-hatched <em>Restricted
         Use Overlay</em> that tracks the former wood-treatment area.
       </div>
     </li>
@@ -839,7 +920,7 @@
 
   <div class="practical">
     <strong>Provenance note.</strong> The aerial scans as delivered to us
-    carried no EXIF or XMP attribution — the reseller's tile system
+    carried no EXIF or XMP attribution—the reseller's tile system
     strips them in transit. Year, originating program, and flight date
     above come from the purchase record, not from the image bytes. If
     anyone wants to obtain the same frames directly from the source,
@@ -866,8 +947,34 @@
   <h4>About this dispatch</h4>
   <p>Sources &amp; Documents is the second dispatch in the Unraveling project. The first, "Ground Truth: 266 Acres South of Town," is the substantive chronology of the parcel and is at <a href="/">groundtruth.watch</a>. Future dispatches will follow as the regulatory and entitlement processes unfold. Mistakes and hallucinations will most certainly be made.</p>
   <p>This dispatch will be updated as documents become available. If you have a public document, comment letter, or piece of regulatory correspondence relating to this site that should be linked here, the dispatch's compilers welcome the addition. Errors of fact, omission, or emphasis should be reported back so that subsequent versions can incorporate them. Distribute freely; correct generously.</p>
-  <p class="colophon-end">end of dispatch · 2 of 2</p>
+  <p class="colophon-end">end of dispatch · no. 3</p>
 </footer>
+
+  <footer class="sitefoot">
+    <div class="sitefoot-top">
+      <a class="sitefoot-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+      <span class="sitefoot-tag">A citizen&rsquo;s documentary record &middot; 266 acres south of Cloverdale</span>
+    </div>
+    <div class="sitefoot-cols">
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
+      </div>
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </div>
+    <p class="sitefoot-note">Public records only. Distribute freely; correct generously.</p>
+  </footer>
 
 </main>
 </body>

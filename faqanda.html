@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We Asked the Binder · Ground Truth Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=DM+Sans:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+<style>
+/* =================================================================
+   GROUND TRUTH—house stylesheet (cobalt on near-white)
+   ================================================================= */
+@layer reset, tokens, base, type, layout, components, additions;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; min-width: 0; }
+  * { margin: 0; padding: 0; }
+  html, body { overflow-x: clip; max-width: 100%; }
+  img, picture, svg { display: block; max-width: 100%; height: auto; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; }
+  a { color: inherit; overflow-wrap: anywhere; word-break: break-word; }
+  :focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; border-radius: 2px; }
+}
+
+@layer tokens {
+  :root {
+    --paper:        #fcfcff;
+    --paper-soft:   #ffffff;
+    --paper-deep:   #eef0fa;
+    --shell:        #ffffff;
+
+    --ink:          #0a0a14;
+    --ink-soft:     #1a1d2e;
+    --ink-faded:    #4a4f63;
+
+    --cobalt:       #1340e0;
+    --cobalt-deep:  #001a80;
+    --cobalt-light: color-mix(in oklab, var(--cobalt) 55%, var(--paper));
+
+    --slate:        #2a4378;
+    --slate-deep:   #0f1f4a;
+    --slate-light:  color-mix(in oklab, var(--slate) 35%, var(--paper));
+
+    --azure:        #1860c4;
+    --azure-deep:   #0a4090;
+
+    --rule:         #c8cde0;
+
+    --fs-xs:    clamp(0.75rem, 0.72rem + 0.15vw, 0.825rem);
+    --fs-sm:    clamp(0.875rem, 0.85rem + 0.15vw, 0.95rem);
+    --fs-base:  clamp(1.0625rem, 1.0rem + 0.35vw, 1.2rem);
+    --fs-md:    clamp(1.2rem, 1.1rem + 0.5vw, 1.35rem);
+    --fs-lg:    clamp(1.5rem, 1.3rem + 1vw, 1.85rem);
+    --fs-xl:    clamp(1.85rem, 1.5rem + 1.75vw, 2.6rem);
+    --fs-2xl:   clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+    --fs-3xl:   clamp(3.25rem, 2.5rem + 3.75vw, 5.5rem);
+
+    --space-xs:  0.5rem;
+    --space-sm:  1rem;
+    --space-md:  1.75rem;
+    --space-lg:  3rem;
+    --space-xl:  5rem;
+    --space-2xl: 7rem;
+
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-organic: 28px 36px 32px 24px / 36px 28px 40px 30px;
+
+    --measure: 38rem;
+    --measure-wide: 52rem;
+    --measure-narrow: 30rem;
+
+    --shadow-soft:    0 1px 2px rgba(10, 10, 20, 0.06),
+                      0 8px 24px rgba(15, 31, 74, 0.10);
+    --shadow-accent:  0 2px 4px rgba(19, 64, 224, 0.10),
+                      0 12px 32px rgba(0, 26, 128, 0.12);
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, color-mix(in oklab, var(--cobalt) 3%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 88% 78%, color-mix(in oklab, var(--slate) 3%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 50% 110%, color-mix(in oklab, var(--azure) 2%, transparent) 0%, transparent 60%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 18;
+    font-size: var(--fs-base);
+    line-height: 1.7;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--cobalt) 30%, transparent);
+    color: var(--ink);
+  }
+}
+
+@layer type {
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+    color: var(--ink);
+    text-wrap: balance;
+    line-height: 1.1;
+  }
+  h1 { font-variation-settings: "opsz" 144, "wght" 700, "SOFT" 50; }
+  h2 { font-variation-settings: "opsz" 96, "wght" 600, "SOFT" 60; }
+  h3 { font-variation-settings: "opsz" 36, "wght" 600, "SOFT" 40; }
+
+  p { text-wrap: pretty; hyphens: auto; }
+  em { font-style: italic; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  a:not([class]) {
+    color: var(--cobalt-deep);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--cobalt) 50%, transparent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color .2s ease;
+  }
+  a:not([class]):hover { text-decoration-color: var(--cobalt); }
+}
+
+@layer layout {
+  .page {
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    padding-block: clamp(2rem, 5vw, 4rem) var(--space-2xl);
+  }
+}
+
+@layer components {
+  .masthead {
+    position: relative;
+    padding-block: var(--space-md) var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .masthead-meta {
+    display: flex; flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    justify-content: space-between; align-items: baseline;
+    font-family: 'DM Sans', sans-serif;
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-faded);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead-meta > :first-child { color: var(--cobalt); }
+
+  .masthead .title {
+    font-family: 'Fraunces', serif;
+    font-size: var(--fs-3xl);
+    font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 60;
+    letter-spacing: -0.025em; line-height: 0.92;
+    color: var(--ink);
+    margin-block: clamp(1.5rem, 4vw, 2.5rem) var(--space-sm);
+  }
+  .masthead .title em {
+    font-style: italic; color: var(--cobalt);
+    font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 100;
+  }
+  .masthead .subtitle {
+    font-family: 'Fraunces', serif;
+    font-size: var(--fs-md);
+    font-variation-settings: "opsz" 32, "wght" 400, "SOFT" 70;
+    font-style: italic; line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+    margin-bottom: var(--space-md);
+  }
+
+  .sidebar-note {
+    margin-block: var(--space-md) var(--space-lg); padding: var(--space-md);
+    background: linear-gradient(135deg,
+      color-mix(in oklab, var(--slate) 8%, var(--paper-soft)),
+      var(--paper-soft));
+    border-radius: var(--radius-organic);
+    border-left: 4px solid var(--slate);
+    box-shadow: var(--shadow-soft);
+    line-height: 1.6;
+    max-width: var(--measure-wide);
+    margin-inline: auto;
+  }
+  .sidebar-note p {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 28, "wght" 400, "SOFT" 80;
+    font-style: italic;
+    font-size: var(--fs-base);
+    color: var(--ink-soft);
+  }
+  .sidebar-note p + p { margin-top: 0.8em; }
+
+  .telling { max-width: var(--measure); margin-inline: auto; }
+  .telling p {
+    font-family: 'Newsreader', serif;
+    font-variation-settings: "opsz" 20, "wght" 410;
+    font-size: var(--fs-md);
+    line-height: 1.78;
+    margin-bottom: 1.4em;
+    color: var(--ink-soft);
+  }
+  .telling p strong { color: var(--ink); font-weight: 600; }
+  .telling p em { color: var(--cobalt-deep); font-style: italic; }
+
+  .lead::first-letter {
+    float: left; font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 30;
+    font-size: 5.4em; line-height: 0.74; color: var(--cobalt);
+    margin: 0.06em 0.1em -0.05em 0;
+    text-shadow: 2px 2px 0 var(--paper-deep),
+      -1px -1px 0 color-mix(in oklab, var(--cobalt) 30%, transparent);
+  }
+
+  .brk {
+    display: flex; align-items: center; justify-content: center;
+    margin-block: var(--space-lg);
+    color: var(--cobalt-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--fs-sm); letter-spacing: 0.5em;
+    user-select: none;
+  }
+  .brk::before, .brk::after {
+    content: ""; flex: 1; max-width: 7rem; height: 1px;
+    background: linear-gradient(to right, transparent, var(--rule), transparent);
+  }
+  .brk span { padding: 0 1rem; color: var(--cobalt); opacity: 0.7; }
+
+  .land {
+    margin-block: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--paper-soft);
+    border-left: 5px solid var(--cobalt);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    box-shadow: var(--shadow-soft);
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 60, "wght" 460, "SOFT" 90;
+    font-style: italic;
+    font-size: var(--fs-lg);
+    line-height: 1.34; color: var(--ink);
+  }
+  .land em { color: var(--cobalt-deep); }
+
+  .sources {
+    margin-top: var(--space-2xl); padding-top: var(--space-md);
+    border-top: 1px dashed color-mix(in oklab, var(--ink) 20%, transparent);
+    font-family: 'DM Sans', sans-serif;
+    font-size: var(--fs-xs); line-height: 1.75; color: var(--ink-soft);
+    max-width: var(--measure-wide); margin-inline: auto;
+  }
+  .sources-label {
+    font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--cobalt);
+    margin-bottom: 0.5rem; display: block;
+  }
+  .sources p { margin-bottom: 0.7rem; }
+  .sources em { font-family: 'Newsreader', serif; }
+  .sources a {
+    color: var(--cobalt-deep); text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--cobalt) 40%, transparent);
+    text-underline-offset: 2px;
+  }
+  .sources .sig {
+    display: block; margin-top: 1rem; text-align: right;
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: var(--fs-base); color: var(--ink);
+  }
+}
+
+/* ---------- ADDITIONS—index + question / answer components ---------- */
+@layer additions {
+  .intro-lead { max-width: var(--measure); margin-inline: auto; }
+  .intro-lead p {
+    font-family: 'Newsreader', serif;
+    font-variation-settings: "opsz" 20, "wght" 410;
+    font-size: var(--fs-md); line-height: 1.78;
+    margin-bottom: 1.4em; color: var(--ink-soft);
+  }
+  .intro-lead p em { color: var(--cobalt-deep); font-style: italic; }
+
+  /* the index—a designed table of contents */
+  .toc {
+    max-width: var(--measure-wide); margin-inline: auto;
+    margin-block: var(--space-lg) var(--space-xl);
+    scroll-margin-top: 1.5rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.4rem, 3vw, 2.25rem) clamp(1.4rem, 3vw, 2.5rem);
+  }
+  .toc-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem 1rem;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-head h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 110, "wght" 800, "SOFT" 0;
+    font-size: var(--fs-xl); letter-spacing: -0.035em; line-height: 0.95;
+    color: var(--ink);
+  }
+  .toc-head .toc-kicker {
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobalt);
+  }
+  .toc-list { display: flex; flex-direction: column; }
+  .toc-row {
+    display: grid; grid-template-columns: 2.6rem 1fr; align-items: baseline;
+    gap: 0 1.1rem; padding: 0.9rem 0.5rem 0.9rem 0;
+    border-top: 1px solid var(--rule);
+    text-decoration: none; color: var(--ink);
+    transition: background .15s ease, padding-left .15s ease;
+  }
+  .toc-row:first-of-type { border-top: 0; }
+  .toc-row:hover, .toc-row:focus-visible {
+    background: color-mix(in oklab, var(--cobalt) 6%, transparent);
+    padding-left: 0.6rem; border-radius: var(--radius-sm);
+  }
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace; font-size: var(--fs-sm);
+    color: var(--cobalt); opacity: 0.8; letter-spacing: 0.08em;
+  }
+  .toc-role {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 36, "wght" 600, "SOFT" 40;
+    font-size: var(--fs-md); color: var(--ink);
+  }
+  .toc-sep { color: var(--cobalt-light); padding: 0 0.5rem; }
+  .toc-topic {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: var(--fs-base); color: var(--ink-faded);
+  }
+
+  .entry { max-width: var(--measure); margin-inline: auto; margin-block: var(--space-lg); scroll-margin-top: 1.5rem; }
+
+  .who {
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--cobalt);
+    display: block; margin-bottom: var(--space-sm);
+  }
+
+  /* the questions—elegant italic, set as quotes */
+  .q {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 42, "wght" 470, "SOFT" 80;
+    font-style: italic;
+    font-size: var(--fs-lg);
+    line-height: 1.3;
+    color: var(--ink);
+    padding-left: var(--space-md);
+    border-left: 3px solid var(--cobalt-light);
+    margin-bottom: var(--space-md);
+    letter-spacing: -1px;
+  }
+
+  .a { margin-top: var(--space-md); }
+  .a p {
+    font-family: 'Newsreader', serif;
+    font-variation-settings: "opsz" 20, "wght" 410;
+    font-size: var(--fs-base); line-height: 1.78;
+    margin-bottom: 1.1em; color: var(--ink-soft);
+  }
+  .a p strong { color: var(--ink); font-weight: 600; }
+  .a p em { color: var(--cobalt-deep); font-style: italic; }
+  .a .land { font-size: var(--fs-md); }
+
+  .backlink {
+    display: inline-block; margin-top: var(--space-xs);
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--cobalt); text-decoration: none;
+  }
+  .backlink:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* site navigation—periodical nameplate + no-JS dispatch index */
+  .sitenav {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 0.75rem var(--space-md); flex-wrap: wrap;
+    margin-bottom: var(--space-md); padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--rule);
+  }
+  .sitenav-brand {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 40, "wght" 700, "SOFT" 30;
+    font-size: var(--fs-md); letter-spacing: -0.01em;
+    color: var(--ink); text-decoration: none;
+  }
+  .sitenav-brand em {
+    font-style: italic; color: var(--cobalt);
+    font-variation-settings: "opsz" 40, "wght" 500, "SOFT" 100;
+  }
+  .sitenav-menu { position: relative; }
+  .sitenav-menu > summary {
+    list-style: none; cursor: pointer; user-select: none;
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobalt);
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .sitenav-menu > summary::-webkit-details-marker { display: none; }
+  .sitenav-menu > summary::after {
+    content: "\25BE"; font-size: 0.78em; transition: transform .2s ease;
+  }
+  .sitenav-menu[open] > summary::after { transform: rotate(180deg); }
+  .sitenav-panel {
+    position: absolute; right: 0; top: calc(100% + 0.7rem); z-index: 30;
+    width: max-content; max-width: calc(100vw - 2.5rem);
+    display: flex; flex-direction: column;
+    background: var(--paper-soft); border: 1px solid var(--rule);
+    border-radius: var(--radius-md); box-shadow: var(--shadow-accent);
+    padding: var(--space-sm) var(--space-md);
+  }
+  .sitenav-panel a {
+    font-family: 'Newsreader', serif; font-size: var(--fs-base);
+    color: var(--ink-soft); text-decoration: none; padding: 0.32rem 0;
+  }
+  .sitenav-panel a:hover { color: var(--cobalt-deep); }
+  .sitenav-panel a.is-current { color: var(--cobalt); font-style: italic; }
+  .sitenav-group {
+    font-family: 'JetBrains Mono', monospace; font-size: var(--fs-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faded);
+    margin: 0.7rem 0 0.25rem;
+  }
+  .sitenav-group:first-child { margin-top: 0; }
+
+  /* site footer—the full dispatch index */
+  .sitefoot {
+    max-width: var(--measure-wide); margin-inline: auto;
+    margin-top: var(--space-2xl); padding-top: var(--space-lg);
+    border-top: 1px solid var(--rule);
+  }
+  .sitefoot-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.4rem 1rem; margin-bottom: var(--space-lg);
+  }
+  .sitefoot-brand {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 48, "wght" 700, "SOFT" 30;
+    font-size: var(--fs-lg); letter-spacing: -0.015em;
+    color: var(--ink); text-decoration: none;
+  }
+  .sitefoot-brand em {
+    font-style: italic; color: var(--cobalt);
+    font-variation-settings: "opsz" 48, "wght" 500, "SOFT" 100;
+  }
+  .sitefoot-tag {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: var(--fs-base); color: var(--ink-faded);
+  }
+  .sitefoot-cols {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md) var(--space-lg);
+  }
+  .sitefoot-head {
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobalt);
+    margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule);
+  }
+  .sitefoot-col a {
+    display: block; font-family: 'Newsreader', serif; font-size: var(--fs-base);
+    color: var(--ink-soft); text-decoration: none; padding: 0.34rem 0;
+  }
+  .sitefoot-col a:hover { color: var(--cobalt-deep); text-decoration: underline; text-underline-offset: 3px; }
+  .sitefoot-col a.is-current { color: var(--cobalt); font-style: italic; }
+  .sitefoot-note {
+    margin-top: var(--space-lg);
+    font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs);
+    letter-spacing: 0.04em; color: var(--ink-faded);
+  }
+  @media (max-width: 34rem) { .sitefoot-cols { grid-template-columns: 1fr; } }
+
+  @media print {
+    body { background: #fff; }
+    .land, .sidebar-note, .toc, .sitefoot { box-shadow: none; }
+    .backlink, .sitenav { display: none; }
+    a { color: inherit; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+
+  <nav class="sitenav" aria-label="Ground Truth dispatches">
+    <a class="sitenav-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+    <details class="sitenav-menu">
+      <summary>Dispatches</summary>
+      <div class="sitenav-panel">
+        <p class="sitenav-group">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a class="is-current" href="https://groundtruth.watch/faqanda.html" aria-current="page">We Asked the Binder</a>
+        <p class="sitenav-group">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </details>
+  </nav>
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Volume I &middot; Dispatch No. 5</span>
+      <span>Cloverdale &middot; Esmeralda</span>
+      <span>Filed May 2026</span>
+    </div>
+    <h1 class="title">We asked the binder. The binder said, &ldquo;<em>no</em>.&rdquo;</h1>
+    <p class="subtitle">An imagined Q&amp;A. Ten made-up Cloverdale neighbors put their questions not to a developer, but to the documents themselves&mdash;the covenant, the Water Board file, the EIR, the Specific Plan.</p>
+  </header>
+
+  <aside class="sidebar-note">
+    <p>The ten neighbors below are invented, and so are their questions. But they aren&rsquo;t the questions a project&rsquo;s outreach tends to invite&mdash;they&rsquo;re the ones you&rsquo;d ask if you&rsquo;d read the file first. Every answer comes straight off the page.</p>
+  </aside>
+
+  <div class="intro-lead">
+    <p class="lead">Every figure and restriction here traces to a document a resident can pull without anyone&rsquo;s permission: <em>GeoTracker</em>, the North Coast Water Board case file, the recorded Sonoma County covenant, the 2009 EIR and its addenda, and the draft Specific Plan. Nothing rests on the developer&rsquo;s framing, and nothing rests on a source that can&rsquo;t be verified.</p>
+  </div>
+
+  <!-- THE INDEX -->
+  <nav class="toc" id="index" aria-label="The questions">
+    <div class="toc-head">
+      <h2>The Questions</h2>
+      <span class="toc-kicker">Ten neighbors &middot; one file</span>
+    </div>
+    <div class="toc-list">
+      <a class="toc-row" href="#q01"><span class="toc-num">01</span><span><span class="toc-role">The grandfather</span><span class="toc-sep">&middot;</span><span class="toc-topic">a school on restricted ground</span></span></a>
+      <a class="toc-row" href="#q02"><span class="toc-num">02</span><span><span class="toc-role">The grape grower</span><span class="toc-sep">&middot;</span><span class="toc-topic">water across the river</span></span></a>
+      <a class="toc-row" href="#q03"><span class="toc-num">03</span><span><span class="toc-role">The real-estate agent</span><span class="toc-sep">&middot;</span><span class="toc-topic">senior housing &amp; disclosure</span></span></a>
+      <a class="toc-row" href="#q04"><span class="toc-num">04</span><span><span class="toc-role">The HOA board member</span><span class="toc-sep">&middot;</span><span class="toc-topic">who enforces the covenant</span></span></a>
+      <a class="toc-row" href="#q05"><span class="toc-num">05</span><span><span class="toc-role">The mill widow</span><span class="toc-sep">&middot;</span><span class="toc-topic">the health study that isn&rsquo;t there</span></span></a>
+      <a class="toc-row" href="#q06"><span class="toc-num">06</span><span><span class="toc-role">The hearing regular</span><span class="toc-sep">&middot;</span><span class="toc-topic">addendum or new EIR</span></span></a>
+      <a class="toc-row" href="#q07"><span class="toc-num">07</span><span><span class="toc-role">The mother on city water</span><span class="toc-sep">&middot;</span><span class="toc-topic">the monitoring switched off</span></span></a>
+      <a class="toc-row" href="#q08"><span class="toc-num">08</span><span><span class="toc-role">The market farmer</span><span class="toc-sep">&middot;</span><span class="toc-topic">what the &ldquo;Twinkie&rdquo; is made of</span></span></a>
+      <a class="toc-row" href="#q09"><span class="toc-num">09</span><span><span class="toc-role">The shopkeeper</span><span class="toc-sep">&middot;</span><span class="toc-topic">where the record actually lives</span></span></a>
+      <a class="toc-row" href="#q10"><span class="toc-num">10</span><span><span class="toc-role">The hotel housekeeper</span><span class="toc-sep">&middot;</span><span class="toc-topic">why commercial is allowed</span></span></a>
+    </div>
+  </nav>
+
+  <!-- 1 -->
+  <div class="brk"><span>01</span></div>
+  <article class="entry" id="q01">
+    <span class="who">A grandfather of two middle-schoolers</span>
+    <blockquote class="q">You&rsquo;ve drawn a school into this plan. I read that the covenant on this land bans schools for anyone under 21 across the whole restricted area. And I&rsquo;ve heard the Dry Creek Rancheria sent the City a letter. So two things: where does this school actually sit on the covenant map, and has the City finished the tribal consultation the law requires&mdash;or did someone send an email and call it done?</blockquote>
+    <div class="a">
+      <p>The covenant&mdash;recorded August 28, 2013, and the instrument the Water Board still points to&mdash;is explicit. Article III bars, across the &ldquo;Burdened Property,&rdquo; any <strong>residence for human habitation</strong>, any hospital, and <strong>schools for persons under 21 years of age</strong>. The draft Specific Plan puts that housing-restricted zone at <strong>22.5 acres</strong>&mdash;a roughly 8-acre former-plant footprint plus a 14.5-acre buffer. A school for children is lawful only <em>outside</em> that 22.5-acre envelope.</p>
+      <p>Where the proposed school sits relative to that line is a map question: overlay the Plan&rsquo;s land-use map (Figure 2-1) on the covenant&rsquo;s figures. The Plan calls the school a future &ldquo;conditional use&rdquo; the Planning Commission would decide later. Until those parcels are shown overlaid, &ldquo;the school is outside the restricted area&rdquo; is an assertion, not a fact in the file.</p>
+      <p>On consultation: under AB&nbsp;52 (Public Resources Code &sect;&nbsp;21080.3.1), formal tribal consultation is the <strong>City&rsquo;s</strong> duty, triggered by a tribe&rsquo;s written request, and it concludes on agreement or a documented good-faith failure to agree&mdash;not on a tribe&rsquo;s non-response. The Dry Creek Rancheria has put a letter on the record; a letter is the tribe at the table. The question for the City is whether the file shows consultation requested and concluded, or only attempted.</p>
+      <p class="land">A letter is the tribe at the <em>table.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <div class="brk"><span>02</span></div>
+  <article class="entry" id="q02">
+    <span class="who">A grape grower across the river, working old-vines Petite Sirah he inherited from his father</span>
+    <blockquote class="q">They keep saying they won&rsquo;t draw water &ldquo;from the site.&rdquo; Fine&mdash;but they&rsquo;ll draw from the city&rsquo;s wells, and the city&rsquo;s wells and my river are the same water. And now they want to &ldquo;recharge the aquifer&rdquo; over a spot the file says has a PCP plume 130 feet down. So does that well restriction reach across the river to me, and what exactly are they percolating water into?</blockquote>
+    <div class="a">
+      <p>The narrow answer first: the covenant creates a Restricted Groundwater Area, and the recorded Notice of Groundwater Restrictions covers an area <em>bounding</em> the plume&mdash;it sets notification and Water Board-approval requirements for new water-supply wells near the contamination. By its own terms it does <strong>not</strong> burden adjacent property; it&rsquo;s a buffer around the on-site plume, not a line across the river. Your ranch well is almost certainly outside it.</p>
+      <p>The broader answer: &ldquo;no draw from the site&rdquo; is not &ldquo;no new draw from the basin.&rdquo; The 2009 EIR records the alluvial aquifer and the Russian River as <strong>connected</strong>&mdash;groundwater recharges the river in normal years, and the river feeds the aquifer when levels drop. The project&rsquo;s water (the developer&rsquo;s own worst-case figure is 76 million gallons a year at buildout) comes from city wells in that same system. The relevant question isn&rsquo;t the parcel line; it&rsquo;s basin draw in the dry years&mdash;and the developer measures that draw against Sonoma Water, the county&rsquo;s largest wholesaler, which makes any one project read like a rounding error.</p>
+      <p>On &ldquo;recharge&rdquo;: the documented bedrock PCP plume sits to roughly 130 feet near wells MW-27 and MW-37, south of the old treatment area. Recharge basins percolate surface water down into the shallow alluvial system&mdash;the same ground the contamination sits beneath. How that is done without mobilizing residual contamination or disturbing the soil cap is a question the addenda do not take up.</p>
+      <p class="land">That analysis would belong in a <em>full environmental review.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <div class="brk"><span>03</span></div>
+  <article class="entry" id="q03">
+    <span class="who">A local real estate agent who recently moved her mother into Vine Ridge; her own children live in Canada</span>
+    <blockquote class="q">I sell homes in this town&mdash;I fill out disclosure forms for a living&mdash;and I just signed my own mother into assisted living. So I want to know: does the covenant that bans homes and a seniors&rsquo; day-care on this land also stop a senior facility, and what will buyers and their families be told, in plain English, before they sign?</blockquote>
+    <div class="a">
+      <p>The covenant draws two lines. Across the entire <strong>22.5-acre</strong> Burdened Property it bars any &ldquo;residence for human habitation&rdquo; and any hospital. Within the smaller <strong>5.35-acre</strong> Restricted Soil Area it separately bars &ldquo;day care centers for children or day care centers for Senior Citizens.&rdquo; An assisted-living or continuum-of-care building is residential&mdash;people sleep there&mdash;so it runs into the residence bar across the whole zone, not only the soil hot-spot.</p>
+      <p>Whether the proposed senior facility sits inside or outside the 22.5 acres is, once again, a Figure-on-figure question the Plan hasn&rsquo;t shown overlaid.</p>
+      <p>You know the disclosure side better than most: the covenant runs with the land, so it would surface as an exception on a preliminary title report. But a title exception is not a plain-language explanation. Nothing in the record requires that a buyer&mdash;or an elderly resident&rsquo;s family&mdash;be told, in writing they will actually read, that this is a deed-restricted former wood-treatment site where the Water Board&rsquo;s monitoring program was terminated in January 2026 and a perpetual covenant is now the only control.</p>
+      <p class="land">A covenant that &ldquo;runs with the land&rdquo; still has to be read out loud to the people living on it.</p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <div class="brk"><span>04</span></div>
+  <article class="entry" id="q04">
+    <span class="who">A former local HOA board member, who has read more CC&amp;Rs than she&rsquo;d like</span>
+    <blockquote class="q">I sat on an HOA board here for years. I know what does and doesn&rsquo;t make it into a disclosure packet. For Esmeralda: who actually enforces this covenant after the developer sells and walks away&mdash;the HOA, the City, or the Water Board&mdash;and will every owner <em>and</em> every renter get the covenant, the soil-management plan, and the plain fact that the groundwater monitoring has been switched off?</blockquote>
+    <div class="a">
+      <p>Enforcement is not the HOA&rsquo;s. The covenant is an institutional control under the Water Board&rsquo;s authority; it grants the North Coast Regional Water Quality Control Board access to the property &ldquo;for purposes of inspection, surveillance, maintenance, or monitoring&rdquo; under the Water Code. It&rsquo;s the Board&mdash;not a homeowners&rsquo; board&mdash;that polices the use and excavation limits. The Board&rsquo;s January&nbsp;21, 2026 letter is blunt: no further action <em>beyond the covenant requirements</em> is required. The covenant is the requirement now.</p>
+      <p>That matters because the same letter <strong>also terminates</strong> Monitoring and Reporting Program Order No. R1-2023-0028. The routine groundwater monitoring is over. There is no HOA mechanism, and no remaining Board order, that resumes it. The land-use restrictions are the entire safety net.</p>
+      <p>A covenant binds successors and occupants by operation of law&mdash;but the record shows no requirement that the developer hand every owner and tenant the covenant, the Soil Management Plan, and the monitoring-termination fact at signing. If you want that in the packet, for renters too, someone has to write it in as a condition.</p>
+      <p class="land">After the developer sells, the homeowners don&rsquo;t inherit a regulator. They inherit a <em>document.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <div class="brk"><span>05</span></div>
+  <article class="entry" id="q05">
+    <span class="who">A woman whose late husband spent thirty years at the mill</span>
+    <blockquote class="q">My husband worked here when they were still treating wood. He&rsquo;s gone now. Everyone keeps saying the site is &ldquo;safe&rdquo; and &ldquo;closed.&rdquo; I want one straight answer: is there anywhere, in all of these documents, a study of what happened to the people who worked here&mdash;or who lived next door&mdash;for forty years?</blockquote>
+    <div class="a">
+      <p>No. The &ldquo;No Further Action&rdquo; letter is a regulatory closure of a water-quality case. It certifies that residual soil and groundwater contamination is being managed by a covenant&mdash;its own words are &ldquo;due to limited residual contamination&rdquo;&mdash;not that anyone studied human health. It is silent on workers and neighbors.</p>
+      <p>The contamination is real and named in the file: pentachlorophenol, a wood preservative whose commercial grades carried chlorinated impurities, plus arsenic, chromium, copper, and petroleum hydrocarbons in the soil of the roughly 8-acre former treatment area. The draft Specific Plan states the work will still require excavation and off-haul of soil &ldquo;with the potential to contain&rdquo; PCP, arsenic, and petroleum hydrocarbons, and that <strong>construction workers and the general public could be exposed</strong>. That is the developer&rsquo;s own document.</p>
+      <p>A health study of former workers and nearby residents is one of the things the record does not contain.</p>
+      <p class="land">Absence of evidence is not evidence of absence.</p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <div class="brk"><span>06</span></div>
+  <article class="entry" id="q06">
+    <span class="who">A retiree who has sat through Cloverdale planning hearings since the 1990s</span>
+    <blockquote class="q">In 2009 this was approved as a gated golf resort. Now it&rsquo;s roughly six hundred homes, a school, senior housing, and an amphitheater&mdash;and they want to bless it with another addendum instead of a new EIR. The 2018 addendum literally says &ldquo;no changes since 2009 and 2016.&rdquo; How does &ldquo;no changes&rdquo; cover all of that?</blockquote>
+    <div class="a">
+      <p>CEQA does allow an addendum&mdash;but only when changes cause no new significant effects and don&rsquo;t worsen the ones already studied. The 2018 Initial Study leans on exactly that logic, repeating that &ldquo;there have been no changes to conditions in and around the broader Project site&rdquo; since the 2009 and 2016 approvals. That is the language of continuity.</p>
+      <p>The Esmeralda program is not continuity. It deletes the gated golf course, multiplies the housing, and adds uses the earlier EIRs never analyzed as built features here&mdash;a school and a senior facility on a covenanted brownfield, plus an amphitheater. Two of those uses are the very ones the covenant restricts. Whether that clears the addendum bar is a contested legal question, not a settled one, and it&rsquo;s decided on &ldquo;substantial evidence&rdquo; by the Planning Commission and Council, who are free to disagree with the consultant.</p>
+      <p>One tell of how carefully the latest document was assembled: the Specific Plan calls the January 2026 outcome a &ldquo;clean closure&rdquo; and credits &ldquo;thresholds approved by the Department of Toxic Substances Control.&rdquo; The operative letter is from the North Coast <em>Water Board</em>, not DTSC, and it is a no-further-action <em>with</em> residual contamination and a perpetual covenant&mdash;the opposite of a clean closure. When a plan misdescribes its own keystone document, every downstream &ldquo;no new impact&rdquo; finding earns a closer read.</p>
+      <p class="land">You don&rsquo;t get to call it unchanged and brand-new in the <em>same binder.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <div class="brk"><span>07</span></div>
+  <article class="entry" id="q07">
+    <span class="who">A young mother in the southeast quarter of town, on the city water the new tank will feed</span>
+    <blockquote class="q">They&rsquo;re building a water tank to pressurize my side of town, and they say the site is safe because monitoring showed no risk. But if the Water Board just turned the monitoring <em>off</em>, how does anyone know the plume isn&rsquo;t moving? Who&rsquo;s measuring now?</blockquote>
+    <div class="a">
+      <p>No one, on a routine basis. The January&nbsp;21, 2026 letter terminated the Monitoring and Reporting Program (Order R1-2023-0028). The closure rests on &ldquo;monitored natural attenuation&rdquo;&mdash;the theory that the contamination breaks down on its own over time. The catch is in the word <em>monitored</em>: once the order is terminated, the monitoring that would confirm the theory stops with it.</p>
+      <p>And the numbers were not at zero when it stopped. The Water Board&rsquo;s stated water-quality goal for PCP is <strong>1 microgram per liter</strong>. In the file, bedrock well MW-37 read <strong>220</strong> &micro;g/L in late 2020&mdash;220 times the goal&mdash;and was still around 15&ndash;20 &micro;g/L in 2021. Those are well above the objective at the point the case closed. The covenant&rsquo;s own attenuation analysis projected the bedrock cleanup over a span reaching into the 2030s; closure landed near the early end of that window.</p>
+      <p>Your tap is a separate system&mdash;city wells, treated to drinking standards&mdash;and the covenant bars new wells in the restricted groundwater zone. The honest gap isn&rsquo;t your faucet; it&rsquo;s that the only thing now standing between residual contamination and the groundwater is a land-use restriction, with the measuring switched off before the levels reached the goal.</p>
+      <p class="land">They <em>destroyed</em> the monitoring wells and then recommended monitored natural attenuation. Hmmm&hellip;</p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <div class="brk"><span>08</span></div>
+  <article class="entry" id="q08">
+    <span class="who">A market farmer who sells at the Cloverdale stand and wondered about growing on-site</span>
+    <blockquote class="q">Everybody keeps calling that flat eastern piece &ldquo;the Twinkie&rdquo; and telling me you can grow produce on it with a little soil testing. But what is that ground actually made of? I&rsquo;m not planting carrots in something I can&rsquo;t name.</blockquote>
+    <div class="a">
+      <p>Name it from the EIR: that fill is former landfill. The 2009 EIR records that the Louisiana-Pacific wood-waste landfills, once sited southwest of the treatment area, were excavated and the wood waste was &ldquo;blended with soils&rdquo; and used &ldquo;to fill a portion of the property in the Russian River flood plain.&rdquo; The flat eastern pad&mdash;the developer&rsquo;s &ldquo;reusable fill area&rdquo;&mdash;is, by the record, wood-waste-blended fill placed over former floodplain.</p>
+      <p>Which is why the pitch that this area is unrelated to the Masonite site doesn&rsquo;t match the file: the fill is made of the site&rsquo;s own waste stream. The 2009 EIR&rsquo;s own mitigation says fill containing wood waste &ldquo;shall not be placed under any proposed habitable structures, access roadways, or major utility corridors&rdquo; unless a geotechnical report finds the specific use non-hazardous. The record treats this material as something to keep out from under buildings&mdash;not as clean topsoil.</p>
+      <p>For food: the covenant&rsquo;s Soil Management Plan confines excavated soil within the Restricted Soil Area and requires Water Board notification and sampling for deeper digging. &ldquo;Sure, with soil testing&rdquo; understates it. Before a carrot, you&rsquo;d want the fill&rsquo;s composition and an agricultural-use analysis on paper&mdash;neither of which is in the addenda.</p>
+      <p class="land">They nicknamed it the Twinkie. The EIR calls it the <em>landfill.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 9 -->
+  <div class="brk"><span>09</span></div>
+  <article class="entry" id="q09">
+    <span class="who">A downtown shopkeeper and Friday Night Live regular</span>
+    <blockquote class="q">Everybody keeps pointing me to the developer&rsquo;s FAQ. Fine&mdash;but that FAQ is theirs. Where does a regular person go to read the actual Water Board letter, the covenant, and the four-thousand-page addendum&mdash;and why isn&rsquo;t the regulatory file just sitting in the public library where anyone can read it?</blockquote>
+    <div class="a">
+      <p>The independent record lives in public repositories, not the developer&rsquo;s website. The Water Board case file (NCRWQCB Case #1NSO266) and its monitoring data are on the State Water Board&rsquo;s <strong>GeoTracker</strong> (Global ID T0609793185). The covenant and its companion deed restriction are recorded with the <strong>Sonoma County Recorder</strong> (Instruments #2013088083 and #2013088084, recorded August&nbsp;28, 2013). The CEQA documents are filed through the State Clearinghouse on <strong>CEQAnet</strong>. These are the sources without a marketing department.</p>
+      <p>The developer frames its &ldquo;20-day&rdquo; and &ldquo;30-day&rdquo; review windows as generosity&mdash;the 20-day one as a courtesy beyond what the law requires. That&rsquo;s fine, but a voluntary window the proponent designed is not the same as a permanent, neutral place to read the file. Re-establishing the public regulatory file at the Cloverdale Public Library&mdash;where a resident without a 4,000-page printer can sit with the addendum, the covenant, and the closure letter&mdash;is a reasonable ask of the City.</p>
+      <p>The point isn&rsquo;t that the FAQ shouldn&rsquo;t exist. It&rsquo;s that &ldquo;go read our FAQ&rdquo; and &ldquo;go read the record&rdquo; are different instructions&mdash;and only one of them lets you check the other.</p>
+      <p class="land">Read the FAQ the developer wrote. The State Water Resources Control Board GeoTracker file is the one you can <em>check it against.</em></p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <div class="brk"><span>10</span></div>
+  <article class="entry" id="q10">
+    <span class="who">A hotel housekeeper who would work the new resort full-time, eight hours a day</span>
+    <blockquote class="q">They keep families off this restricted ground, but a hotel goes right on it. I&rsquo;d be cleaning that bar and those rooms eight hours a day for years. If it&rsquo;s too contaminated for someone to live on, why is it fine for me to work on?</blockquote>
+    <div class="a">
+      <p>The covenant doesn&rsquo;t ban it&mdash;and that&rsquo;s by design. Article III bars only four uses on the Burdened Property: residences, hospitals, schools under 21, and child or senior day care. Hotels and other commercial uses aren&rsquo;t on the list, and the reason is the closure logic. This was a <strong>risk-based</strong> closure: the residual PCP left in the soil sits <em>above</em> the screening level used for homes and <em>below</em> the one used for commercial settings. By the covenant&rsquo;s own numbers that&rsquo;s roughly 4.4&nbsp;mg/kg for residential against about 13 for commercial, with the residual in between. So a home is barred and a hotel is allowed.</p>
+      <p>That split exists because of assumed exposure. The residential level is built around someone present around the clock, for decades, including children, with bare-soil contact and food grown in the yard. The commercial level is built around an adult working a roughly eight-hour day, no residence, no children, less contact with soil. A full-time housekeeper or groundskeeper <strong>is</strong> the commercial receptor&mdash;the exact person that higher number was written for. &ldquo;Legally fine&rdquo; means your exposure was judged to fall within an <em>acceptable</em> risk for that receptor. Acceptable is a regulatory threshold, not zero, and a looser one than a resident gets.</p>
+      <p>What actually stands between you and the contamination isn&rsquo;t the word &ldquo;hotel.&rdquo; It&rsquo;s the soil cap&mdash;excavated areas were backfilled with at least three feet of clean fill&mdash;the deeper residual sitting below roughly five feet, and the excavation rules. The thin spots are in the record: a groundskeeper turning soil shallower than three feet triggers no sampling; the construction Health &amp; Safety Plan protects the people who build the hotel, not the housekeeper working there fifteen years later; the monitoring is now off, so &ldquo;still below commercial&rdquo; isn&rsquo;t being re-checked; and the bedrock plume to 130 feet isn&rsquo;t tracked under any future hotel parcel.</p>
+      <p>The asymmetry is the part worth saying plainly. The covenant lets commercial go where homes can&rsquo;t, so putting the resort on the restricted ground conserves the clean, sellable acreage for the houses. If the hotel sits on the Burdened Property&mdash;the same unverified placement question as the school&mdash;the buyers get a disclosure and clean ground, and the hourly workers get the restricted parcel and no notice at all.</p>
+      <p class="land">If it&rsquo;s too dirty to sleep on, &ldquo;safe to work on&rdquo; is a <em>calculation</em>&mdash;not a clean bill.</p>
+      <a class="backlink" href="#index">&uarr; Index</a>
+    </div>
+  </article>
+
+  <section class="sources">
+    <span class="sources-label">Sources&mdash;public record only</span>
+    <p>State Water Resources Control Board, <em>GeoTracker</em>, Case Global ID T0609793185. North Coast Regional Water Quality Control Board, Case #1NSO266&mdash;including the <em>No Further Action and Termination of Monitoring and Reporting Program, Order No. R1-2023-0028</em>, signed Valerie Quinto, Executive Officer, January&nbsp;21, 2026, and the bedrock-well analytical data (MW-27, MW-37) in the GeoTracker file.</p>
+    <p>Sonoma County Recorder: <em>Covenant and Environmental Restriction on Property</em> and <em>Notice of Deed Restriction</em>, Instruments #2013088083 and #2013088084, recorded August&nbsp;28, 2013, with the attached Soil Management Plan and Restricted Soil Area description (residential and commercial soil screening levels appear in the covenant&rsquo;s supporting materials).</p>
+    <p>City of Cloverdale CEQA file (State Clearinghouse / <em>CEQAnet</em>): Alexander Valley Resort Final EIR (April&nbsp;2009); 2016 Addendum; 2018 Initial Study / CEQA Addendum; Draft Esmeralda Specific Plan (2026). Tribal-consultation duty per AB&nbsp;52 (Public Resources Code &sect;&nbsp;21080.3.1); the Dry Creek Rancheria has corresponded with the City regarding the Plan.</p>
+    <p>The ten neighbors and their questions are invented; the answers are not. Figures attributed to the developer&mdash;the 76-million-gallon worst-case demand, the 22.5-acre restricted area&mdash;are the developer&rsquo;s own, drawn from the project&rsquo;s water supply assessment and Specific Plan. Everything else is drawn directly from the documents above.</p>
+    <span class="sig">Ground Truth Watch &middot; Cloverdale</span>
+  </section>
+
+  <footer class="sitefoot">
+    <div class="sitefoot-top">
+      <a class="sitefoot-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+      <span class="sitefoot-tag">A citizen&rsquo;s documentary record &middot; 266 acres south of Cloverdale</span>
+    </div>
+    <div class="sitefoot-cols">
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a class="is-current" href="https://groundtruth.watch/faqanda.html" aria-current="page">We Asked the Binder</a>
+      </div>
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </div>
+    <p class="sitefoot-note">Public records only. Distribute freely; correct generously.</p>
+  </footer>
+
+</main>
+</body>
+</html>
