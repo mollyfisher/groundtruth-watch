@@ -469,6 +469,31 @@
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
 </script>
+<!-- OpenReplay Tracking Code for my first project -->
+<script>
+  var initOpts = {
+    projectKey: "rUKheaVZkDhfPNFQRxVG",
+    // 0 - plain, 1 - obscured, 2 - ignored
+    defaultInputMode: 1,
+    obscureTextNumbers: true,
+    obscureTextEmails: true,
+  };
+  var startOpts = { userID: "" };
+  (function(A,s,a,y,e,r){
+    r=window.OpenReplay=[e,r,y,[s-1, e]];
+    s=document.createElement('script');s.src=A;s.async=!a;
+    document.getElementsByTagName('head')[0].appendChild(s);
+    r.start=function(v){r.push([0])};
+    r.stop=function(v){r.push([1])};
+    r.setUserID=function(id){r.push([2,id])};
+    r.setUserAnonymousID=function(id){r.push([3,id])};
+    r.setMetadata=function(k,v){r.push([4,k,v])};
+    r.event=function(k,p,i){r.push([5,k,p,i])};
+    r.issue=function(k,p){r.push([6,k,p])};
+    r.isActive=function(){return false};
+    r.getSessionToken=function(){};
+  })("//static.openreplay.com/latest/openreplay.js",1,0,initOpts,startOpts);
+</script>
 </head>
 <body>
 <main class="page is-wide">
@@ -485,7 +510,7 @@
   </header>
 
   <section class="lede col">
-    <p>Ten dispatches make up this record. The first four set down what the public documents say; the last six let you see the ground itself. Start anywhere &mdash; but if you read only one, read <a href="/chronicle.html">the chronicle</a>.</p>
+    <p>Eleven dispatches make up this record. The first six set down what the public documents say; the last five let you see the ground itself. Start anywhere &mdash; but if you read only one, read <a href="/chronicle.html">the chronicle</a>.</p>
   </section>
 
   <div class="chapters-grid">
@@ -514,6 +539,16 @@
         <span class="doc-title"><a href="/comments.html">The <em>Public Record</em></a></span>
         <span class="doc-meta">Every comment on the 2009 Alexander Valley Resort EIR, paraphrased into plain language with the City&rsquo;s responses kept verbatim.</span>
         <span class="doc-url"><a href="/comments.html">groundtruth.watch/comments.html</a></span>
+      </li>
+      <li>
+        <span class="doc-title"><a href="/faqanda.html">We Asked the <em>Binder</em></a></span>
+        <span class="doc-meta">Plain answers to the questions a neighbor actually asks, drawn from the documentary record.</span>
+        <span class="doc-url"><a href="/faqanda.html">groundtruth.watch/faqanda.html</a></span>
+      </li>
+      <li>
+        <span class="doc-title"><a href="/write.html">Write to <em>City Hall</em></a></span>
+        <span class="doc-meta">A builder that turns what you care about into a letter to the City, in your own words, ready to send.</span>
+        <span class="doc-url"><a href="/write.html">groundtruth.watch/write.html</a></span>
       </li>
     </ul>
   </article>
@@ -548,11 +583,6 @@
         <span class="doc-title"><a href="/dust.html">About <em>Construction Dust</em></a></span>
         <span class="doc-meta">An interactive wind model of how contaminated dust can drift off-site during Phase 1 grading.</span>
         <span class="doc-url"><a href="/dust.html">groundtruth.watch/dust.html</a></span>
-      </li>
-      <li>
-        <span class="doc-title"><a href="/write.html">Write to <em>City Hall</em></a></span>
-        <span class="doc-meta">A builder that turns what you care about into a letter to the City, in your own words, ready to copy and send.</span>
-        <span class="doc-url"><a href="/write.html">groundtruth.watch/write.html</a></span>
       </li>
     </ul>
   </article>
