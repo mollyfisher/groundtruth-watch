@@ -4,9 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Write to City Hall: Ground Truth</title>
-<meta name="description" content="Build a letter to Cloverdale City Hall about the Esmeralda development on the former Masonite mill site. Pick what you care about, add your own story, copy and send.">
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-poEpyurL6cImhwUj3jfc8.js"></script>
+<meta name="description" content="Write to Cloverdale City Hall about the Esmeralda development on the former Masonite mill site. Choose what to raise, add your own account, and send it from your email.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
 <script>
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
@@ -14,7 +13,7 @@
 </head>
 <body>
 <div id="root"></div>
-<script>/* React 18.2.0 (UMD production) bundled inline, no external dependencies */
+<script>/* React 18.2.0 (UMD production), bundled inline */
 /**
  * @license React
  * react.production.min.js
@@ -48,7 +47,7 @@ c.useSyncExternalStore=function(a,b,c){return g.current.useSyncExternalStore(a,b
 })();
 
 </script>
-<script>/* ReactDOM 18.2.0 (UMD production) bundled inline */
+<script>/* ReactDOM 18.2.0 (UMD production), bundled inline */
 /**
  * @license React
  * react-dom.production.min.js
@@ -318,61 +317,77 @@ function(a,b,c){if(!Vd(b))throw Error(n(200));return Wd(null,a,b,!1,c)};Q.unmoun
 })();
 
 </script>
-<script>/* Application, pre-compiled from JSX to plain JS at build time */
+<script>/* Application, pre-compiled from JSX at build time */
 const {
   useState,
   useMemo
 } = React;
 
-// ---- Content (vetted, plain-neighbor voice, unspaced em dashes) ----
+// ---- Content (Telling the Ground Truth voice; unspaced em dashes) ----
 
-const ADDRESSEES = [{
-  id: "council",
-  label: "City Council"
-}, {
-  id: "both",
-  label: "Both"
-}, {
-  id: "manager",
-  label: "City Manager"
-}];
+const RECIPIENTS = {
+  council: {
+    label: "City Council",
+    to: "publiccomments@ci.cloverdale.ca.us",
+    cc: "bwheeler@ci.cloverdale.ca.us, tlands@ci.cloverdale.ca.us, mlaskey@ci.cloverdale.ca.us, amarquez@ci.cloverdale.ca.us, mmorgenstern@ci.cloverdale.ca.us",
+    greet: "Dear Mayor Wheeler and Members of the City Council,"
+  },
+  both: {
+    label: "Council & Manager",
+    to: "publiccomments@ci.cloverdale.ca.us, kthompson@ci.cloverdale.ca.us",
+    cc: "bwheeler@ci.cloverdale.ca.us, tlands@ci.cloverdale.ca.us, mlaskey@ci.cloverdale.ca.us, amarquez@ci.cloverdale.ca.us, mmorgenstern@ci.cloverdale.ca.us",
+    greet: "Dear Mayor Wheeler, Members of the Council, and Mr. Thompson,"
+  },
+  manager: {
+    label: "City Manager",
+    to: "kthompson@ci.cloverdale.ca.us",
+    cc: "",
+    greet: "Dear Mr. Thompson,"
+  }
+};
+const ADDRESSEE_ORDER = ["council", "both", "manager"];
 const CONCERN_ORDER = ["scale", "soil", "school", "gw", "process", "water"];
 const CONCERNS = {
   scale: {
-    label: "The project got a lot bigger",
-    text: "The environmental study covered about 170 homes. The plan is now roughly 605, plus a school, senior housing, and an amphitheater—a different project the old study was never written to cover."
+    label: "The project outgrew its study",
+    text: "The environmental review this project still relies on was written for something far smaller—on the order of 170 homes. What is proposed now is closer to 605, with a school, senior housing, and an amphitheater. That is not a revision of the old project. It is a different one, and the document meant to anticipate its effects was never written to hold it."
   },
   soil: {
-    label: "Leftover chemicals in the soil",
-    text: "Part of this site still holds chemicals left from the mill. The cleanup judged them safe for commercial use, not for housing—yet the plan puts homes and a school on that same ground."
+    label: "What the ground still holds",
+    text: "For thirteen years part of this site was a wood-treating plant, and the chemicals it used—arsenic and pentachlorophenol among them—went into the ground a little at a time, the ordinary way, by people doing their jobs. The cleanup did not remove all of it. It judged the residue tolerable for commercial use, not for homes. The plan puts homes, and a school, on that same ground."
   },
   school: {
-    label: "A school on restricted ground",
-    text: "A deed restriction recorded on the property bars homes, day care, and schools for children on its most contaminated section. The plan includes a school. Those two facts have to be squared before anyone breaks ground."
+    label: "A school where the deed says no",
+    text: "A covenant recorded against this property—the legal instrument the State left in place of a full cleanup—bars residences, day care, and schools for children on its most contaminated ground. The plan includes a school. Those two facts cannot both stand, and the question of which one yields should be answered in the open, before any ground is broken, not after."
   },
   gw: {
-    label: "Groundwater monitoring has stopped",
-    text: "In January the state closed its file here and switched off the groundwater monitoring that had run for years—just as a plan for hundreds of homes moved forward. Who is watching the water now?"
+    label: "The watching has stopped",
+    text: "The State did not order this contamination removed. It chose to leave it in place and monitor it as it slowly dilutes—an approach in which the watching is the remedy. Then in January the case was closed and the groundwater monitoring ended, just as a plan for hundreds of homes moved forward. The remedy rests on someone continuing to watch. Right now no one is."
   },
   process: {
-    label: "A real study, not an add-on",
-    text: "Rather than a new environmental study, the City means to approve this through a fourth addendum to its 2009 report. After everything that has changed since—including this year's cleanup closure—it deserves a fresh, full review."
+    label: "A full review, not a fourth addendum",
+    text: "Rather than a new environmental study, the City proposes to approve this through a fourth addendum to its 2009 report. Given everything that has changed since then—the project's scale, and this year's closure of the cleanup case under a deed restriction—the honest course is a fresh and complete review that accounts for the site as it actually is today."
   },
   water: {
     label: "Where the water comes from",
-    text: "Hundreds of new homes need water. I'd want a straight answer on where it comes from, and what that leaves for the rest of us in Cloverdale."
+    text: "Hundreds of new homes will need a dependable water supply. I would want a clear and public accounting of where that water is to come from, what it draws on, and what it leaves for the households already here. Water coming up bright on a dry hillside is the kind of gift worth examining before it is accepted."
   }
 };
-const ASK_ORDER = ["eir", "disclosure", "monitoring", "tribal", "health", "scwa", "repository"];
+const ASK_ORDER = ["eir", "monitoring", "school", "disclosure", "tribal", "scwa", "health", "repository"];
 const ASKS = {
-  eir: "Order a full, current environmental review (EIR) for the project as it actually stands.",
-  disclosure: "Tell future buyers, in plain language, what this land was and what restrictions remain.",
-  monitoring: "Keep monitoring the groundwater instead of stopping now.",
-  tribal: "Formally consult the Cloverdale Rancheria of Pomo Indians on this site.",
-  health: "Study the health of former mill workers and the neighbors nearby.",
-  scwa: "Notify the Sonoma County Water Agency before any digging into the capped areas.",
-  repository: "Return the site's records to the Cloverdale Public Library, where anyone can read them."
+  eir: "Require a full, current environmental impact report for the project as it now stands, rather than a fourth addendum to the 2009 review.",
+  monitoring: "Continue monitoring the groundwater rather than ending it at the moment development begins.",
+  school: "Reconcile the proposed school and homes with the recorded deed restriction before any approval, in public.",
+  disclosure: "Provide future residents a plain-language disclosure of what this land was and what restrictions remain bound to it.",
+  tribal: "Formally consult the Cloverdale Rancheria of Pomo Indians, whose connection to this ground predates all of this.",
+  scwa: "Notify the Sonoma County Water Agency before any excavation into the capped or restricted areas.",
+  health: "Support a health study of former mill workers and the neighbors nearest the site.",
+  repository: "Return the site's regulatory record to the Cloverdale Public Library, where any resident can read it."
 };
+const INTRO_TAIL = " I am writing about the proposed Esmeralda development on the former Masonite mill site south of town.";
+const NO_ASK = "I am asking only this: that the City come to know what is in this ground before deciding what to stand on it. That knowledge belongs in the open record, and in this decision, before approval rather than after.";
+const ASK_LEAD = "I am asking the City to:";
+const CLOSING = "Thank you for your time and for your service to Cloverdale.";
 
 // ---- Letter assembly ----
 
@@ -385,31 +400,29 @@ function buildLetter({
   note,
   asks
 }) {
-  const greet = addressee === "council" ? "Dear Members of the Cloverdale City Council," : addressee === "manager" ? "Dear Mr. Thompson," : "Dear Mr. Thompson and Members of the City Council,";
+  const r = RECIPIENTS[addressee] || RECIPIENTS.both;
+  const greet = r.greet;
   const nm = name.trim() || "[your name]";
   const h = hood.trim();
   const y = years.trim();
-  let intro = `My name is ${nm}.`;
-  if (h && y) intro += ` I live in ${h} and have lived in Cloverdale for ${y}.`;else if (h) intro += ` I live in ${h}.`;else if (y) intro += ` I've lived in Cloverdale for ${y}.`;else intro += ` I live in Cloverdale.`;
-  intro += ` I'm writing about the proposed Esmeralda development on the old Masonite mill site.`;
+  let intro = "My name is " + nm + ".";
+  if (h && y) intro += " I live in " + h + " and have lived in Cloverdale for " + y + ".";else if (h) intro += " I live in " + h + ".";else if (y) intro += " I have lived in Cloverdale for " + y + ".";else intro += " I live in Cloverdale.";
+  intro += INTRO_TAIL;
   const blocks = [greet, intro];
   CONCERN_ORDER.forEach(id => {
     if (concerns[id]) blocks.push(CONCERNS[id].text);
   });
-  if (note.trim()) blocks.push(`Here's something I know firsthand: ${note.trim()}`);
+  if (note.trim()) blocks.push("There is something here I know firsthand. " + note.trim());
   const chosen = ASK_ORDER.filter(id => asks[id]);
   if (chosen.length) {
-    blocks.push("I'm asking the City to:\n" + chosen.map(id => `\u2022 ${ASKS[id]}`).join("\n"));
+    blocks.push(ASK_LEAD + "\n" + chosen.map(id => "\u2022 " + ASKS[id]).join("\n"));
   } else {
-    blocks.push("I'm asking the City to take a hard look at this land's history before approving the project.");
+    blocks.push(NO_ASK);
   }
-  blocks.push("Thank you for your time.");
-  blocks.push(`Sincerely,\n${nm}${h ? `\n${h}, Cloverdale` : `\nCloverdale`}`);
+  blocks.push(CLOSING);
+  blocks.push("Sincerely,\n" + nm + (h ? "\n" + h + ", Cloverdale" : "\nCloverdale"));
   return blocks.join("\n\n");
 }
-
-// ---- House style (groundtruth.watch tokens) ----
-
 const GT_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap');
 
@@ -550,6 +563,9 @@ const GT_CSS = `
 }
 .gt-btn:hover{ background:var(--cobalt-deep); }
 .gt-btn.done{ background:var(--cobalt-deep); }
+.gt-btn-secondary{ background:transparent; color:var(--cobalt); border:1.5px solid var(--rule); box-shadow:none; margin-top:.6rem; }
+.gt-btn-secondary:hover{ background:color-mix(in oklab, var(--cobalt) 6%, var(--paper-soft)); border-color:var(--cobalt); }
+.gt-btn-secondary.done{ background:var(--cobalt); color:#fff; border-color:var(--cobalt); }
 
 .gt-fine{ font-family:'Newsreader',serif; font-size:.9rem; color:var(--ink-faded); line-height:1.5; margin-top:.8rem; }
 .gt-hint{ font-family:'DM Sans',sans-serif; font-size:.85rem; color:var(--ink-faded); line-height:1.5; margin-top:.65rem; }
@@ -572,13 +588,12 @@ const GT_CSS = `
 .gt-scope .mt-10{ margin-top:2.5rem; }
 .gt-scope .mb-3{ margin-bottom:.75rem; }
 @media (min-width:1024px){
-  .gt-scope .lg\:grid-cols-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .gt-scope .lg\:gap-12{ gap:3rem; }
-  .gt-scope .lg\:sticky{ position:sticky; }
-  .gt-scope .lg\:top-8{ top:2rem; }
+  .gt-scope .lg\\:grid-cols-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .gt-scope .lg\\:gap-12{ gap:3rem; }
+  .gt-scope .lg\\:sticky{ position:sticky; }
+  .gt-scope .lg\\:top-8{ top:2rem; }
 }
 `;
-
 // ---- UI bits ----
 
 function Check() {
@@ -665,6 +680,7 @@ function App() {
     asks
   }), [addressee, name, hood, years, concerns, note, asks]);
   const words = letter.trim().split(/\s+/).filter(Boolean).length;
+  const r = RECIPIENTS[addressee] || RECIPIENTS.both;
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(letter);
@@ -680,6 +696,15 @@ function App() {
     }
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
+  };
+  const openEmail = () => {
+    const subject = "Public comment: the Esmeralda development on the former Masonite site";
+    const params = [];
+    if (r.cc) params.push("cc=" + encodeURIComponent(r.cc));
+    params.push("subject=" + encodeURIComponent(subject));
+    params.push("body=" + encodeURIComponent(letter));
+    const href = "mailto:" + encodeURIComponent(r.to).replace(/%2C/g, ",") + "?" + params.join("&");
+    window.location.href = href;
   };
   const tog = setter => id => setter(s => ({
     ...s,
@@ -699,7 +724,7 @@ function App() {
     className: "gt-h1"
   }, "Write to City Hall"), /*#__PURE__*/React.createElement("p", {
     className: "gt-lede"
-  }, "Pick what you care about. This builds a letter you can copy, personalize, and send. Use only the parts you believe and would ", /*#__PURE__*/React.createElement("em", null, "put your name to"), ".")), /*#__PURE__*/React.createElement("div", {
+  }, "Choose what you want to say. This assembles a letter you can make your own, then copy or send. Include only what you believe and would ", /*#__PURE__*/React.createElement("em", null, "put your name to"), ".")), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start mt-10"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col gap-10"
@@ -707,11 +732,13 @@ function App() {
     n: "01"
   }, "Who it's going to"), /*#__PURE__*/React.createElement("div", {
     className: "gt-seg"
-  }, ADDRESSEES.map(a => /*#__PURE__*/React.createElement("button", {
-    key: a.id,
-    onClick: () => setAddressee(a.id),
-    className: addressee === a.id ? "on" : ""
-  }, a.label)))), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionTitle, {
+  }, ADDRESSEE_ORDER.map(id => /*#__PURE__*/React.createElement("button", {
+    key: id,
+    onClick: () => setAddressee(id),
+    className: addressee === id ? "on" : ""
+  }, RECIPIENTS[id].label))), /*#__PURE__*/React.createElement("p", {
+    className: "gt-hint"
+  }, "Council comments go to ", /*#__PURE__*/React.createElement("strong", null, "publiccomments@ci.cloverdale.ca.us"), " and become part of the public record. The Send button fills in the addresses, a subject, and your letter; you review and send it from your own email.")), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionTitle, {
     n: "02"
   }, "About you"), /*#__PURE__*/React.createElement("p", {
     className: "gt-madlib"
@@ -731,9 +758,9 @@ function App() {
     width: 120
   }), "."), /*#__PURE__*/React.createElement("p", {
     className: "gt-hint"
-  }, "Letters to the City become permanent public record. Your name and a general part of town are plenty\u2014you don't need to put your street address.")), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionTitle, {
+  }, "Letters to the City become permanent public record. Your name and a general part of town are plenty\u2014you needn't give your street address.")), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionTitle, {
     n: "03"
-  }, "What you care about"), /*#__PURE__*/React.createElement("div", {
+  }, "What you want to raise"), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col gap-1"
   }, CONCERN_ORDER.map(id => /*#__PURE__*/React.createElement(ToggleRow, {
     key: id,
@@ -745,12 +772,12 @@ function App() {
     n: "04"
   }, "Your own story"), /*#__PURE__*/React.createElement("div", {
     className: "gt-note"
-  }, /*#__PURE__*/React.createElement("p", null, "This is the most useful part. Firsthand accounts\u2014what you saw, worked near, or remember\u2014can carry weight that general comments can't. Only include what you know to be true.")), /*#__PURE__*/React.createElement("textarea", {
+  }, /*#__PURE__*/React.createElement("p", null, "This is the most valuable part. A firsthand account\u2014what you saw, worked near, or remember\u2014can carry weight that a general comment cannot. Write only what you know to be true.")), /*#__PURE__*/React.createElement("textarea", {
     className: "gt-textarea",
     value: note,
     onChange: e => setNote(e.target.value),
     rows: 4,
-    placeholder: "Anything you personally saw, experienced, or remember about this site\u2026"
+    placeholder: "Anything you personally saw, worked near, or remember about this site\u2026"
   })), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement(SectionTitle, {
     n: "05"
   }, "What you're asking for"), /*#__PURE__*/React.createElement("div", {
@@ -771,11 +798,14 @@ function App() {
   }, words, " words")), /*#__PURE__*/React.createElement("div", {
     className: "gt-letter"
   }, /*#__PURE__*/React.createElement("pre", null, letter)), /*#__PURE__*/React.createElement("button", {
+    onClick: openEmail,
+    className: "gt-btn"
+  }, "Send it from your email"), /*#__PURE__*/React.createElement("button", {
     onClick: copy,
-    className: "gt-btn" + (copied ? " done" : "")
-  }, copied ? "Copied to clipboard ✓" : "Copy letter"), /*#__PURE__*/React.createElement("p", {
+    className: "gt-btn gt-btn-secondary" + (copied ? " done" : "")
+  }, copied ? "Copied to clipboard ✓" : "Copy the text instead"), /*#__PURE__*/React.createElement("p", {
     className: "gt-fine"
-  }, "Paste into your email or a document and make it your own before sending. A letter in your own words counts for more than a form one.")))));
+  }, "Send opens your email program with everything filled in\u2014read it over, add anything of your own, and send when you're ready. A letter in your own words counts for more than a form one.")))));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
 </script>
