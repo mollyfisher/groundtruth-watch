@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#fcfcff">
-<title>Telling the Ground Truth</title>
+<title>The Monitoring Record · Ground Truth</title>
 
 <style>
 /* ---------- SELF-HOSTED FONTS (subset, base64) ---------- */
@@ -455,22 +455,59 @@
     r.getSessionToken=function(){};
   })("//static.openreplay.com/latest/openreplay.js",1,0,initOpts,startOpts);
 </script>
+<style>
+/* supplemental tokens not in house sheet */
+:root{--amber:#b9770f;--amber-deep:#7d4a00;--amber-light:#e0a64a;--grid:#e3e7f4;--shell:#ffffff;}
+/* figure sections (charts) */
+.figsec{margin-top:var(--space-lg);padding-top:var(--space-md);border-top:1px solid var(--rule);}
+.figsec h2{font-family:'Fraunces',Georgia,serif;font-variation-settings:"opsz" 60,"wght" 600,"SOFT" 50;
+  font-size:var(--fs-lg);line-height:1.12;margin-bottom:.2rem;color:var(--ink);}
+.figsec .cap{max-width:var(--measure);color:var(--ink-soft);margin:.5rem 0 1.1rem;
+  font-family:'Newsreader',Georgia,serif;font-size:var(--fs-base);line-height:1.6;}
+.figsec .cap strong{color:var(--ink);font-weight:600;}
+.fig{background:var(--shell);border:1px solid var(--rule);border-radius:var(--radius-md);
+  padding:1.1rem 1.1rem .9rem;box-shadow:var(--shadow-soft);overflow-x:auto;}
+.fig svg{display:block;width:100%;height:auto;}
+.fig svg text{font-family:Georgia,'Iowan Old Style',serif;}   /* keep charts in the verified serif */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+@media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+.src{font-size:var(--fs-xs);color:var(--ink-faded);margin:.6rem 0 0;max-width:var(--measure);
+  font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;}
+.src code,.sources code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.9em;
+  background:var(--paper-deep);padding:.05em .35em;border-radius:4px;}
+.flag{display:inline-block;font-family:'DM Sans',system-ui,sans-serif;font-size:.72rem;font-weight:600;
+  letter-spacing:.04em;padding:.12em .55em;border-radius:999px;vertical-align:middle;}
+.flag.confirmed{background:color-mix(in oklab,var(--cobalt) 12%,#fff);color:var(--cobalt-deep);}
+.flag.verify{background:color-mix(in oklab,var(--amber) 16%,#fff);color:var(--amber-deep);}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-family:'DM Sans',system-ui,sans-serif;
+  font-size:.78rem;color:var(--ink-soft);margin:.6rem 0 0;align-items:center;}
+.legend span{display:inline-flex;align-items:center;gap:.35rem;}
+.sw{width:.85rem;height:.85rem;border-radius:3px;display:inline-block;}
+.tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:#fff;
+  font-family:'DM Sans',system-ui,sans-serif;font-size:.74rem;line-height:1.35;padding:.4rem .55rem;
+  border-radius:7px;opacity:0;transition:opacity .08s;max-width:15rem;box-shadow:0 6px 20px rgba(0,0,0,.25);}
+.tip b{color:var(--amber-light);}
+.sources ul{list-style:none;margin:.5rem 0 0;padding:0;}
+.sources li{padding:.5rem 0;border-bottom:1px solid var(--paper-deep);}
+.sources li b{color:var(--ink);font-weight:600;}
+</style>
 </head>
 <body>
 <main class="page">
-  <nav class="sitenav" aria-label="Ground Truth dispatches">
+
+<nav class="sitenav" aria-label="Ground Truth dispatches">
     <a class="sitenav-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
     <details class="sitenav-menu">
       <summary>Dispatches</summary>
       <div class="sitenav-panel">
         <p class="sitenav-group">I &middot; In the record</p>
         <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
-        <a class="is-current" aria-current="page" href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
         <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
         <a href="https://groundtruth.watch/comments.html">The Public Record</a>
         <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
         <a href="https://groundtruth.watch/write.html">Write to City Hall</a>
-        <a href="https://groundtruth.watch/record.html">The Monitoring Record</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/record.html">The Monitoring Record</a>
         <p class="sitenav-group">II &middot; On the ground</p>
         <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
         <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
@@ -481,82 +518,141 @@
     </details>
   </nav>
 
-
   <header class="masthead">
     <div class="masthead-meta">
-      <span>Volume I &middot; Dispatch No. 2</span>
-      <span>A Telling for the Neighbors</span>
+      <span>Volume I &middot; Dispatch No. 7</span>
+      <span>Six Readings of the File</span>
       <span>266 Acres &middot; Asti Road</span>
     </div>
-    <h1 class="title">Telling the <em>Ground Truth</em></h1>
-    <p class="subtitle">A telling for the neighbors, about the 266 acres south of town.</p>
+    <h1 class="title">The <em>Monitoring</em> Record</h1>
+    <p class="subtitle">What the state measured in the groundwater for fifty years—and what the closure leaves unmeasured.</p>
   </header>
 
   <article class="telling">
-
     <div class="sidebar-note">
-      <p>A note before I start.<br />I'm only a student of this valley. Somewhere in my reading, I came across the way the first people of this region thought about places that should be left alone. So I'll tell you what I learned from them. Their stories are theirs. <a href="/viewing.html">But I will tell you ours.</a></p>
+      <p>A note on the numbers.<br />Every figure here is built from the state's own chemistry file—the same export the Water Board had in front of it when it closed the case. I didn't gather this data. I plotted what was already on the record.</p>
     </div>
 
-    <p class="lead">The people who kept this country longest—and they are still here—understood something about a poisoned place that we should learn.</p>
+    <p class="lead">The plant treated wood with pentachlorophenol—PCP—and chromated copper arsenate, and those two choices set the entire monitoring list. PCP is acutely toxic and capped in drinking water at one part per billion. Technical PCP made before the late 1980s carried dioxins and furans as manufacturing impurities, and those are among the most persistent and toxic compounds known: they don't break down on human timescales, they build up in living tissue, and the toxic-equivalent math exists precisely because trace amounts still count.</p>
 
-    <p>They understood, first, that you can't always leave. Some dangerous places you simply abandon and never return to. But a place on the river, the trail—a dangerous place that is also where you live—that one you can't walk away from. So you do the harder thing. You keep it. You teach the children its name. You say out loud, every generation, here is what happened here, and here is how you must behave. The danger isn't fenced. It's remembered. Remembering is the job now, and the duty is never finished.</p>
+    <p>The arsenate side leaves arsenic and chromium in the soil, and arsenic is a known human carcinogen. None of this is the kind of contamination that quietly weathers off in a few years—which is the whole reason a place like this gets watched for decades, and why the list is exactly these chemicals and not something more convenient.</p>
 
-    <p>That's the lens. Here's the ground.</p>
-
-    <div class="brk"><span>&#9670;</span></div>
-
-    <p>For about forty years there was a mill on the 266 acres south of Cloverdale, down by the river where the rail line runs. For thirteen of those years, part of it was something more particular than a sawmill: a plant that pushed chemicals deep into cut wood so the fenceposts and the railroad ties wouldn't rot. That's useful work. Half this country stands on treated wood. The men who did it—never more than twenty-five, and at the end just six—were our neighbors' fathers and grandfathers.</p>
-
-    <p>The chemicals were copper, chromium, arsenic, and one called pentachlorophenol. PCP is the kind of chemical that makes other poisons as it breaks down.</p>
-
-    <p>It went into the wood, and some of it went into the ground. It went in the ordinary way—a little every working day. It was put there by men doing their job exactly as they were trained to do it. Nobody broke a rule.</p>
-
-    <p>That's the part I can't get past. The oldest stories about poisoned ground are about somebody who transgressed—who was warned and didn't listen. The making of this poison wasn't that. This was diligence. This was a town earning its living. The poison that's down there now was made by people following the rules.</p>
-
-    <p>But the transgression in the old stories was never really about the poison. It was about the warning. The man on the scaffold was <em>told</em> what the sparks meant, and he caught the bird anyway. And that part isn't behind us. That part is ours. Because we <em>have</em> been warned—the danger down there is invisible, but it is not unknown. It is written down. To know it's there and build over it as if it weren't—that would be the transgression.</p>
-
-    <p>The treatment plant closed in 1975, the rainy season at its back. The sawmill held on, then in 1993 it closed too, and three hundred jobs ended in a season. The next year the highway got up and walked around the town. A lot of you felt the place quietly become someone else. The mill buildings came down. And under the concrete pads, where the treatment plant had stood, the ground kept what it had been given.</p>
+    <p>It has played out before. In Pensacola, the <a href="https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/bd170e27d45f120a852572ed0064292a.html">Escambia wood-treating plant</a> (creosote and PCP) left dioxin contamination the EPA finally addressed by relocating about 358 households—one of the largest Superfund relocations in the country. In Texarkana, a subdivision called <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0602570">Carver Terrace</a> was built on a former Koppers wood-treating site; by 1993 the government had bought out and relocated all 79 homes. Closer to home, Southern California Edison's <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0902061">Visalia Pole Yard</a> ran the same PCP-and-creosote chemistry—down to the same octachlorinated dioxin impurity that turns up at Cloverdale—and pushed contamination roughly 100 feet into groundwater; it took years of aggressive thermal treatment to bring the water back to drinking standards before the site could be delisted.</p>
 
     <div class="brk"><span>&#9670;</span></div>
 
-    <p>Now here's where the old lens cuts sharpest.</p>
+    <div class="land">The Esmeralda plan proposes 605 homes, a school, senior care, and a park on this ground. Those are commitments measured in decades. The contamination beneath it is measured the same way.</div>
 
-    <p>This past January, with no public ceremony, the State closed the cleanup case on those acres. But listen to how they closed it. Not: the ground is clean, go build. The finding was closer to: this cannot be fully cleaned. It can only be left undisturbed. And so they bound a restriction to the land itself—a covenant, written into the deed—that says, in effect: whoever owns this next, and the one after that, may not disturb what's down there.</p>
-
-    <p>Think about what that is. That is the old idea—keep the danger in memory, pass the warning to whoever comes next—except we've handed the whole job to a piece of paper in a county drawer.</p>
-
-    <p>The old people put the warning in the mouths of the living, and made everyone repeat it, because they knew a danger you can't see is only as safe as the community's memory of it. We put ours in a filing. And a filing does not avert its eyes when it passes. A filing does not teach the children. A filing sits in a drawer and trusts that someone, someday, with a shovel and a permit and a beautiful set of drawings, will think to go read it.</p>
-
-    <div class="land">That's the thing I'm afraid of. Not the poison, exactly. The forgetting.</div>
-   
-    <p>And notice when the covenant even speaks. It speaks at the sale—to the buyer, the title company, the next owner. That's who the law thinks needs to know: whoever holds the deed. But this poison was never the owner's. It belongs to whoever it reaches—the well downgradient, the house downwind, the kids, the river, the people who were here before any of this was anyone's to sell. None of them are party to the deed. None of them get the call when it changes hands. The warning is addressed to the one person who could always just sell and leave.</p>
-
-    <div class="brk"><span>&#9670;</span></div>
-
-    <p>And now, of course, someone wants to build. A whole village—six hundred homes and more, a hotel, trails, gatherings. And maybe it's wonderful. Maybe it's just what a town needs after the mill left and the highway left. I'm honestly not here to tell you it's cursed ground, or to tell you no.</p>
-
-    <p>I'm here to say the people who knew this country best had a posture for exactly this moment—the moment a poisoned place is handed back to you wearing the face of a gift—and the posture was neither yes nor no. It was: know what's in the ground before you stand on it.</p>
-
-    <p>Ask who keeps the record. Ask what "clean enough" was measured against, and who measured it. Ask whether the people whose meeting-place this was—still here, still in this town—were at the table. Those questions are the modern version of teaching the children the name. They are how a community keeps the danger in living memory instead of leaving it in stacks of archives.</p>
-
-    <p>Because here's the last thing, and then I'll hush.</p>
-
-    <p>This poison doesn't disappear. It changes its shape. And the most dangerous shape it ever takes is the one that looks like a gift—like clean ground, like a fresh start, like water coming up bright on a dry hillside.</p>
-
-    <p>The records tell us the poison is still here. The State Water Board didn't order it removed; it recommended <em>monitored natural attenuation</em>—which means leaving it in the ground and watching it dilute, slowly, over years. The watching <em>is</em> the remedy. So the whole plan, the State's own plan, rests on somebody continuing to watch and continuing to remember. And a covenant in a drawer does neither. The only question that's actually ours to answer is whether we'll keep monitoring, and keep remembering.</p>
-
-    <div class="land">That's why I keep the chronicle. Not to stop anything. To make sure the ground truth stays told.</div>
-
+    <p>Everything below is drawn from that file—<span id="m-events"></span> groundwater sampling events between <span id="m-first"></span> and <span id="m-last"></span>. The map already shows <em>where</em> the wells are. What follows is <em>when</em> they were read, <em>how far over</em> the limit they ran, <em>how deep</em> it sits, whether it's actually breaking down, and what the closure record leaves out.</p>
   </article>
 
+
+<!-- 1 -->
+  <section class="figsec">
+    <h2>1 · When they looked</h2>
+    <p class="cap">Every tick is one groundwater sampling event. The line above it is pentachlorophenol
+    (PCP) at well MW&#8209;37. Readings ran twice a year for a while, stopped for three years, thinned to
+    one event in 2024, and <strong>none at all in 2025</strong>—then the No&nbsp;Further&nbsp;Action letter
+    closed the case in January 2026 and ended the monitoring program. The last thing anyone measured at
+    MW&#8209;37 was 130&nbsp;µg/L. <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div id="fig-cadence"></div></div>
+    <p class="src">Source: GeoTracker EDF chemistry export, all water&#8209;matrix samples at monitoring wells.
+    Markers: covenant recorded 8/28/2013 (Sonoma Co. <code>#2013088084</code>); NFA letter 1/21/2026.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="figsec">
+    <h2>2 · How far over the limit</h2>
+    <p class="cap">Four wells, PCP over time, on a log scale against the <strong>1&nbsp;µg/L drinking&#8209;water
+    limit</strong> (the dashed line). MW&#8209;37 climbs through the final four events to 130&nbsp;µg/L —
+    130&times; the limit—at closure. MW&#8209;13 fell to non&#8209;detect (attenuation does happen here).
+    MW&#8209;27 sat high for years, then monitoring of it simply stopped after 2015.
+    <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div class="grid2" id="fig-trend"></div>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--cobalt)"></span>detected PCP</span>
+        <span><span class="sw" style="border:1.5px solid var(--cobalt);background:#fff"></span>non&#8209;detect (at reporting limit)</span>
+        <span><span class="sw" style="background:var(--ink-faded);height:.18rem;border-radius:2px"></span>1&nbsp;µg/L MCL</span>
+      </div>
+    </div>
+    <p class="src">Source: EDF, parameter PCP, max value per event. Log y&#8209;axis so the limit and the peaks
+    fit one frame.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="figsec">
+    <h2>3 · The whole table at a glance</h2>
+    <p class="cap">Every well that ever exceeded the limit (rows, worst at top) by year (columns). Color is
+    the PCP reading against the 1&nbsp;µg/L limit. Blanks are years that well wasn't sampled—note how the
+    grid thins toward the right and stops at 2024. <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div id="fig-matrix"></div>
+      <div class="legend" id="matrix-legend"></div>
+    </div>
+    <p class="src">Source: EDF, parameter PCP, max per well per year. Non&#8209;detects shown as at&#8209;or&#8209;below limit.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="figsec">
+    <h2>4 · Whether it's actually breaking down</h2>
+    <p class="cap">The closure rests on natural attenuation—the idea that PCP is degrading on its own. If it
+    were, the parent compound would fall and its dechlorination daughters would build up. At MW&#8209;37 the
+    opposite shows: PCP is almost the entire chlorophenol mass at every sampling, the only daughters present
+    are minor tetrachlorophenols, tri&#8209; and di&#8209;chlorophenols are non&#8209;detect, and the total is
+    <em>rising</em>. Consistent with limited breakdown, not advanced cleanup.
+    <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div id="fig-deg"></div>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--cobalt-deep)"></span>PCP (parent)</span>
+        <span><span class="sw" style="background:var(--amber)"></span>tetrachlorophenols</span>
+        <span><span class="sw" style="background:var(--slate-light,#8a9bc0)"></span>tri&#8209;/di&#8209;chlorophenols (non&#8209;detect)</span>
+      </div>
+    </div>
+    <p class="src">Source: EDF, MW&#8209;37, full chlorophenol suite events (2010, 2014, 2022, 2024).</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="figsec">
+    <h2>5 · How deep it sits</h2>
+    <p class="cap">PCP at the MW&#8209;37 cluster by depth, from the 2010 characterization. The contamination is
+    in <strong>deep bedrock groundwater, 80–88&nbsp;feet down</strong>—beneath the ground proposed for a
+    park and sports fields on the old log&#8209;deck area. The covenant restricts shallow soil and bars new
+    wells, but the plume is below all of that. <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div id="fig-depth"></div></div>
+    <p class="src">Depth&#8209;resolved PCP: EDF discrete&#8209;interval samples (MW&#8209;37, 80&nbsp;ft and 88&nbsp;ft,
+    Apr&nbsp;2010). The overburden/bedrock band is schematic; the 5&#8209;ft line is the covenant soil datum.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="figsec">
+    <h2>6 · What the closure leaves out</h2>
+    <p class="cap">Dioxins and furans are the signature impurity of pre&#8209;1987 technical PCP. They were
+    measured here exactly once—in 2008, at two wells—and never again, and they don't appear in the 2026
+    closure record at all. The levels are low and the most toxic congener (2,3,7,8&#8209;TCDD) was
+    non&#8209;detect; the detected mass is mostly OCDD, which is far less toxic. The point isn't a big number.
+    It's that the one thing you'd most expect to track at a former wood&#8209;treater was checked a single
+    time, sixteen years before closure, and left out. <span class="flag confirmed">on file</span></p>
+    <div class="fig"><div id="fig-dioxin"></div></div>
+    <p class="src">Source: EDF, method SW8290 (high&#8209;resolution dioxin/furan), MW&#8209;25 &amp; MW&#8209;27,
+    May &amp; Nov 2008, units pg/L. TEQ computed with WHO&#8209;2005 toxic&#8209;equivalency factors, non&#8209;detects
+    counted as zero. Reference: the 2,3,7,8&#8209;TCDD drinking&#8209;water limit is 30&nbsp;pg/L.</p>
+  </section>
+
+  
   <footer class="sources">
-    <span class="sources-label">A note on sources</span>
-    Sources for the facts above—the mill's chemicals and dates, the 1975 closure, the 1993 layoffs, and the January 21, 2026 case closure under a land-use covenant—are documented in the <a href="https://groundtruth.watch/">Ground Truth</a> chronicle and its underlying record (the <em>Cloverdale Reveille</em> archive, the Regional Water Board's <a href="https://geotracker.waterboards.ca.gov/profile_report.asp?global_id=T0609793185">GeoTracker file</a>, and the <a href="https://ceqanet.opr.ca.gov/2003072142">project EIR</a>). The way of thinking about poisoned ground is drawn, with attribution and respect, from S.&nbsp;A.&nbsp;Barrett's 1908 record of the Pomo and neighboring peoples; it is theirs, and it is offered here as a borrowed lens, not a retold story.
-    <span class="sig">— A student of the valley</span>
+    <span class="sources-label">Sources &amp; Documents</span>
+    Everything here is public record, built from the state's own chemistry export for the former Masonite / Louisiana&#8209;Pacific wood&#8209;treating site (North Coast Regional Water Board case&nbsp;#1NSO266). The closure, the covenant, and the comparison sites are linked below.
+    <ul>
+      <li><b>GeoTracker case file:</b> North Coast RWQCB Case&nbsp;#1NSO266, Global&nbsp;ID <code>T0609793185</code>—the chemistry export behind every figure on this page, plus the monitoring reports, boring logs, and correspondence. <a href="https://geotracker.waterboards.ca.gov/profile_report.asp?global_id=T0609793185">View the case on GeoTracker</a>.</li>
+      <li><b>No Further Action determination:</b> NCRWQCB, signed January&nbsp;21, 2026 (Resolution&nbsp;92-49); notice of proposed closure posted October&nbsp;27, 2025, comment period closed November&nbsp;27, 2025. <a href="https://www.waterboards.ca.gov/northcoast/public_notices/site_cleanup_decisions/pdf/2025/Masonite_PublicNotice.pdf">NCRWQCB public notice (PDF)</a>.</li>
+      <li><b>Monitoring &amp; Reporting Program Order R1-2023-0028:</b> the groundwater monitoring program, terminated by the NFA. After closure, no further sampling is required.</li>
+      <li><b>Land Use Covenant and Environmental Restriction:</b> recorded Sonoma County, August&nbsp;28, 2013, Doc.&nbsp;<code>#2013088084</code> (companion Notice of Groundwater Restrictions, Doc.&nbsp;<code>#2013088083</code>). Restricts shallow soil disturbance and bars new wells; perpetual.</li>
+      <li><b>Dioxin/furan analysis:</b> EPA Method&nbsp;SW8290 (high-resolution), wells MW-25 and MW-27, May &amp; November 2008, within the GeoTracker chemistry file. TEQ computed with WHO-2005 toxic-equivalency factors, non-detects counted as zero.</li>
+      <li><b>Comparison sites (EPA Superfund):</b> <a href="https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/bd170e27d45f120a852572ed0064292a.html">Escambia Wood Treating, Pensacola</a>; <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0602570">Koppers / Carver Terrace, Texarkana</a>; <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0902061">SCE Visalia Pole Yard</a>.</li>
+    </ul>
+    <span class="sig">— Ground Truth Watch &middot; Cloverdale</span>
   </footer>
 
-  <footer class="sitefoot">
+<footer class="sitefoot">
     <div class="sitefoot-top">
       <a class="sitefoot-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
       <span class="sitefoot-tag">A citizen&rsquo;s documentary record &middot; 266 acres south of Cloverdale</span>
@@ -565,12 +661,12 @@
       <div class="sitefoot-col">
         <p class="sitefoot-head">I &middot; In the record</p>
         <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
-        <a class="is-current" aria-current="page" href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
         <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
         <a href="https://groundtruth.watch/comments.html">The Public Record</a>
         <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
         <a href="https://groundtruth.watch/write.html">Write to City Hall</a>
-        <a href="https://groundtruth.watch/record.html">The Monitoring Record</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/record.html">The Monitoring Record</a>
       </div>
       <div class="sitefoot-col">
         <p class="sitefoot-head">II &middot; On the ground</p>
@@ -585,5 +681,277 @@
   </footer>
 
 </main>
+
+<div class="tip" id="tip"></div>
+
+<script>
+const GT = {"cadence":{"events":[{"date":"2005-05-09","n":12,"mw37":null},{"date":"2006-02-22","n":12,"mw37":null},{"date":"2006-02-23","n":37,"mw37":null},{"date":"2006-05-22","n":7,"mw37":null},{"date":"2006-05-23","n":19,"mw37":null},{"date":"2006-05-24","n":33,"mw37":null},{"date":"2006-12-11","n":2,"mw37":null},{"date":"2006-12-12","n":14,"mw37":null},{"date":"2007-05-30","n":12,"mw37":null},{"date":"2007-11-26","n":6,"mw37":null},{"date":"2007-11-27","n":30,"mw37":null},{"date":"2007-11-28","n":25,"mw37":null},{"date":"2008-05-19","n":5,"mw37":null},{"date":"2008-05-20","n":107,"mw37":null},{"date":"2008-11-17","n":5,"mw37":null},{"date":"2008-11-18","n":73,"mw37":null},{"date":"2008-11-19","n":10,"mw37":null},{"date":"2009-01-29","n":5,"mw37":null},{"date":"2009-06-24","n":20,"mw37":null},{"date":"2009-06-25","n":6,"mw37":null},{"date":"2009-12-16","n":12,"mw37":null},{"date":"2009-12-17","n":13,"mw37":null},{"date":"2010-04-20","n":1,"mw37":null},{"date":"2010-04-21","n":1,"mw37":null},{"date":"2010-05-25","n":78,"mw37":null},{"date":"2010-05-26","n":91,"mw37":null},{"date":"2010-11-16","n":81,"mw37":null},{"date":"2010-11-17","n":96,"mw37":null},{"date":"2010-11-18","n":96,"mw37":58.0},{"date":"2014-05-05","n":53,"mw37":81.0},{"date":"2014-11-19","n":4,"mw37":70.0},{"date":"2015-05-27","n":10,"mw37":65.0},{"date":"2015-11-03","n":4,"mw37":25.0},{"date":"2016-06-07","n":18,"mw37":null},{"date":"2016-06-08","n":18,"mw37":null},{"date":"2016-11-09","n":50,"mw37":null},{"date":"2016-11-10","n":30,"mw37":null},{"date":"2017-06-02","n":3,"mw37":null},{"date":"2017-11-14","n":9,"mw37":null},{"date":"2018-06-12","n":42,"mw37":null},{"date":"2018-11-15","n":3,"mw37":null},{"date":"2019-06-04","n":3,"mw37":null},{"date":"2019-11-05","n":3,"mw37":null},{"date":"2020-06-02","n":108,"mw37":null},{"date":"2020-11-24","n":5,"mw37":null},{"date":"2021-06-02","n":5,"mw37":51.0},{"date":"2021-11-02","n":5,"mw37":21.7},{"date":"2022-06-10","n":81,"mw37":43.0},{"date":"2022-11-10","n":5,"mw37":55.0},{"date":"2023-08-23","n":5,"mw37":68.0},{"date":"2024-07-29","n":87,"mw37":130.0}]},"trend":{"MW-37":[{"date":"2010-11-18","v":58.0,"nd":false},{"date":"2014-05-05","v":81.0,"nd":false},{"date":"2014-11-19","v":70.0,"nd":false},{"date":"2015-05-27","v":65.0,"nd":false},{"date":"2015-11-03","v":25.0,"nd":false},{"date":"2021-06-02","v":51.0,"nd":false},{"date":"2021-11-02","v":21.7,"nd":false},{"date":"2022-06-10","v":43.0,"nd":false},{"date":"2022-11-10","v":55.0,"nd":false},{"date":"2023-08-23","v":68.0,"nd":false},{"date":"2024-07-29","v":130.0,"nd":false}],"MW-27":[{"date":"2006-02-23","v":73.0,"nd":false},{"date":"2006-05-24","v":74.0,"nd":false},{"date":"2006-12-12","v":67.0,"nd":false},{"date":"2007-05-30","v":63.0,"nd":false},{"date":"2007-11-27","v":78.0,"nd":false},{"date":"2008-05-20","v":91.0,"nd":false},{"date":"2008-11-18","v":74.0,"nd":false},{"date":"2009-06-24","v":43.0,"nd":false},{"date":"2009-12-16","v":9.5,"nd":false},{"date":"2010-11-18","v":59.0,"nd":false},{"date":"2014-05-05","v":13.0,"nd":false},{"date":"2014-11-19","v":18.0,"nd":false},{"date":"2015-05-27","v":55.0,"nd":false},{"date":"2015-11-03","v":52.0,"nd":false}],"MW-12":[{"date":"2005-05-09","v":1.1,"nd":false},{"date":"2006-05-22","v":6.0,"nd":false},{"date":"2006-12-12","v":0.5,"nd":true},{"date":"2007-05-30","v":6.1,"nd":false},{"date":"2007-11-26","v":1.4,"nd":false},{"date":"2008-05-20","v":5.4,"nd":false},{"date":"2008-11-17","v":4.1,"nd":false},{"date":"2009-06-24","v":7.2,"nd":false},{"date":"2009-12-17","v":0.5,"nd":true},{"date":"2010-11-18","v":0.9,"nd":false},{"date":"2014-05-05","v":3.5,"nd":false},{"date":"2014-11-19","v":8.5,"nd":false},{"date":"2015-05-27","v":5.3,"nd":false},{"date":"2015-11-03","v":8.5,"nd":false},{"date":"2021-06-02","v":10.1,"nd":false},{"date":"2021-11-02","v":1.8,"nd":false},{"date":"2022-06-10","v":17.4,"nd":false},{"date":"2022-11-10","v":19.1,"nd":false},{"date":"2023-08-23","v":14.2,"nd":false},{"date":"2024-07-29","v":14.5,"nd":false}],"MW-13":[{"date":"2005-05-09","v":56.0,"nd":false},{"date":"2006-05-24","v":190.0,"nd":false},{"date":"2006-12-12","v":27.0,"nd":false},{"date":"2007-05-30","v":150.0,"nd":false},{"date":"2008-05-20","v":22.0,"nd":false},{"date":"2008-11-18","v":1.3,"nd":false},{"date":"2009-06-25","v":16.0,"nd":false},{"date":"2010-11-17","v":4.8,"nd":false},{"date":"2014-05-05","v":0.5,"nd":true},{"date":"2015-05-27","v":0.5,"nd":true}]},"depth":[{"depth":80,"v":230.0,"date":"2010-04-20"},{"depth":88,"v":55.0,"date":"2010-04-21"}],"degradation":[{"date":"2010-11-18","PCP":58.0,"tetra":6.8,"tri":0,"di":0,"dcpaa":0},{"date":"2014-05-05","PCP":81.0,"tetra":5.2,"tri":0,"di":0,"dcpaa":0},{"date":"2022-06-10","PCP":43.0,"tetra":3.0,"tri":0,"di":0,"dcpaa":0},{"date":"2024-07-29","PCP":130.0,"tetra":7.59,"tri":0,"di":0,"dcpaa":0}],"exceedance":{"wells":["MW37 80FT","MW-37-LF","MW-13","MW-37","MW-27-3V","MW-27","MW-37-3V","MW-27-LF","MW-27F","MW37 88FT","MW-12","MW-23","MW-12-LF","MW-12-3V","MW-25"],"dates":["2005-05-09","2006-02-23","2006-05-22","2006-05-23","2006-05-24","2006-12-11","2006-12-12","2007-05-30","2007-11-26","2007-11-27","2007-11-28","2008-05-19","2008-05-20","2008-11-17","2008-11-18","2009-06-24","2009-06-25","2009-12-16","2009-12-17","2010-04-20","2010-04-21","2010-11-17","2010-11-18","2014-05-05","2014-11-19","2015-05-27","2015-11-03","2016-06-07","2016-06-08","2016-11-09","2016-11-10","2017-06-02","2017-11-14","2018-06-12","2018-11-15","2019-06-04","2019-11-05","2020-06-02","2020-11-24","2021-06-02","2021-11-02","2022-06-10","2022-11-10","2023-08-23","2024-07-29"],"peak":{"MW37 80FT":230.0,"MW-37-LF":225.0,"MW-13":190.0,"MW-37":130.0,"MW-27-3V":92.0,"MW-27":91.0,"MW-37-3V":80.0,"MW-27-LF":73.0,"MW-27F":65.0,"MW37 88FT":55.0,"MW-12":19.1,"MW-23":9.4,"MW-12-LF":6.4,"MW-12-3V":3.9,"MW-25":1.8},"grid":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,230.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,77.0,null,65.0,null,90.0,88.0,110.0,110.0,92.0,110.0,104.0,225.0,null,null,null,null,null,null],[56.0,null,null,null,190.0,null,27.0,150.0,null,null,null,null,22.0,null,1.3,null,16.0,null,null,null,null,4.8,null,0,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,58.0,81.0,70.0,65.0,25.0,null,null,null,null,null,null,null,null,null,null,null,null,51.0,21.7,43.0,55.0,68.0,130.0],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,92.0,null,53.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,73.0,null,null,74.0,null,67.0,63.0,null,78.0,null,null,91.0,null,74.0,43.0,null,9.5,null,null,null,null,59.0,13.0,18.0,55.0,52.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,73.0,80.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,73.0,null,26.0,null,1.4,0.84,0.21,0,0.48,0,0.1,null,null,null,null,null,null,null],[null,65.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,55.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[1.1,null,6.0,null,null,null,0,6.1,1.4,null,null,null,5.4,4.1,null,7.2,null,null,0,null,null,null,0.9,3.5,8.5,5.3,8.5,null,null,null,null,null,null,null,null,null,null,null,null,10.1,1.8,17.4,19.1,14.2,14.5],[5.8,null,null,9.4,null,null,4.1,3.7,6.1,null,null,4.7,null,3.7,null,4.1,null,1.4,null,null,null,null,1.1,1.3,1.1,0.78,0.84,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2.6,null,0.39,6.4,3.4,3.9,0.16,1.1,0.73,1.9,0,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3.9,null,0.48,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,1.7,null,null,1.8,1.3,null,0,null,null,0.91,null,0,null,0,0,null,0,null,null,null,null,0.16,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]},"dioxin":{"samples":[{"well":"MW-25","date":"2008-05-20","teq":0.3074,"congeners":[{"name":"2,3,7,8-TCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"1,2,3,7,8-PeCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"2,3,4,7,8-PeCDF","tef":0.3,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,7,8-TCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,4,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8-PeCDF","tef":0.03,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,6,7,8-HpCDD","tef":0.01,"v":22.1,"det":true,"contrib":0.221},{"name":"1,2,3,4,6,7,8-HpCDF","tef":0.01,"v":3.0,"det":true,"contrib":0.03},{"name":"1,2,3,4,7,8,9-HpCDF","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"OCDD","tef":0.0003,"v":178.0,"det":true,"contrib":0.0534},{"name":"OCDF","tef":0.0003,"v":9.97,"det":true,"contrib":0.003}]},{"well":"MW-25","date":"2008-11-18","teq":0.0018,"congeners":[{"name":"2,3,7,8-TCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"1,2,3,7,8-PeCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"2,3,4,7,8-PeCDF","tef":0.3,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,7,8-TCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,4,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8-PeCDF","tef":0.03,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,6,7,8-HpCDD","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,6,7,8-HpCDF","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8,9-HpCDF","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"OCDD","tef":0.0003,"v":5.03,"det":true,"contrib":0.0015},{"name":"OCDF","tef":0.0003,"v":0.947,"det":true,"contrib":0.0003}]},{"well":"MW-27","date":"2008-05-20","teq":0.0125,"congeners":[{"name":"2,3,7,8-TCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"1,2,3,7,8-PeCDD","tef":1,"v":0,"det":false,"contrib":0},{"name":"2,3,4,7,8-PeCDF","tef":0.3,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDD","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,7,8-TCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8,9-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"2,3,4,6,7,8-HxCDF","tef":0.1,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,7,8-PeCDF","tef":0.03,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,6,7,8-HpCDD","tef":0.01,"v":0.936,"det":true,"contrib":0.0094},{"name":"1,2,3,4,6,7,8-HpCDF","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"1,2,3,4,7,8,9-HpCDF","tef":0.01,"v":0,"det":false,"contrib":0.0},{"name":"OCDD","tef":0.0003,"v":10.4,"det":true,"contrib":0.0031},{"name":"OCDF","tef":0.0003,"v":0,"det":false,"contrib":0.0}]}],"tcdd_mcl":30,"units":"pg/L"},"meta":{"mcl_pcp":1.0,"first":"2005-05-09","last":"2024-07-29","n_events":51,"nfa":"2026-01-21","covenant":"2013-08-28"}};
+</script>
+<script>
+// ---------- helpers ----------
+const NS="http://www.w3.org/2000/svg";
+const C=getComputedStyle(document.documentElement);
+const col=n=>C.getPropertyValue(n).trim();
+const yearFrac=s=>{const[y,m,d]=s.split("-").map(Number);return y+(m-1)/12+(d-1)/365;};
+const tip=document.getElementById("tip");
+function svg(w,h){const s=document.createElementNS(NS,"svg");s.setAttribute("viewBox",`0 0 ${w} ${h}`);s.setAttribute("width",w);s.setAttribute("height",h);return s;}
+function el(p,t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+function tipOn(node,html){
+  node.style.cursor="default";
+  node.addEventListener("mousemove",e=>{tip.innerHTML=html;tip.style.opacity=1;
+    let x=e.clientX+14,y=e.clientY+14;if(x>innerWidth-180)x=e.clientX-tip.offsetWidth-14;tip.style.left=x+"px";tip.style.top=y+"px";});
+  node.addEventListener("mouseleave",()=>tip.style.opacity=0);
+}
+const fmt=n=>n>=10?Math.round(n):(Math.round(n*100)/100);
+const niceDate=s=>{const[y,m,d]=s.split("-");return["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+m-1]+" "+y;};
+
+// meta
+document.getElementById("m-events").textContent=GT.meta.n_events;
+document.getElementById("m-first").textContent=niceDate(GT.meta.first);
+document.getElementById("m-last").textContent=niceDate(GT.meta.last);
+
+const X0=2005, X1=2026.5;
+const xpos=(yr,L,R)=>L+(yr-X0)/(X1-X0)*(R-L);
+
+// ================= 1. CADENCE =================
+(function(){
+  const W=920,H=250,L=46,R=W-18,Tline=176,top=30;
+  const s=svg(W,H);
+  // gap band 2011-2014
+  const gx0=xpos(2011,L,R),gx1=xpos(2013.95,L,R);
+  el(s,"rect",{x:gx0,y:top,width:gx1-gx0,height:Tline-top,fill:col("--paper-deep")});
+  el(s,"text",{x:(gx0+gx1)/2,y:top+14,"text-anchor":"middle","font-size":11,fill:col("--ink-faded"),"font-style":"italic"},"no sampling");
+  el(s,"text",{x:(gx0+gx1)/2,y:top+27,"text-anchor":"middle","font-size":11,fill:col("--ink-faded"),"font-style":"italic"},"2011–2013");
+  // year axis
+  el(s,"line",{x1:L,y1:Tline,x2:R,y2:Tline,stroke:col("--rule"),"stroke-width":1});
+  for(let y=2005;y<=2026;y++){
+    const x=xpos(y,L,R);
+    el(s,"line",{x1:x,y1:Tline,x2:x,y2:Tline+4,stroke:col("--rule")});
+    if(y%5===0||y===2026)el(s,"text",{x:x,y:Tline+18,"text-anchor":"middle","font-size":11,fill:col("--ink-faded")},y);
+  }
+  // secondary PCP scale (MW-37)
+  const pmax=152, py=v=>Tline-6-(v/pmax)*(Tline-6-top);
+  [50,100].forEach(v=>{el(s,"line",{x1:L,y1:py(v),x2:R,y2:py(v),stroke:col("--grid"),"stroke-dasharray":"2 4"});
+    el(s,"text",{x:L-4,y:py(v)+3,"text-anchor":"end","font-size":9,fill:col("--cobalt-light")},v);});
+  // event ticks
+  GT.cadence.events.forEach(ev=>{
+    const x=xpos(yearFrac(ev.date),L,R);
+    const t=el(s,"line",{x1:x,y1:Tline,x2:x,y2:Tline-8,stroke:col("--slate"),"stroke-width":1.4});
+    tipOn(t,`<b>${niceDate(ev.date)}</b><br>${ev.n} analyses`);
+  });
+  // MW-37 line
+  const pts=GT.cadence.events.filter(e=>e.mw37!=null);
+  let dpath="";
+  pts.forEach((e,i)=>{const x=xpos(yearFrac(e.date),L,R),y=py(e.mw37);dpath+=(i?"L":"M")+x+" "+y+" ";});
+  el(s,"path",{d:dpath,fill:"none",stroke:col("--cobalt"),"stroke-width":2,"stroke-linejoin":"round"});
+  pts.forEach(e=>{const x=xpos(yearFrac(e.date),L,R),y=py(e.mw37);
+    const last=e.mw37>=130;
+    const c=el(s,"circle",{cx:x,cy:y,r:last?5:3.2,fill:last?col("--amber"):col("--cobalt"),stroke:"#fff","stroke-width":1});
+    tipOn(c,`<b>MW-37 · ${niceDate(e.date)}</b><br>PCP ${e.mw37} µg/L`);
+    if(last){el(s,"text",{x:x-8,y:y-9,"text-anchor":"end","font-size":12,"font-weight":700,fill:col("--amber-deep")},"130 µg/L");
+      el(s,"text",{x:x-8,y:y+4,"text-anchor":"end","font-size":9.5,fill:col("--amber-deep")},"last reading");}
+  });
+  el(s,"text",{x:L,y:top-12,"font-size":11,fill:col("--cobalt"),"font-weight":600},"PCP at MW-37, µg/L");
+  // covenant + NFA markers
+  function mark(yr,label1,label2,c){
+    const x=xpos(yr,L,R);
+    el(s,"line",{x1:x,y1:top-6,x2:x,y2:Tline,stroke:c,"stroke-width":1.4,"stroke-dasharray":"4 3"});
+    el(s,"text",{x:x+4,y:H-22,"font-size":10.5,fill:c,"font-weight":600},label1);
+    if(label2)el(s,"text",{x:x+4,y:H-9,"font-size":10.5,fill:c},label2);
+  }
+  mark(2013.65,"covenant","recorded",col("--slate-deep"));
+  const nx=xpos(2026.06,L,R);
+  el(s,"line",{x1:nx,y1:top-6,x2:nx,y2:Tline,stroke:col("--amber-deep"),"stroke-width":1.6,"stroke-dasharray":"4 3"});
+  el(s,"text",{x:nx-4,y:H-22,"text-anchor":"end","font-size":10.5,fill:col("--amber-deep"),"font-weight":700},"NFA—monitoring");
+  el(s,"text",{x:nx-4,y:H-9,"text-anchor":"end","font-size":10.5,fill:col("--amber-deep")},"ends Jan 2026");
+  document.getElementById("fig-cadence").appendChild(s);
+})();
+
+// ================= 2. TREND small multiples =================
+(function(){
+  const wells=["MW-37","MW-27","MW-12","MW-13"];
+  const W=440,H=210,L=44,R=W-14,B=H-30,T=26;
+  const lo=0.7,hi=300;
+  const ly=v=>{v=Math.max(v,lo);return B-(Math.log10(v)-Math.log10(lo))/(Math.log10(hi)-Math.log10(lo))*(B-T);};
+  const host=document.getElementById("fig-trend");
+  wells.forEach(w=>{
+    const data=GT.trend[w]; if(!data) return;
+    const wrap=document.createElement("div");
+    const s=svg(W,H);
+    const hot=(w==="MW-37");
+    el(s,"text",{x:L-2,y:16,"font-size":13,"font-weight":700,"font-family":"Fraunces,Georgia,serif",fill:hot?col("--amber-deep"):col("--slate-deep")},w);
+    // gridlines 1,10,100
+    [1,10,100].forEach(v=>{el(s,"line",{x1:L,y1:ly(v),x2:R,y2:ly(v),stroke:col("--grid")});
+      el(s,"text",{x:L-4,y:ly(v)+3,"text-anchor":"end","font-size":9,fill:col("--ink-faded")},v);});
+    // MCL line at 1
+    el(s,"line",{x1:L,y1:ly(1),x2:R,y2:ly(1),stroke:col("--ink-faded"),"stroke-width":1.4,"stroke-dasharray":"5 3"});
+    el(s,"text",{x:R,y:ly(1)-4,"text-anchor":"end","font-size":9,fill:col("--ink-faded")},"1 µg/L limit");
+    // x ticks
+    el(s,"line",{x1:L,y1:B,x2:R,y2:B,stroke:col("--rule")});
+    [2005,2010,2015,2020,2025].forEach(y=>{const x=xpos(y,L,R);
+      el(s,"text",{x:x,y:B+14,"text-anchor":"middle","font-size":9,fill:col("--ink-faded")},"'"+String(y).slice(2));});
+    // line through detects
+    const dets=data.filter(d=>!d.nd);
+    let p="";dets.forEach((d,i)=>{const x=xpos(yearFrac(d.date),L,R),y=ly(d.v);p+=(i?"L":"M")+x+" "+y+" ";});
+    el(s,"path",{d:p,fill:"none",stroke:hot?col("--amber"):col("--cobalt"),"stroke-width":1.8,"stroke-linejoin":"round"});
+    data.forEach(d=>{const x=xpos(yearFrac(d.date),L,R),y=ly(d.v);
+      const last=hot&&d.v>=130;
+      let c;
+      if(d.nd)c=el(s,"circle",{cx:x,cy:y,r:2.8,fill:"#fff",stroke:col("--cobalt"),"stroke-width":1.4});
+      else c=el(s,"circle",{cx:x,cy:y,r:last?5:3,fill:last?col("--amber"):(hot?col("--amber"):col("--cobalt")),stroke:"#fff","stroke-width":1});
+      tipOn(c,`<b>${w} · ${niceDate(d.date)}</b><br>PCP ${d.nd?"<"+d.v+" (non-detect)":d.v+" µg/L"}`);
+      if(last){el(s,"text",{x:x-7,y:y+2,"text-anchor":"end","font-size":11,"font-weight":700,fill:col("--amber-deep")},"130×");}
+    });
+    wrap.appendChild(s);host.appendChild(wrap);
+  });
+})();
+
+// ================= 3. EXCEEDANCE matrix (year-binned) =================
+(function(){
+  const wells=GT.exceedance.wells, dates=GT.exceedance.dates, grid=GT.exceedance.grid;
+  const years=[];for(let y=2005;y<=2024;y++)years.push(y);
+  // build well x year max
+  const M=wells.map((w,wi)=>{
+    const row={};years.forEach(y=>row[y]=null);
+    dates.forEach((ds,di)=>{const v=grid[wi][di];if(v==null)return;const y=+ds.slice(0,4);
+      row[y]=(row[y]==null)?v:Math.max(row[y],v);});
+    return row;
+  });
+  const MCL=GT.meta.mcl_pcp;
+  function cell(v){
+    if(v==null)return {f:col("--paper"),s:col("--grid")};
+    if(v<=MCL)return {f:"#eef2fb",s:col("--grid")};
+    const r=v/MCL;
+    if(r<=10)return {f:col("--cobalt-light"),s:col("--cobalt-light")};
+    if(r<=50)return {f:col("--cobalt"),s:col("--cobalt")};
+    if(r<=100)return {f:col("--cobalt-deep"),s:col("--cobalt-deep")};
+    return {f:col("--amber"),s:col("--amber-deep")};
+  }
+  const labW=78, cw=Math.max(26,(900-labW)/years.length), ch=20, T=24, W=labW+years.length*cw+8, H=T+wells.length*ch+8;
+  const s=svg(W,H);
+  years.forEach((y,i)=>{if(y%5===0)el(s,"text",{x:labW+i*cw+cw/2,y:T-8,"text-anchor":"middle","font-size":10,fill:col("--ink-faded")},y);});
+  wells.forEach((w,wi)=>{
+    const yy=T+wi*ch;
+    el(s,"text",{x:labW-6,y:yy+ch/2+3.5,"text-anchor":"end","font-size":10.5,fill:col("--ink-soft")},w);
+    years.forEach((y,i)=>{
+      const v=M[wi][y],cl=cell(v);
+      const rc=el(s,"rect",{x:labW+i*cw+1,y:yy+1,width:cw-2,height:ch-2,rx:2.5,fill:cl.f,stroke:cl.s,"stroke-width":.6});
+      if(v!=null)tipOn(rc,`<b>${w} · ${y}</b><br>PCP ${fmt(v)} µg/L · ${v<=MCL?"≤ limit":fmt(v/MCL)+"× limit"}`);
+      else tipOn(rc,`<b>${w} · ${y}</b><br>not sampled`);
+    });
+  });
+  document.getElementById("fig-matrix").appendChild(s);
+  // legend
+  const lg=document.getElementById("matrix-legend");
+  const items=[["not sampled",col("--paper"),col("--grid")],["≤ limit","#eef2fb",col("--grid")],
+    ["1–10×",col("--cobalt-light")],["10–50×",col("--cobalt")],["50–100×",col("--cobalt-deep")],[">100×",col("--amber")]];
+  items.forEach(it=>{const sp=document.createElement("span");
+    sp.innerHTML=`<span class="sw" style="background:${it[1]};${it[2]?`border:1px solid ${it[2]}`:""}"></span>${it[0]}`;lg.appendChild(sp);});
+})();
+
+// ================= 4. DEGRADATION stacked =================
+(function(){
+  const d=GT.degradation, W=540,H=300,L=46,R=W-16,B=H-40,T=20;
+  const tot=d.map(x=>x.PCP+x.tetra+x.tri+x.di+x.dcpaa);
+  const hi=Math.ceil(Math.max(...tot)/20)*20+20;
+  const y=v=>B-(v/hi)*(B-T);
+  const s=svg(W,H);
+  [0,40,80,120,160].filter(v=>v<=hi).forEach(v=>{el(s,"line",{x1:L,y1:y(v),x2:R,y2:y(v),stroke:col("--grid")});
+    el(s,"text",{x:L-5,y:y(v)+3,"text-anchor":"end","font-size":9.5,fill:col("--ink-faded")},v);});
+  el(s,"text",{x:L-5,y:T-4,"text-anchor":"end","font-size":9.5,fill:col("--ink-faded")},"µg/L");
+  el(s,"line",{x1:L,y1:B,x2:R,y2:B,stroke:col("--rule")});
+  const bw=46, gap=(R-L-d.length*bw)/(d.length+1);
+  d.forEach((x,i)=>{
+    const cx=L+gap+i*(bw+gap);
+    let acc=0;
+    const segs=[["PCP",x.PCP,col("--cobalt-deep")],["tetrachlorophenols",x.tetra,col("--amber")],
+      ["tri-/di-chlorophenols",x.tri+x.di+x.dcpaa,"#8a9bc0"]];
+    segs.forEach(seg=>{if(seg[1]<=0)return;const h=(seg[1]/hi)*(B-T);
+      const rc=el(s,"rect",{x:cx,y:y(acc+seg[1]),width:bw,height:h,fill:seg[2]});
+      tipOn(rc,`<b>${seg[0]}</b><br>${niceDate(x.date)}<br>${fmt(seg[1])} µg/L`);acc+=seg[1];});
+    const total=x.PCP+x.tetra+x.tri+x.di+x.dcpaa;
+    const pct=Math.round(x.PCP/total*100);
+    el(s,"text",{x:cx+bw/2,y:y(total)-14,"text-anchor":"middle","font-size":11,"font-weight":700,fill:col("--ink")},fmt(total));
+    el(s,"text",{x:cx+bw/2,y:y(total)-3,"text-anchor":"middle","font-size":9,fill:col("--ink-faded")},pct+"% PCP");
+    el(s,"text",{x:cx+bw/2,y:B+15,"text-anchor":"middle","font-size":10.5,fill:col("--ink-soft")},x.date.slice(0,4));
+    el(s,"text",{x:cx+bw/2,y:B+28,"text-anchor":"middle","font-size":9,fill:col("--ink-faded")},niceDate(x.date).slice(0,3));
+  });
+  // rising arrow note
+  el(s,"text",{x:R,y:T+6,"text-anchor":"end","font-size":10.5,"font-style":"italic",fill:col("--amber-deep")},"total rising →");
+  document.getElementById("fig-deg").appendChild(s);
+})();
+
+// ================= 5. DEPTH profile =================
+(function(){
+  const d=GT.depth, W=600,H=420,L=150,R=W-40,T=58,B=H-30;
+  const dmax=95; const dy=ft=>T+(ft/dmax)*(B-T);
+  const pmax=300; const px=v=>L+(v/pmax)*(R-L);
+  const s=svg(W,H);
+  // surface label
+  el(s,"text",{x:L,y:24,"font-size":12,"font-weight":700,"font-family":"Fraunces,Georgia,serif",fill:col("--slate-deep")},"proposed surface use:");
+  el(s,"text",{x:L,y:39,"font-size":11,fill:col("--ink-soft")},"park / sports fields—former log-deck area");
+  // ground line
+  el(s,"line",{x1:L,y1:dy(0),x2:R,y2:dy(0),stroke:col("--ink"),"stroke-width":2});
+  el(s,"text",{x:L-8,y:dy(0)+3,"text-anchor":"end","font-size":10,fill:col("--ink-faded")},"0 ft");
+  // overburden band 0-~40 (schematic) and bedrock 40-95
+  el(s,"rect",{x:L,y:dy(0),width:R-L,height:dy(40)-dy(0),fill:col("--paper-deep"),opacity:.7});
+  el(s,"rect",{x:L,y:dy(40),width:R-L,height:dy(dmax)-dy(40),fill:"#dfe4f2"});
+  // bedrock hatch
+  for(let yy=dy(40);yy<dy(dmax);yy+=8)el(s,"line",{x1:L,y1:yy,x2:R,y2:yy-6,stroke:"#cdd4ea","stroke-width":.7});
+  el(s,"text",{x:R-4,y:dy(20)+3,"text-anchor":"end","font-size":10,"font-style":"italic",fill:col("--ink-faded")},"overburden (schematic)");
+  el(s,"text",{x:R-4,y:dy(63)+3,"text-anchor":"end","font-size":10,"font-style":"italic",fill:col("--slate")},"bedrock");
+  // 5 ft datum
+  el(s,"line",{x1:L,y1:dy(5),x2:R,y2:dy(5),stroke:col("--cobalt"),"stroke-width":1.3,"stroke-dasharray":"4 3"});
+  el(s,"text",{x:L-8,y:dy(5)+3,"text-anchor":"end","font-size":9.5,fill:col("--cobalt")},"5 ft");
+  el(s,"text",{x:px(pmax)*0+L+4,y:dy(5)-4,"font-size":9.5,fill:col("--cobalt")},"covenant soil datum—shallow soil restricted above");
+  // depth ruler ticks
+  [20,40,60,80].forEach(ft=>el(s,"text",{x:L-8,y:dy(ft)+3,"text-anchor":"end","font-size":9.5,fill:col("--ink-faded")},ft+" ft"));
+  // PCP scale bottom
+  el(s,"text",{x:L,y:B+20,"font-size":10,fill:col("--ink-faded")},"PCP in groundwater (µg/L) →");
+  [100,200].forEach(v=>{el(s,"line",{x1:px(v),y1:T,x2:px(v),y2:B,stroke:col("--grid"),"stroke-dasharray":"2 4"});
+    el(s,"text",{x:px(v),y:T-4,"text-anchor":"middle","font-size":9,fill:col("--ink-faded")},v);});
+  // bars at depth
+  d.forEach(pt=>{
+    const yy=dy(pt.depth);
+    const rc=el(s,"rect",{x:L,y:yy-6,width:px(pt.v)-L,height:12,rx:3,fill:col("--amber"),opacity:.85});
+    tipOn(rc,`<b>MW-37 · ${pt.depth} ft</b><br>PCP ${pt.v} µg/L<br>${niceDate(pt.date)}`);
+    el(s,"circle",{cx:L,cy:yy,r:3,fill:col("--amber-deep")});
+    el(s,"text",{x:px(pt.v)+6,y:yy+4,"font-size":11,"font-weight":700,fill:col("--amber-deep")},pt.v+" µg/L");
+    el(s,"text",{x:px(pt.v)+6,y:yy-7,"font-size":9,fill:col("--ink-faded")},pt.depth+" ft deep");
+  });
+  document.getElementById("fig-depth").appendChild(s);
+})();
+
+// ================= 6. DIOXIN =================
+(function(){
+  // focal: MW-25 May 2008 (the event with detections)
+  const samples=GT.dioxin.samples;
+  const focal=samples.find(s=>s.well==="MW-25"&&s.date==="2008-05-20")||samples[0];
+  const dets=focal.congeners.filter(c=>c.det).sort((a,b)=>b.v-a.v);
+  const W=600,H=300,L=170,R=W-70,T=40,B=H-70;
+  const hi=Math.max(...dets.map(c=>c.v))*1.1;
+  const x=v=>L+(v/hi)*(R-L);
+  const s=svg(W,H);
+  el(s,"text",{x:L-2,y:20,"font-size":12,"font-weight":700,"font-family":"Fraunces,Georgia,serif",fill:col("--slate-deep")},"Detected congeners—MW-25, May 2008 (pg/L)");
+  const bh=Math.min(26,(B-T)/dets.length-6);
+  dets.forEach((c,i)=>{
+    const yy=T+i*((B-T)/dets.length);
+    el(s,"text",{x:L-6,y:yy+bh/2+3.5,"text-anchor":"end","font-size":10.5,fill:col("--ink-soft")},c.name);
+    const rc=el(s,"rect",{x:L,y:yy,width:Math.max(2,x(c.v)-L),height:bh,rx:2.5,fill:col("--cobalt")});
+    tipOn(rc,`<b>${c.name}</b><br>${c.v} pg/L · TEF ${c.tef}<br>TEQ contribution ${c.contrib} pg/L`);
+    el(s,"text",{x:x(c.v)+5,y:yy+bh/2+3.5,"font-size":10,fill:col("--ink")},c.v+"  (TEF "+c.tef+")");
+  });
+  // TEQ summary box
+  const by=B+24;
+  el(s,"line",{x1:L-2,y1:B+8,x2:R,y2:B+8,stroke:col("--rule")});
+  el(s,"text",{x:L-2,y:by,"font-size":11.5,fill:col("--ink")},`WHO-2005 TEQ (this sample): `);
+  el(s,"text",{x:L+182,y:by,"font-size":11.5,"font-weight":700,fill:col("--cobalt-deep")},`${focal.teq.toFixed(2)} pg/L`);
+  el(s,"text",{x:L-2,y:by+18,"font-size":11.5,fill:col("--ink")},`2,3,7,8-TCDD (most toxic): `);
+  el(s,"text",{x:L+182,y:by+18,"font-size":11.5,"font-weight":700,fill:col("--amber-deep")},`non-detect`);
+  el(s,"text",{x:L-2,y:by+36,"font-size":10.5,"font-style":"italic",fill:col("--ink-faded")},`for reference, the TCDD drinking-water limit is 30 pg/L`);
+  document.getElementById("fig-dioxin").appendChild(s);
+})();
+</script>
+
 </body>
 </html>
