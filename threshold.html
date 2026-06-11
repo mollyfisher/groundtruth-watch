@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is a cancer-risk threshold? — Ground Truth</title>
+<!-- PREVIEW NOTE: fonts pulled from Google for standalone rendering.
+     On groundtruth.watch, delete this <link> and the <style id="preview-fallback"> block,
+     then link the self-hosted house stylesheet instead. All class names below match it. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style id="preview-fallback">
+/* ---------- tokens (mirror of house stylesheet) ---------- */
+:root{
+  --paper:#fcfcff; --paper-soft:#fff; --paper-deep:#eef0fa;
+  --ink:#0a0a14; --ink-soft:#1a1d2e; --ink-faded:#4a4f63;
+  --cobalt:#1340e0; --cobalt-deep:#001a80;
+  --cobalt-light:color-mix(in oklab, var(--cobalt) 55%, var(--paper));
+  --slate:#2a4378; --azure:#1860c4; --amber:#b9770f; --amber-deep:#7a4d05;
+  --rule:#c8cde0;
+  --fs-xs:clamp(.75rem,.72rem + .15vw,.825rem);
+  --fs-sm:clamp(.875rem,.85rem + .15vw,.95rem);
+  --fs-base:clamp(1.0625rem,1rem + .35vw,1.2rem);
+  --fs-md:clamp(1.2rem,1.1rem + .5vw,1.35rem);
+  --fs-lg:clamp(1.5rem,1.3rem + 1vw,1.85rem);
+  --fs-xl:clamp(1.85rem,1.5rem + 1.75vw,2.6rem);
+  --fs-3xl:clamp(3.25rem,2.5rem + 3.75vw,5.5rem);
+  --space-xs:.5rem; --space-sm:1rem; --space-md:1.75rem; --space-lg:3rem;
+  --space-xl:5rem; --space-2xl:7rem;
+  --radius-sm:6px; --radius-md:14px; --radius-lg:24px;
+  --measure:38rem; --measure-wide:52rem;
+  --shadow-soft:0 1px 2px rgba(10,10,20,.06),0 8px 24px rgba(15,31,74,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Newsreader','Iowan Old Style',Georgia,serif;
+  font-size:var(--fs-base);line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);text-wrap:balance;line-height:1.1;}
+em{font-style:italic;} strong{font-weight:600;color:var(--ink);}
+a:not([class]){color:var(--cobalt-deep);text-decoration:underline;
+  text-decoration-color:color-mix(in oklab,var(--cobalt) 50%,transparent);
+  text-underline-offset:3px;}
+button{font:inherit;cursor:pointer;border:0;background:none;}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px;border-radius:2px;}
+
+.page{max-width:70rem;margin-inline:auto;
+  padding-inline:clamp(1.25rem,4vw,3rem);
+  padding-block:clamp(2rem,5vw,4rem) var(--space-2xl);}
+
+.masthead{padding-block:var(--space-md);margin-bottom:var(--space-lg);}
+.masthead-meta{display:flex;flex-wrap:wrap;gap:var(--space-sm) var(--space-md);
+  justify-content:space-between;align-items:baseline;
+  font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faded);
+  padding-bottom:var(--space-sm);border-bottom:1px solid var(--rule);}
+.masthead-meta>:first-child{color:var(--cobalt);}
+.masthead .title{font-family:'Fraunces',serif;font-size:var(--fs-3xl);
+  font-variation-settings:"opsz" 144,"wght" 800,"SOFT" 60;
+  letter-spacing:-.025em;line-height:.92;color:var(--ink);
+  margin-block:clamp(1.5rem,4vw,2.5rem) var(--space-sm);}
+.masthead .title em{font-style:italic;color:var(--cobalt);
+  font-variation-settings:"opsz" 144,"wght" 500,"SOFT" 100;}
+.masthead .subtitle{font-family:'Fraunces',serif;font-size:var(--fs-md);
+  font-variation-settings:"opsz" 32,"wght" 400,"SOFT" 70;font-style:italic;
+  line-height:1.4;color:var(--ink-soft);max-width:var(--measure);margin-bottom:var(--space-md);}
+
+.telling{max-width:var(--measure);margin-inline:auto;}
+.telling p{font-family:'Newsreader',serif;font-variation-settings:"opsz" 20,"wght" 410;
+  font-size:var(--fs-md);line-height:1.78;margin-bottom:1.4em;color:var(--ink-soft);}
+.telling p strong{color:var(--ink);font-weight:600;}
+.telling p em{color:var(--cobalt-deep);font-style:italic;}
+.telling h3{font-variation-settings:"opsz" 36,"wght" 600,"SOFT" 40;
+  font-size:var(--fs-lg);margin-block:var(--space-lg) var(--space-sm);}
+.telling h3 .step-no{color:var(--cobalt);font-style:italic;}
+.lead::first-letter{float:left;font-family:'Fraunces',serif;
+  font-variation-settings:"opsz" 144,"wght" 800,"SOFT" 30;
+  font-size:5.4em;line-height:.74;color:var(--cobalt);
+  margin:.06em .1em -.05em 0;
+  text-shadow:2px 2px 0 var(--paper-deep),-1px -1px 0 color-mix(in oklab,var(--cobalt) 30%,transparent);}
+
+.brk{display:flex;align-items:center;justify-content:center;margin-block:var(--space-lg);
+  color:var(--cobalt-light);font-family:'JetBrains Mono',monospace;
+  font-size:var(--fs-sm);letter-spacing:.5em;user-select:none;}
+.brk::before,.brk::after{content:"";flex:1;max-width:7rem;height:1px;
+  background:linear-gradient(to right,transparent,var(--rule),transparent);}
+.brk span{padding:0 1rem;color:var(--cobalt);opacity:.7;}
+
+.land{margin-block:var(--space-lg);padding:var(--space-md) var(--space-lg);
+  background:var(--paper-soft);border-left:5px solid var(--cobalt);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;box-shadow:var(--shadow-soft);
+  font-family:'Fraunces',serif;font-variation-settings:"opsz" 60,"wght" 460,"SOFT" 90;
+  font-style:italic;font-size:var(--fs-lg);line-height:1.34;color:var(--ink);}
+.land em{color:var(--cobalt-deep);}
+
+/* the developer's asks — amber to match the looser side of the gadgets */
+.asks{max-width:var(--measure-wide);margin:var(--space-lg) auto;
+  background:color-mix(in oklab,var(--amber) 5%,var(--paper-soft));
+  border:1px solid color-mix(in oklab,var(--amber) 30%,var(--rule));
+  border-left:5px solid var(--amber);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  box-shadow:var(--shadow-soft);padding:clamp(1.25rem,3vw,2rem);}
+.asks-kicker{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--amber-deep);margin-bottom:.4rem;}
+.asks h4{font-family:'Fraunces',serif;font-variation-settings:"opsz" 60,"wght" 600,"SOFT" 60;
+  font-size:var(--fs-lg);color:var(--ink);margin-bottom:.35rem;}
+.asks-sub{font-family:'Newsreader',serif;font-style:italic;font-size:var(--fs-base);
+  color:var(--ink-faded);margin-bottom:1.25rem;}
+.ask{display:flex;gap:.85rem;padding:.85rem 0;border-top:1px dashed color-mix(in oklab,var(--amber) 30%,transparent);}
+.ask:first-of-type{border-top:0;}
+.ask-mark{flex-shrink:0;width:1.6rem;font-family:'JetBrains Mono',monospace;
+  font-size:var(--fs-sm);font-weight:700;color:var(--amber-deep);line-height:1.5;}
+.ask-body{flex:1;min-width:0;}
+.ask-h{font-family:'DM Sans',sans-serif;font-weight:600;font-size:var(--fs-base);color:var(--ink);}
+.ask-h .from{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:.85em;color:var(--amber-deep);white-space:nowrap;}
+.ask-p{font-family:'Newsreader',serif;font-size:var(--fs-base);line-height:1.6;color:var(--ink-soft);margin-top:.15rem;}
+.ask-src{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-faded);margin-top:.3rem;}
+.asks-foot{font-family:'Newsreader',serif;font-style:italic;font-size:var(--fs-base);
+  color:var(--ink-soft);line-height:1.6;margin-top:1.1rem;padding-top:1rem;
+  border-top:1px solid color-mix(in oklab,var(--amber) 30%,var(--rule));}
+
+.sources{margin-top:var(--space-2xl);padding-top:var(--space-md);
+  border-top:1px dashed color-mix(in oklab,var(--ink) 20%,transparent);
+  font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);line-height:1.75;
+  color:var(--ink-soft);max-width:var(--measure-wide);margin-inline:auto;}
+.sources-label{font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cobalt);margin-bottom:.5rem;display:block;}
+.sources em{font-family:'Newsreader',serif;}
+.sources a{color:var(--cobalt-deep);text-decoration:underline;text-underline-offset:2px;}
+
+/* ---------- gadget shell (house-tuned) ---------- */
+.gadget{max-width:var(--measure-wide);margin:var(--space-lg) auto;
+  background:var(--paper-soft);border:1px solid var(--rule);
+  border-radius:var(--radius-md);box-shadow:var(--shadow-soft);
+  padding:clamp(1.25rem,3vw,2rem);font-family:'DM Sans',sans-serif;}
+.gadget-kicker{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt);
+  margin-bottom:.75rem;}
+.g-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.g-btn{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);font-weight:600;
+  padding:.5rem .9rem;border:1px solid var(--rule);border-radius:var(--radius-sm);
+  background:var(--paper);color:var(--ink-soft);transition:border-color .15s,background .15s;}
+.g-btn:hover{border-color:var(--cobalt-light);}
+.g-btn[aria-pressed="true"]{border-color:var(--cobalt);background:color-mix(in oklab,var(--cobalt) 8%,var(--paper));color:var(--cobalt-deep);}
+#b5[aria-pressed="true"],#snr34[aria-pressed="true"]{border-color:var(--amber);background:color-mix(in oklab,var(--amber) 12%,var(--paper));color:var(--amber-deep);}
+.g-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.4rem;}
+.g-label{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);color:var(--ink-faded);white-space:nowrap;}
+input[type=range]{flex:1;accent-color:var(--cobalt);height:4px;}
+.g-scale{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;
+  font-size:var(--fs-xs);color:var(--ink-faded);margin-bottom:1.25rem;}
+.g-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-bottom:1.25rem;}
+.g-card{background:var(--paper-deep);border-radius:var(--radius-sm);padding:.9rem 1rem;}
+.g-card .lab{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);color:var(--ink-faded);margin-bottom:.3rem;}
+.g-card .val{font-family:'JetBrains Mono',monospace;font-size:var(--fs-lg);font-weight:500;color:var(--ink);line-height:1.1;}
+.g-note{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);color:var(--ink-faded);line-height:1.6;margin-bottom:.6rem;}
+.dotfield{display:flex;flex-wrap:wrap;gap:2px;min-height:36px;margin-bottom:1.25rem;}
+.dotfield span{width:5px;height:5px;border-radius:50%;display:inline-block;}
+
+/* chain */
+.step{}
+.stephead{display:flex;align-items:center;gap:.75rem;cursor:pointer;
+  background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius-sm);padding:.7rem .85rem;}
+.stephead.active{border-color:var(--cobalt);box-shadow:inset 0 0 0 1px var(--cobalt);}
+.stepnum{width:26px;height:26px;flex-shrink:0;border-radius:50%;background:var(--paper-deep);
+  color:var(--ink-faded);display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);font-weight:500;}
+.stephead.active .stepnum{background:var(--cobalt);color:#fff;}
+.stepmid{flex:1;min-width:0;}
+.stepwho{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);font-weight:600;color:var(--ink);}
+.steprole{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);color:var(--ink-faded);}
+.steppill{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:600;
+  padding:3px 8px;border-radius:var(--radius-sm);white-space:nowrap;}
+.steppill.on{background:color-mix(in oklab,var(--cobalt) 14%,var(--paper));color:var(--cobalt-deep);}
+.steppill.off{background:color-mix(in oklab,var(--amber) 18%,var(--paper));color:var(--amber-deep);}
+.stepchev{font-family:'DM Sans',sans-serif;color:var(--ink-faded);font-size:1.1rem;transition:transform .15s;}
+.stepdetail{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);color:var(--ink-faded);
+  line-height:1.6;padding:.6rem .85rem .2rem 3.1rem;}
+.stepconn{width:0;height:10px;border-left:2px solid var(--rule);margin-left:26px;}
+.step.skipped{opacity:.45;}
+.outwrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.25rem 0 1rem;}
+@media (max-width:30rem){.outwrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Ground Truth · Tool</span>
+      <span>The Unraveling · Cloverdale</span>
+    </div>
+    <h1 class="title">What is a <em>cancer-risk threshold</em>—and who gets to set it?</h1>
+    <p class="subtitle">A short walk-through, with two things you can move with your own hands. No background required.</p>
+  </header>
+
+  <section class="telling">
+    <p class="lead">Somewhere in the paperwork for the Esmeralda project there is a single number that decides how clean is clean enough before people live on the old mill site. It looks like a typo—<em>one in a million</em> versus <em>one in a hundred thousand</em>. It is not a typo. This page explains what the number means, who chooses it, and why the difference between those two versions is the whole argument.</p>
+
+    <div class="brk"><span>I</span></div>
+    <h3><span class="step-no">First.</span> What the number actually counts</h3>
+
+    <p>A <strong>cancer-risk threshold</strong> is a ceiling on <em>added</em> lifetime risk. "One in a million" (written 10⁻⁶) means: if a million people each lived a full lifetime under the site's leftover contamination, the cleanup is built so that <strong>at most one</strong> extra cancer would be statistically expected on top of all the cancers that happen anyway. It is not a prediction of anyone's fate. It is a deliberately cautious budget.</p>
+
+    <p>The slider below turns that budget into people. Drag it, or tap the two markers, and watch the crowd change size. Each dot is a thousand people; the amber dot is the crowd that contains the one expected case.</p>
+  </section>
+
+  <!-- GADGET 1 -->
+  <div class="gadget" aria-label="Threshold-to-people slider">
+    <div class="gadget-kicker">Tool 1 — how big is the crowd?</div>
+    <div class="g-btns">
+      <button class="g-btn" id="b6" aria-pressed="true">2009 EIR · 1 in 1,000,000</button>
+      <button class="g-btn" id="b5" aria-pressed="false">Esmeralda plan · 1 in 100,000</button>
+      <button class="g-btn" id="b4" aria-pressed="false">EPA range ceiling · 1 in 10,000</button>
+    </div>
+    <div class="g-row">
+      <label class="g-label" for="thr">Risk threshold</label>
+      <input type="range" id="thr" min="-6" max="-4" step="0.05" value="-6">
+    </div>
+    <div class="g-scale">
+      <span>10⁻⁶ · strict start</span><span>10⁻⁵</span><span>10⁻⁴ · loose limit</span>
+    </div>
+    <div class="g-cards">
+      <div class="g-card"><div class="lab">Allowed added risk</div><div class="val" id="riskOut">1 in 1,000,000</div></div>
+      <div class="g-card"><div class="lab">People per 1 expected case</div><div class="val" id="popOut">1,000,000</div></div>
+      <div class="g-card"><div class="lab">Cloverdales (~9,000 each)</div><div class="val" id="cdOut">111</div></div>
+    </div>
+    <div class="g-note">Each dot = 1,000 people living a full lifetime under the site's residual exposure. The amber dot marks the crowd holding the one statistically expected added case.</div>
+    <div class="dotfield" id="dots" aria-hidden="true"></div>
+  </div>
+
+  <section class="telling">
+    <div class="land">Both numbers are small. That is the honest part. The fight is not over whether 1-in-100,000 is survivable—it is over <em>how the number got chosen.</em></div>
+
+    <div class="brk"><span>II</span></div>
+    <h3><span class="step-no">Second.</span> Who actually sets it</h3>
+
+    <p>No one in the room invents the strict number. It arrives as a <em>default</em>—the starting point written into federal and state cleanup guidance. From there it passes through a short chain of hands: a consultant proposes, the public can object, the City adopts, the water board signs off on the technical study. The number that survives depends on which of those hands actually move.</p>
+
+    <p>Tap each actor below to open it. Then flip between the two real episodes—<strong>2009</strong>, when the strict number won, and the <strong>2025 plan</strong>, which proposes the looser one. Watch what happens to step 3.</p>
+  </section>
+
+  <!-- GADGET 2 -->
+  <div class="gadget" aria-label="Who sets the number chain">
+    <div class="gadget-kicker">Tool 2 — chain of custody for a number</div>
+    <div class="g-btns">
+      <button class="g-btn" id="s2009" aria-pressed="true">2009 · how it became 1 in 1,000,000</button>
+      <button class="g-btn" id="snr34" aria-pressed="false">2025 plan · how NR-34 proposes 1 in 100,000</button>
+    </div>
+    <div id="chain"></div>
+    <div class="outwrap">
+      <div class="g-card"><div class="lab">Resulting threshold</div><div class="val" id="outNum" style="color:var(--cobalt-deep)">1 in 1,000,000</div></div>
+      <div class="g-card"><div class="lab">The pivotal step</div><div class="val" id="outStep" style="font-size:var(--fs-base);line-height:1.35">Step 3 — the public pulled it to the default</div></div>
+    </div>
+    <div class="g-note" id="outNote">A commenter asked for the stricter number. The City revised the measure on the record, in the Final EIR.</div>
+  </div>
+
+  <section class="telling">
+    <div class="brk"><span>III</span></div>
+    <h3><span class="step-no">Third.</span> Why "addendum" versus "new EIR" is the whole game</h3>
+
+    <p>Step 3—the public comment period—only exists in a full environmental review. An <strong>addendum</strong> is the quiet path: not circulated, no comment period, no written replies required. A <strong>new EIR</strong> reopens that door. In 2009 a single comment moved the number from 1-in-100,000 to 1-in-1,000,000, on the record. On the addendum path, that comment never gets asked for.</p>
+
+    <p>So when the plan proposes the looser number through an addendum, it isn't sneaking past the science. It's routing around the one step where a neighbor's objection has to be answered in writing. Whether the City requires a new EIR is, in plain terms, the decision about whether <em>you</em> are in the chain at all.</p>
+
+    <div class="land">The strict number survived public review. The looser number is trying to reach the same place <em>without</em> it.</div>
+  </section>
+
+  <!-- THE ASK -->
+  <aside class="asks" aria-label="What the Esmeralda plan asks to change">
+    <div class="asks-kicker">The 2026 ask · measured against the 2009 adopted measure</div>
+    <h4>What the Esmeralda plan asks to change</h4>
+    <p class="asks-sub">Four edits to one already-adopted safeguard—Revised Mitigation Measure 5.6-3.</p>
+
+    <div class="ask">
+      <div class="ask-mark">1</div>
+      <div class="ask-body">
+        <div class="ask-h">The cancer-risk ceiling, loosened tenfold <span class="from">10⁻⁶ → 10⁻⁵</span></div>
+        <div class="ask-p">The adopted measure caps added lifetime risk at one in a million. The plan proposes one in a hundred thousand.</div>
+        <div class="ask-src">FEIR p. 11 · Esmeralda Specific Plan NR-34, p. 61</div>
+      </div>
+    </div>
+
+    <div class="ask">
+      <div class="ask-mark">2</div>
+      <div class="ask-body">
+        <div class="ask-h">Dioxins and furans, dropped from the study</div>
+        <div class="ask-p">The 2009 measure required the health-risk assessment to evaluate dioxins and furans. The plan's version lists only petroleum hydrocarbons, metals, and wood-preservation compounds—those two are gone.</div>
+        <div class="ask-src">FEIR p. 11 · NR-34, p. 61</div>
+      </div>
+    </div>
+
+    <div class="ask">
+      <div class="ask-mark">3</div>
+      <div class="ask-body">
+        <div class="ask-h">Engineered controls allowed in place of cleanup</div>
+        <div class="ask-p">The plan adds hardscape, imported clean soil, and deed restrictions as ways to meet the risk goal—an alternative to removing the contamination itself.</div>
+        <div class="ask-src">NR-34, p. 61</div>
+      </div>
+    </div>
+
+    <div class="ask">
+      <div class="ask-mark">4</div>
+      <div class="ask-body">
+        <div class="ask-h">Cited by its pre-correction name</div>
+        <div class="ask-p">The plan labels the safeguard "MM 4.6-4"—the 2004 number, from before the 2009 revisions that set 10⁻⁶ and added dioxins and furans in the first place.</div>
+        <div class="ask-src">NR-34, p. 61</div>
+      </div>
+    </div>
+
+    <p class="asks-foot">Each is a change to a safeguard the City already adopted. On the addendum path, all four would take effect without the comment step that produced the stricter version.</p>
+  </aside>
+
+  <section class="telling"></section>
+
+  <footer class="sources">
+    <span class="sources-label">Sources &amp; notes</span>
+    <p><em>The two thresholds.</em> Final EIR (Alexander Valley Resort, April 2009), p. 11, Revised Mitigation Measure 5.6-3, sets the carcinogen risk goal at one in a million (10⁻⁶), correcting an earlier 1-in-100,000 figure in response to Comment R1.2.7 (FEIR p. 94). The Esmeralda Specific Plan, Ch. 3, p. 61, policy NR-34, states 1 × 10⁻⁵ (one in one hundred thousand) and omits dioxins/furans from the risk-assessment scope.</p>
+    <p><em>The range.</em> The 10⁻⁶-to-10⁻⁴ band and 10⁻⁶ "point of departure" come from the U.S. EPA National Contingency Plan (40 CFR 300.430) and California screening-level (CHHSL) practice. An agency may land above 10⁻⁶ with documented, site-specific justification; the strict end is the default, not a floor that cannot move.</p>
+    <p><em>The process.</em> Under the CEQA Guidelines, a lead agency must respond in writing to comments on a circulated EIR (§15088); addenda (§15164) are not circulated and carry no comment period; subsequent/supplemental EIRs (§15162–15163) are triggered by new significant impacts, substantially increased severity, or new information of substantial importance. This section states regulatory structure, not legal advice or a conclusion about what the City must do.</p>
+    <p><em>The unit.</em> "Cloverdales of people" is a scale aid (~9,000 residents), not a claim that 9,000 people are exposed at the threshold level. Risk figures are ceilings on added lifetime risk under the assessment's exposure assumptions, not case forecasts.</p>
+  </footer>
+
+</main>
+
+<script>
+/* ---------- Tool 1: threshold -> crowd ---------- */
+(function(){
+  var thr=document.getElementById('thr'),riskOut=document.getElementById('riskOut'),
+      popOut=document.getElementById('popOut'),cdOut=document.getElementById('cdOut'),
+      dots=document.getElementById('dots'),
+      btns={'-6':document.getElementById('b6'),'-5':document.getElementById('b5'),'-4':document.getElementById('b4')};
+  function sig2(n){if(n>=100){var m=Math.pow(10,Math.floor(Math.log10(n))-1);return Math.round(n/m)*m;}return Math.round(n);}
+  function press(){var v=Math.round(parseFloat(thr.value));for(var k in btns){btns[k].setAttribute('aria-pressed',String(k===String(v)));}}
+  function render(){
+    var exp=parseFloat(thr.value),people=sig2(Math.pow(10,-exp));
+    riskOut.textContent='1 in '+people.toLocaleString();
+    popOut.textContent=people.toLocaleString();
+    var cd=people/9000;
+    cdOut.textContent=cd>=10?Math.round(cd).toLocaleString():(Math.round(cd*10)/10).toFixed(1);
+    var n=Math.max(1,Math.round(people/1000)),h='';
+    for(var i=0;i<n;i++){h+='<span style="background:'+((i===n-1)?'var(--amber)':'var(--cobalt)')+'"></span>';}
+    dots.innerHTML=h;press();
+  }
+  thr.addEventListener('input',render);
+  for(var k in btns){(function(kk){btns[kk].addEventListener('click',function(){thr.value=kk;render();});})(k);}
+  render();
+})();
+
+/* ---------- Tool 2: who sets the number ---------- */
+(function(){
+  var steps=[
+    {n:'1',who:'The rulebook',role:'Sets the default — 1 in 1,000,000',
+     detail:"Federal cleanup rules (EPA's National Contingency Plan) and California screening levels treat 1 in 1,000,000 as the point of departure — the presumptive starting target. Nobody picked it for Cloverdale; it's the standing default every site begins from."},
+    {n:'2',who:'The developer\u2019s consultant',role:'Proposes a number in the document',
+     detail:"The consultant writes a threshold into the plan or the health-risk study. They may propose a looser number inside the 10\u207B\u2076\u2013to\u201310\u207B\u2074 band \u2014 but moving off the default is supposed to require a documented, site-specific reason."},
+    {n:'3',who:'The public',role:'Can challenge it on the record',pivot:true,
+     detail:"During an EIR comment period, anyone can contest the proposed number and the agency must answer in writing. This is the only step where a neighbor can actually move the number."},
+    {n:'4',who:'The lead agency \u2014 City of Cloverdale',role:'Adopts the document, owns the finding',
+     detail:"The City certifies the document and owns the significance finding. To weaken a measure it already adopted, it needs a reasoned basis backed by substantial evidence."},
+    {n:'5',who:'The water board \u2014 RWQCB',role:'Approves the technical study',
+     detail:"The measure sends the health-risk assessment to the Regional Water Board for approval. It's the technical backstop \u2014 not the body that picks the number for the plan."}
+  ];
+  var scen={
+    s2009:{num:'1 in 1,000,000',col:'var(--cobalt-deep)',step:'Step 3 \u2014 the public pulled it to the default',
+      note:'A commenter asked for the stricter number. The City revised the measure on the record, in the Final EIR.',s3:'active'},
+    snr34:{num:'1 in 100,000',col:'var(--amber-deep)',step:'Step 3 \u2014 skipped on the addendum route',
+      note:'The looser number sits in the plan text (NR-34). An addendum has no comment period, so the one step where the public can move the number never runs.',s3:'skipped'}
+  };
+  var cur='s2009',open={},chain=document.getElementById('chain');
+  function pill(s){if(s==='active')return '<span class="steppill on">active</span>';if(s==='skipped')return '<span class="steppill off">skipped</span>';return '';}
+  function draw(){
+    var s3=scen[cur].s3,h='';
+    for(var i=0;i<steps.length;i++){
+      var st=steps[i],state=st.pivot?s3:'',skip=(state==='skipped'),act=(state==='active');
+      h+='<div class="step'+(skip?' skipped':'')+'">';
+      h+='<div class="stephead'+(act?' active':'')+'" data-i="'+i+'" role="button" tabindex="0" aria-expanded="'+(open[i]?'true':'false')+'">';
+      h+='<span class="stepnum">'+st.n+'</span>';
+      h+='<span class="stepmid"><span class="stepwho">'+st.who+'</span><span class="steprole">'+st.role+'</span></span>';
+      h+=pill(state);
+      h+='<span class="stepchev" aria-hidden="true" style="transform:rotate('+(open[i]?'180':'0')+'deg)">\u25be</span>';
+      h+='</div>';
+      if(open[i])h+='<div class="stepdetail">'+st.detail+'</div>';
+      if(i<steps.length-1)h+='<div class="stepconn"></div>';
+      h+='</div>';
+    }
+    chain.innerHTML=h;
+    var heads=chain.querySelectorAll('.stephead');
+    for(var j=0;j<heads.length;j++){heads[j].addEventListener('click',tog);
+      heads[j].addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog.call(this);}});}
+  }
+  function tog(){var i=this.getAttribute('data-i');open[i]=!open[i];draw();}
+  function out(){
+    var s=scen[cur];
+    document.getElementById('outNum').textContent=s.num;
+    document.getElementById('outNum').style.color=s.col;
+    document.getElementById('outStep').textContent=s.step;
+    document.getElementById('outNote').textContent=s.note;
+    document.getElementById('s2009').setAttribute('aria-pressed',String(cur==='s2009'));
+    document.getElementById('snr34').setAttribute('aria-pressed',String(cur==='snr34'));
+  }
+  document.getElementById('s2009').addEventListener('click',function(){cur='s2009';draw();out();});
+  document.getElementById('snr34').addEventListener('click',function(){cur='snr34';draw();out();});
+  draw();out();
+})();
+</script>
+</body>
+</html>
