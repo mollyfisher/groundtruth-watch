@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A covenant is only as good as the memory of it — Ground Truth</title>
+<!-- PREVIEW NOTE: fonts pulled from Google for standalone rendering.
+     On groundtruth.watch, delete this <link> and the <style id="preview-fallback"> block,
+     then link the self-hosted house stylesheet instead. All class names below match it. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style id="preview-fallback">
+:root{
+  --paper:#fcfcff; --paper-soft:#fff; --paper-deep:#eef0fa;
+  --ink:#0a0a14; --ink-soft:#1a1d2e; --ink-faded:#4a4f63;
+  --cobalt:#1340e0; --cobalt-deep:#001a80;
+  --cobalt-light:color-mix(in oklab, var(--cobalt) 55%, var(--paper));
+  --slate:#2a4378; --azure:#1860c4; --amber:#b9770f; --amber-deep:#7a4d05;
+  --rule:#c8cde0;
+  --fs-xs:clamp(.75rem,.72rem + .15vw,.825rem);
+  --fs-sm:clamp(.875rem,.85rem + .15vw,.95rem);
+  --fs-base:clamp(1.0625rem,1rem + .35vw,1.2rem);
+  --fs-md:clamp(1.2rem,1.1rem + .5vw,1.35rem);
+  --fs-lg:clamp(1.5rem,1.3rem + 1vw,1.85rem);
+  --fs-xl:clamp(1.85rem,1.5rem + 1.75vw,2.6rem);
+  --fs-3xl:clamp(3.25rem,2.5rem + 3.75vw,5.5rem);
+  --space-xs:.5rem; --space-sm:1rem; --space-md:1.75rem; --space-lg:3rem;
+  --space-xl:5rem; --space-2xl:7rem;
+  --radius-sm:6px; --radius-md:14px; --radius-lg:24px;
+  --measure:38rem; --measure-wide:52rem;
+  --shadow-soft:0 1px 2px rgba(10,10,20,.06),0 8px 24px rgba(15,31,74,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Newsreader','Iowan Old Style',Georgia,serif;
+  font-size:var(--fs-base);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);text-wrap:balance;line-height:1.1;}
+em{font-style:italic;} strong{font-weight:600;color:var(--ink);}
+a:not([class]){color:var(--cobalt-deep);text-decoration:underline;text-decoration-color:color-mix(in oklab,var(--cobalt) 50%,transparent);text-underline-offset:3px;}
+button{font:inherit;cursor:pointer;border:0;background:none;}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px;border-radius:2px;}
+
+.page{max-width:70rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem);padding-block:clamp(2rem,5vw,4rem) var(--space-2xl);}
+
+.masthead{padding-block:var(--space-md);margin-bottom:var(--space-lg);}
+.masthead-meta{display:flex;flex-wrap:wrap;gap:var(--space-sm) var(--space-md);justify-content:space-between;align-items:baseline;font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faded);padding-bottom:var(--space-sm);border-bottom:1px solid var(--rule);}
+.masthead-meta>:first-child{color:var(--cobalt);}
+.masthead .title{font-family:'Fraunces',serif;font-size:var(--fs-3xl);font-variation-settings:"opsz" 144,"wght" 800,"SOFT" 60;letter-spacing:-.025em;line-height:.92;color:var(--ink);margin-block:clamp(1.5rem,4vw,2.5rem) var(--space-sm);}
+.masthead .title em{font-style:italic;color:var(--cobalt);font-variation-settings:"opsz" 144,"wght" 500,"SOFT" 100;}
+.masthead .subtitle{font-family:'Fraunces',serif;font-size:var(--fs-md);font-variation-settings:"opsz" 32,"wght" 400,"SOFT" 70;font-style:italic;line-height:1.4;color:var(--ink-soft);max-width:var(--measure);margin-bottom:var(--space-sm);}
+.masthead .dateline{display:inline-block;font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt-deep);border-left:4px solid var(--cobalt);padding-left:1em;margin-top:var(--space-xs);}
+
+.telling{max-width:var(--measure);margin-inline:auto;}
+.telling p{font-family:'Newsreader',serif;font-variation-settings:"opsz" 20,"wght" 410;font-size:var(--fs-md);line-height:1.78;margin-bottom:1.4em;color:var(--ink-soft);}
+.telling p strong{color:var(--ink);font-weight:600;}
+.telling p em{color:var(--cobalt-deep);font-style:italic;}
+.telling h3{font-variation-settings:"opsz" 36,"wght" 600,"SOFT" 40;font-size:var(--fs-lg);margin-block:var(--space-lg) var(--space-sm);}
+.lead::first-letter{float:left;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144,"wght" 800,"SOFT" 30;font-size:5.4em;line-height:.74;color:var(--cobalt);margin:.06em .1em -.05em 0;text-shadow:2px 2px 0 var(--paper-deep),-1px -1px 0 color-mix(in oklab,var(--cobalt) 30%,transparent);}
+
+.brk{display:flex;align-items:center;justify-content:center;margin-block:var(--space-lg);color:var(--cobalt-light);font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);letter-spacing:.5em;user-select:none;}
+.brk::before,.brk::after{content:"";flex:1;max-width:7rem;height:1px;background:linear-gradient(to right,transparent,var(--rule),transparent);}
+.brk span{padding:0 1rem;color:var(--cobalt);opacity:.7;}
+
+.land{margin-block:var(--space-lg);padding:var(--space-md) var(--space-lg);background:var(--paper-soft);border-left:5px solid var(--cobalt);border-radius:0 var(--radius-md) var(--radius-md) 0;box-shadow:var(--shadow-soft);font-family:'Fraunces',serif;font-variation-settings:"opsz" 60,"wght" 460,"SOFT" 90;font-style:italic;font-size:var(--fs-lg);line-height:1.34;color:var(--ink);}
+.land em{color:var(--cobalt-deep);}
+
+.sources{margin-top:var(--space-2xl);padding-top:var(--space-md);border-top:1px dashed color-mix(in oklab,var(--ink) 20%,transparent);font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);line-height:1.75;color:var(--ink-soft);max-width:var(--measure-wide);margin-inline:auto;}
+.sources-label{font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:.5rem;display:block;}
+.sources em{font-family:'Newsreader',serif;}
+
+.sitenav{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-md);padding-bottom:var(--space-sm);border-bottom:1px solid var(--rule);}
+.sitenav-brand{font-family:'Fraunces',serif;font-variation-settings:"opsz" 40,"wght" 700,"SOFT" 30;font-size:var(--fs-md);letter-spacing:-.01em;color:var(--ink);text-decoration:none;}
+.sitenav-brand em{font-style:italic;color:var(--cobalt);font-variation-settings:"opsz" 40,"wght" 500,"SOFT" 100;}
+.sitenav-menu{position:relative;}
+.sitenav-menu > summary{list-style:none;cursor:pointer;user-select:none;font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);display:inline-flex;align-items:center;gap:.5rem;}
+.sitenav-menu > summary::-webkit-details-marker{display:none;}
+.sitenav-menu > summary::after{content:"\25BE";font-size:.78em;transition:transform .2s ease;}
+.sitenav-menu[open] > summary::after{transform:rotate(180deg);}
+.sitenav-panel{position:absolute;right:0;top:calc(100% + 0.7rem);z-index:30;width:max-content;max-width:calc(100vw - 2.5rem);display:flex;flex-direction:column;background:var(--paper-soft);border:1px solid var(--rule);border-radius:var(--radius-md);box-shadow:0 2px 4px rgba(19,64,224,.10),0 12px 32px rgba(0,26,128,.12);padding:var(--space-sm) var(--space-md);}
+.sitenav-panel a{font-family:'Newsreader',serif;font-size:var(--fs-base);color:var(--ink-soft);text-decoration:none;padding:.32rem 0;}
+.sitenav-panel a:hover{color:var(--cobalt-deep);}
+.sitenav-panel a.is-current{color:var(--cobalt);font-style:italic;}
+.sitenav-group{font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faded);margin:.7rem 0 .25rem;}
+.sitenav-group:first-child{margin-top:0;}
+.sitefoot{max-width:var(--measure-wide);margin-inline:auto;margin-top:var(--space-2xl);padding-top:var(--space-lg);border-top:1px solid var(--rule);}
+.sitefoot-top{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.4rem 1rem;margin-bottom:var(--space-lg);}
+.sitefoot-brand{font-family:'Fraunces',serif;font-variation-settings:"opsz" 48,"wght" 700,"SOFT" 30;font-size:var(--fs-lg);letter-spacing:-.015em;color:var(--ink);text-decoration:none;}
+.sitefoot-brand em{font-style:italic;color:var(--cobalt);font-variation-settings:"opsz" 48,"wght" 500,"SOFT" 100;}
+.sitefoot-tag{font-family:'Newsreader',serif;font-style:italic;font-size:var(--fs-base);color:var(--ink-faded);}
+.sitefoot-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-md) var(--space-lg);}
+.sitefoot-head{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);}
+.sitefoot-col a{display:block;font-family:'Newsreader',serif;font-size:var(--fs-base);color:var(--ink-soft);text-decoration:none;padding:.34rem 0;}
+.sitefoot-col a:hover{color:var(--cobalt-deep);text-decoration:underline;text-underline-offset:3px;}
+.sitefoot-col a.is-current{color:var(--cobalt);font-style:italic;}
+.sitefoot-note{margin-top:var(--space-lg);font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);letter-spacing:.04em;color:var(--ink-faded);}
+@media (max-width:34rem){.sitefoot-cols{grid-template-columns:1fr;}}
+@media print{.sitenav{display:none;}}
+
+.gadget{max-width:var(--measure-wide);margin:var(--space-lg) auto;background:var(--paper-soft);border:1px solid var(--rule);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);padding:clamp(1.25rem,3vw,2rem);font-family:'DM Sans',sans-serif;}
+.gadget-kicker{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt);margin-bottom:.75rem;}
+
+/* CYOA */
+.cyoa-intro{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);color:var(--ink-faded);line-height:1.65;margin:0 0 1.1rem;}
+.cyoa-prompt{font-family:'Fraunces',serif;font-variation-settings:"opsz" 32,"wght" 500,"SOFT" 60;font-size:var(--fs-md);color:var(--ink);margin:0 0 .85rem;}
+.cyoa-opt{display:block;width:100%;text-align:left;font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);line-height:1.45;padding:.8rem .95rem;margin:0 0 .55rem;border:1px solid var(--rule);border-radius:var(--radius-sm);background:var(--paper);color:var(--ink-soft);transition:border-color .15s,background .15s,transform .05s;}
+.cyoa-opt:hover{border-color:var(--cobalt-light);background:color-mix(in oklab,var(--cobalt) 4%,var(--paper));}
+.cyoa-opt:active{transform:scale(.995);}
+.cyoa-meter{margin:0 0 1.2rem;}
+.cyoa-meter .mlab{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:var(--fs-xs);color:var(--ink-faded);margin-bottom:.35rem;}
+.cyoa-meter .mtrack{height:6px;border-radius:3px;background:var(--paper-deep);overflow:hidden;}
+.cyoa-meter .mfill{display:block;height:100%;border-radius:3px;background:var(--cobalt);transition:width .4s ease;}
+.cyoa-title{font-family:'Fraunces',serif;font-variation-settings:"opsz" 48,"wght" 600,"SOFT" 50;font-size:var(--fs-lg);color:var(--ink);margin:0 0 1rem;line-height:1.15;}
+.cyoa-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:0 0 1.1rem;}
+.cyoa-panel{border-radius:var(--radius-sm);padding:.9rem 1.05rem;}
+.cyoa-panel.req{background:color-mix(in oklab,var(--cobalt) 6%,var(--paper));}
+.cyoa-panel.real{background:var(--paper-deep);}
+.cyoa-panel .plab{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:0 0 .55rem;}
+.cyoa-panel.req .plab{color:var(--cobalt-deep);}
+.cyoa-panel.real .plab{color:var(--ink-faded);}
+.cyoa-panel ul{margin:0;padding-left:1.05rem;font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);line-height:1.65;}
+.cyoa-panel.req ul{color:var(--cobalt-deep);}
+.cyoa-panel.real ul{color:var(--ink-soft);}
+.cyoa-panel li{margin-bottom:.4rem;}
+.cyoa-note{font-family:'Fraunces',serif;font-style:italic;font-variation-settings:"opsz" 36,"wght" 450,"SOFT" 80;font-size:var(--fs-base);color:var(--ink);line-height:1.5;margin:0 0 1.2rem;border-left:3px solid var(--cobalt);padding-left:.95rem;}
+.cyoa-acts{display:flex;gap:.6rem;flex-wrap:wrap;}
+.cyoa-btn{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);font-weight:600;padding:.55rem 1rem;border:1px solid var(--rule);border-radius:var(--radius-sm);background:var(--paper);color:var(--ink-soft);transition:border-color .15s,background .15s;}
+.cyoa-btn:hover{border-color:var(--cobalt);color:var(--cobalt-deep);}
+.cyoa-btn.primary{border-color:var(--cobalt);color:var(--cobalt-deep);background:color-mix(in oklab,var(--cobalt) 7%,var(--paper));}
+
+/* four conditions */
+.conds{max-width:var(--measure-wide);margin:var(--space-lg) auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+@media (max-width:34rem){.conds{grid-template-columns:1fr;}}
+.cond{background:var(--paper-soft);border:1px solid var(--rule);border-radius:var(--radius-md);padding:1.1rem 1.2rem;box-shadow:var(--shadow-soft);}
+.cond .cn{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);font-weight:700;color:var(--cobalt);}
+.cond h4{font-family:'Fraunces',serif;font-variation-settings:"opsz" 36,"wght" 600,"SOFT" 60;font-size:var(--fs-md);color:var(--ink);margin:.2rem 0 .4rem;}
+.cond p{font-family:'DM Sans',sans-serif;font-size:var(--fs-sm);color:var(--ink-faded);line-height:1.6;margin:0;}
+.cond p .fails{color:var(--amber-deep);font-weight:600;}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <nav class="sitenav" aria-label="Ground Truth dispatches">
+    <a class="sitenav-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+    <details class="sitenav-menu">
+      <summary>Dispatches</summary>
+      <div class="sitenav-panel">
+        <p class="sitenav-group">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
+        <a href="https://groundtruth.watch/write.html">Write to City Hall</a>
+        <a href="https://groundtruth.watch/record.html">The Monitoring Record</a>
+        <a href="https://groundtruth.watch/oaktree.html">The Oak Tree</a>
+        <a href="https://groundtruth.watch/scale.html">The Scale of It</a>
+        <a href="https://groundtruth.watch/review.html">The Environmental Review</a>
+        <a href="https://groundtruth.watch/history.html">The Site Dossier</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/covenant.html">The Covenant</a>
+        <p class="sitenav-group">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </details>
+  </nav>
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Dispatch No. 12</span>
+      <span>Cloverdale, Sonoma County</span>
+      <span>266 Acres &middot; Asti Road</span>
+    </div>
+    <h1 class="title">A covenant is only as good as the <em>memory</em> of it</h1>
+    <p class="subtitle">How an institutional control fails—not by breach, but by forgetting. Walk an ordinary day on the property, years after the case is closed.</p>
+    <div class="dateline">Ground Truth &middot; A thought experiment &middot; not guidance</div>
+  </header>
+
+  <section class="telling">
+    <p class="lead">When the Water Board closed the case in 2026, it ended the groundwater monitoring and destroyed the wells. One safeguard remained: a covenant recorded against the land in 2013, restricting what can be dug and built where residual contamination stays in the soil. A recorded deed restriction is a quiet thing. It does not announce itself. It waits in the chain of title for someone to read it. The question this page asks is simple, and it has nothing to do with poison: <em>does that document still do anything fifteen years later, when the people doing the digging have never heard of it?</em></p>
+
+    <p>Nobody plants a shrub by consulting a website, and this is not a manual. It's a thought experiment. The rules the workers below collide with are quoted from the covenant's own Soil Management Plan. Everything else—the workers, the years, the chores—is invented, to make a structural problem something you can walk through rather than argue about.</p>
+  </section>
+
+  <div class="gadget" aria-label="Interactive thought experiment">
+    <div class="gadget-kicker">A thought experiment — pick a day</div>
+    <div id="stage"></div>
+  </div>
+
+  <section class="telling">
+    <p>However you played it, the dig either passed straight through or tripped a rule with no one positioned to catch it. That isn't a flaw in any one scenario—it's the shape of the device. A control like this protects the ground only when four conditions all hold at the same moment:</p>
+  </section>
+
+  <div class="conds">
+    <div class="cond"><span class="cn">01</span><h4>Location</h4><p>The work falls inside the 5.35-acre Restricted Soil Area. <span class="fails">Fails when</span> the dig is the rail strip—the worst shallow residual sits in ground the covenant never burdened.</p></div>
+    <div class="cond"><span class="cn">02</span><h4>Knowledge</h4><p>Someone on site knows the covenant exists. <span class="fails">Fails when</span> the instruction reaching the worker is a work order that never mentions it.</p></div>
+    <div class="cond"><span class="cn">03</span><h4>Recognition</h4><p>They recognize the depth or suspect-soil trigger. <span class="fails">Fails when</span> routine work crosses three feet and no one clocks it as regulated.</p></div>
+    <div class="cond"><span class="cn">04</span><h4>A live counterparty</h4><p>A regulator is there to receive the notice. <span class="fails">Fails when</span>—as now—the case is closed, the file inactive, the wells gone.</p></div>
+  </div>
+
+  <section class="telling" id="whatkeeps">
+    <div class="land">It fails not by breach, but by forgetting. The contamination barely moves in fifteen years. The <em>memory</em> of it decays on a human schedule.</div>
+
+    <p>None of this is inevitable, and that's the useful part. Remediation practice has a standard answer for keeping a control alive across decades and owners: layer it. Tie the restriction to the local permit counter, so it surfaces when a trench is reviewed rather than waiting in a deed. Name a reviewer with a recurring duty to look. Write owner certification and successor-disclosure obligations into the instrument itself. Fund a counterparty instead of merely naming one. These are additive, city-side choices available at the permitting stage—the difference between a covenant that's <em>recorded</em> and one that's <em>kept</em>.</p>
+  </section>
+
+  <footer class="sources">
+    <span class="sources-label">Sources &amp; notes</span>
+    <p><em>This is a thought experiment for illustration.</em> It is not guidance for any actual excavation, and the workers, years, and tasks are invented. The regulatory triggers are drawn from the covenant's Soil Management Plan; the scenario around them is hypothetical.</p>
+    <p><em>The rules.</em> Covenant &amp; Environmental Restriction on Property, Sonoma County Recorder #2013088084 (recorded August 28, 2013), Attachment A — Soil Management Plan. Notification and depth triggers: §3.1; shallow vs. deep sampling: §3.3.1–3.3.2; off-site disposal thresholds: §3.4.1. The Restricted Soil Area (5.35 acres) and the railroad right-of-way left unexcavated in 1990: §2.2.2–2.3.</p>
+    <p><em>The closure.</em> NCRWQCB No Further Action letter, January 21, 2026, terminating the monitoring and reporting program (Order R1-2023-0028); the final monitoring wells were destroyed in December 2025. After closure the covenant is the sole surviving control.</p>
+    <p><em>The durability mechanisms</em> referenced in the closing reflect U.S. EPA and ITRC long-term-stewardship practice (institutional-control categories, implementation-and-assurance plans, periodic review, registry tracking). This describes regulatory practice generally; it is not legal advice, nor a statement of what the City of Cloverdale is required to do.</p>
+  </footer>
+
+  <footer class="sitefoot">
+    <div class="sitefoot-top">
+      <a class="sitefoot-brand" href="https://groundtruth.watch/index.html">Ground <em>Truth</em></a>
+      <span class="sitefoot-tag">A citizen&rsquo;s documentary record &middot; 266 acres south of Cloverdale</span>
+    </div>
+    <div class="sitefoot-cols">
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle.html">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling.html">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources.html">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments.html">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda.html">We Asked the Binder</a>
+        <a href="https://groundtruth.watch/write.html">Write to City Hall</a>
+        <a href="https://groundtruth.watch/record.html">The Monitoring Record</a>
+        <a href="https://groundtruth.watch/oaktree.html">The Oak Tree</a>
+        <a href="https://groundtruth.watch/scale.html">The Scale of It</a>
+        <a href="https://groundtruth.watch/review.html">The Environmental Review</a>
+        <a href="https://groundtruth.watch/history.html">The Site Dossier</a>
+        <a class="is-current" aria-current="page" href="https://groundtruth.watch/covenant.html">The Covenant</a>
+      </div>
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
+        <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot.html">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo.html">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust.html">About Construction Dust</a>
+      </div>
+    </div>
+    <p class="sitefoot-note">Public records only. Distribute freely; correct generously.</p>
+  </footer>
+
+</main>
+
+<script>
+var nodes={
+ start:{kind:'choose',intro:'Same property, after the Water Board closed the case in 2026. The monitoring wells are gone; the covenant is the only safeguard left. Pick a worker and an ordinary task.',
+  options:[
+   {label:'2034 · Maya, grounds crew — planting screening shrubs along the new hotel drive',next:'maya'},
+   {label:'2038 · Dell, maintenance — augering footings for an event pavilion',next:'dell'},
+   {label:'2041 · Priya, grounds manager — laying a new irrigation main',next:'priya'}
+  ]},
+ maya:{kind:'choose',year:2034,prompt:'What goes in the ground?',
+  options:[
+   {label:'1-gallon lantana — a 12-inch hole',next:'maya_shallow'},
+   {label:'15-gallon toyon — a 3½-foot rootball',next:'maya_deep'}
+  ]},
+ maya_shallow:{kind:'end',year:2034,title:'The trip-wire never trips',
+  require:['Nothing. Digging three feet or less, with no staining or odor, needs no notice and no test.'],
+  reality:['Maya plants the lantana and moves on. This is the covenant working exactly as designed — shallow work is meant to pass straight through.'],
+  note:'The device is silent here on purpose. The question is what happens when the task is just a little bigger.'},
+ maya_deep:{kind:'end',year:2034,title:'A shrub crosses the three-foot line',
+  require:['Notify the Water Board in writing, 30 days before digging.','Wait for approval before excavating.','Test the soil for PCP and arsenic.'],
+  reality:['The toyon needs a hole deeper than three feet, so the plan\u2019s depth trigger is met. But the covenant binds the property owner — and the instruction reaching Maya is a landscaping ticket that says \u201cscreen the drive.\u201d She has never heard of a covenant. She digs.'],
+  note:'The soil at that depth may well be clean — that isn\u2019t the point. The rule is a blanket depth trigger, and it fired with no one there to catch it.'},
+ dell:{kind:'choose',year:2038,prompt:'Where do the pavilion footings go?',
+  options:[
+   {label:'Along the old railroad alignment',next:'dell_rail'},
+   {label:'Inside the former wood-treatment area',next:'dell_rsa'}
+  ]},
+ dell_rail:{kind:'end',year:2038,title:'The one gap the covenant leaves open',
+  require:['On paper, nothing. The 80-foot rail strip was never made \u201cBurdened Property.\u201d'],
+  reality:['Yet the 1990 cleanup left PCP in that strip — 2 to 55 mg/kg — unexcavated, because crews couldn\u2019t dig safely beside the tracks. Dell augers three-foot holes into the one patch of shallow-accessible residual on the property, and it sits entirely outside the instrument meant to manage it.'],
+  note:'A Dell who knew the covenant cold would still find this spot isn\u2019t covered by it.'},
+ dell_rsa:{kind:'end',year:2038,title:'Notice required, nobody home',
+  require:['30-day written notice to the Water Board, approval, and testing — the holes are deeper than three feet, inside the Restricted Soil Area.'],
+  reality:['Dell is a subcontractor, two handoffs removed from whoever holds the title. The covenant still names the Water Board — but the case closed in 2026, the wells are destroyed, and no active file is waiting for the call. The notice has nowhere live to land.'],
+  note:'The plan assumes a regulator on the other end of the line. Closing the case hung up that line.'},
+ priya:{kind:'choose',year:2041,prompt:'Priya runs the grounds. Before the trench goes in \u2014',
+  options:[
+   {label:'Check the site file for any restrictions',next:'priya_check'},
+   {label:'It\u2019s just irrigation — proceed',next:'priya_go'}
+  ]},
+ priya_check:{kind:'end',year:2041,title:'She looks. Is it there to find?',
+  require:['If the covenant ever reached her operating file, she finds it and follows the plan: notice, approval, test.'],
+  reality:['It\u2019s recorded at the County under a 2013 document number. Whether it\u2019s in the binder Priya inherited depends on an unbroken chain through every ownership change and every manager before her. The recorder\u2019s copy never moves. The working knowledge has to be carried, hand to hand, for fifteen years.'],
+  note:'Recording protects the document. It does not protect anyone\u2019s memory of it.'},
+ priya_go:{kind:'end',year:2041,title:'The keeper of site knowledge didn\u2019t know',
+  require:['The trench runs three to four feet through the Restricted Soil Area — full notice, approval, and testing.'],
+  reality:['Priya is the single person on the whole property most likely to hold this knowledge, and the safeguard still depends on her having been handed it. After the case closed and the property turned over, that\u2019s a coin flip — and the coin is someone\u2019s memory.'],
+  note:'An institutional control is only as durable as the least-briefed person holding a shovel.'}
+};
+
+function aware(y){var m={2034:55,2038:35,2041:20};return m[y];}
+function awareBand(p){if(p>=70)return['Strong','var(--cobalt-deep)'];if(p>=40)return['Fading','var(--amber-deep)'];return['Faint','var(--ink-faded)'];}
+
+var stage=document.getElementById('stage');
+
+function meter(year){
+  if(!year)return '';
+  var p=aware(year),b=awareBand(p);
+  return '<div class="cyoa-meter"><div class="mlab"><span>'+year+' \u00b7 covenant awareness on site</span><span style="color:'+b[1]+';font-weight:700;">'+b[0]+'</span></div>'
+    +'<div class="mtrack"><span class="mfill" style="width:'+p+'%;"></span></div></div>';
+}
+
+function go(id){render(id);stage.scrollIntoView({behavior:'smooth',block:'nearest'});}
+
+function render(id){
+  var n=nodes[id];
+  if(n.kind==='choose'){
+    var h=meter(n.year);
+    if(n.intro)h+='<p class="cyoa-intro">'+n.intro+'</p>';
+    if(n.prompt)h+='<p class="cyoa-prompt">'+n.prompt+'</p>';
+    n.options.forEach(function(o){h+='<button class="cyoa-opt" data-n="'+o.next+'">'+o.label+'</button>';});
+    stage.innerHTML=h;
+    stage.querySelectorAll('.cyoa-opt').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-n'));});});
+  } else {
+    var req=n.require.map(function(x){return '<li>'+x+'</li>';}).join('');
+    var rea=n.reality.map(function(x){return '<li>'+x+'</li>';}).join('');
+    var h=meter(n.year);
+    h+='<p class="cyoa-title">'+n.title+'</p>';
+    h+='<div class="cyoa-cols">';
+    h+='<div class="cyoa-panel req"><p class="plab">What the covenant requires</p><ul>'+req+'</ul></div>';
+    h+='<div class="cyoa-panel real"><p class="plab">What actually happens</p><ul>'+rea+'</ul></div>';
+    h+='</div>';
+    h+='<p class="cyoa-note">'+n.note+'</p>';
+    h+='<div class="cyoa-acts"><button class="cyoa-btn primary" id="cyoa-restart">Try another day</button>'
+      +'<button class="cyoa-btn" id="cyoa-jump">What would keep a control alive?</button></div>';
+    stage.innerHTML=h;
+    document.getElementById('cyoa-restart').addEventListener('click',function(){render('start');stage.scrollIntoView({behavior:'smooth',block:'nearest'});});
+    document.getElementById('cyoa-jump').addEventListener('click',function(){document.getElementById('whatkeeps').scrollIntoView({behavior:'smooth',block:'start'});});
+  }
+}
+render('start');
+</script>
+</body>
+</html>
