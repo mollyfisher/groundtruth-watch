@@ -319,10 +319,6 @@
     {
       "@type": "GovernmentOrganization",
       "name": "North Coast Regional Water Quality Control Board"
-    },
-    {
-      "@type": "LegalDocument",
-      "name": "SWRCB Petition A-2933"
     }
   ],
   "mentions": [
@@ -382,6 +378,8 @@
         <a class="is-current" aria-current="page" href="https://groundtruth.watch/scale.html">The Scale of It</a>
         <a href="https://groundtruth.watch/review.html">The Environmental Review</a>
         <a href="https://groundtruth.watch/history.html">The Site Dossier</a>
+        <a href="https://groundtruth.watch/forgetting.html">The Covenant</a>
+        <a href="https://groundtruth.watch/threshold.html">The Risk Threshold</a>
         <p class="sitenav-group">II &middot; On the ground</p>
         <a href="https://groundtruth.watch/destroyed.html">The Wells</a>
         <a href="https://groundtruth.watch/viewing.html">A View from Above</a>
@@ -525,6 +523,91 @@
         </table>
       </div>
 
+
+      <!-- ── The bead count · a counting tray ─────────────────────────── -->
+      <section class="beadsec" aria-label="The bead count — units laid out as counting material">
+        <h2 class="bead-h">The bead count</h2>
+        <p class="bead-cap">Numbers in a table stay abstract. Schoolchildren learn quantity by laying it
+        out in bead material&mdash;a square of one hundred, a bar of ten, a single unit bead. The same
+        exercise works on a planning record. Tap a project and count its homes out on the tray.</p>
+
+        <div class="bead-picker" role="group" aria-label="Choose a quantity to lay out">
+          <button class="bead-btn is-on" data-n="605" data-tag="proposed" aria-pressed="true">Esmeralda <span>605 homes</span></button>
+          <button class="bead-btn" data-n="170" data-tag="adopted" aria-pressed="false">Alexander Valley Resort <span>170 homes</span></button>
+          <button class="bead-btn" data-n="304" data-tag="adopted" aria-pressed="false">Baumgardner Ranch <span>304 homes</span></button>
+          <button class="bead-btn" data-n="75" data-tag="plan" aria-pressed="false">General Plan target <span>75 homes / yr</span></button>
+        </div>
+
+        <div class="bead-tray" id="beadTray" aria-live="polite"></div>
+        <p class="bead-read" id="beadRead"></p>
+        <p class="bead-note">Bead material after the Montessori golden beads: a 10&times;10 square is one
+        hundred, a bar is ten, a bead is one. Unit counts as approved or proposed in the table above; the
+        General Plan figure is the City&rsquo;s growth-policy target of 75 units per year.</p>
+      </section>
+
+      <style>
+        .beadsec{margin:var(--space-lg) 0;padding:var(--space-md) var(--space-md) var(--space-sm);
+          background:var(--paper-deep);border:1px solid var(--rule);border-radius:var(--radius-md)}
+        .bead-h{font-family:'Fraunces',serif;font-weight:560;font-size:var(--fs-lg);margin:0 0 .35rem;color:var(--ink)}
+        .bead-cap{font-family:'Newsreader',serif;font-size:var(--fs-sm);color:var(--ink-faded);max-width:var(--measure);margin:0 0 var(--space-sm)}
+        .bead-picker{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:var(--space-sm)}
+        .bead-btn{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);letter-spacing:.02em;
+          padding:.45rem .8rem;border:1px solid var(--rule);border-radius:999px;background:var(--shell);
+          color:var(--ink-soft);cursor:pointer;transition:border-color .15s,background .15s}
+        .bead-btn span{display:block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-faded)}
+        .bead-btn:hover{border-color:var(--cobalt)}
+        .bead-btn:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+        .bead-btn.is-on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+        .bead-btn.is-on span{color:var(--rule)}
+        .bead-tray{min-height:120px;padding:var(--space-sm);background:var(--shell);
+          border:1px solid var(--rule);border-radius:var(--radius-sm);
+          box-shadow:inset 0 1px 4px rgba(10,10,20,.05);
+          display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px}
+        .bead-hundred{display:grid;grid-template-columns:repeat(10,7px);grid-auto-rows:7px;gap:1px}
+        .bead-ten{display:grid;grid-auto-rows:7px;gap:1px}
+        .bead-units{display:flex;gap:3px}
+        .bead{width:7px;height:7px;border-radius:50%;background:var(--amber);
+          box-shadow:inset -1px -1px 1px rgba(125,74,0,.55), inset 1px 1px 1px rgba(255,236,200,.7)}
+        @media (prefers-reduced-motion: no-preference){
+          .bead-piece{animation:beadIn .3s ease-out backwards}
+          @keyframes beadIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+        }
+        .bead-read{font-family:'JetBrains Mono',monospace;font-size:var(--fs-sm);color:var(--ink-soft);margin:.6rem 0 0}
+        .bead-note{font-family:'Newsreader',serif;font-style:italic;font-size:var(--fs-xs);color:var(--ink-faded);max-width:var(--measure);margin:.5rem 0 0}
+        @media (max-width:560px){.bead-tray{gap:10px}}
+      </style>
+      <script>
+      (function(){
+        var tray=document.getElementById('beadTray'),read=document.getElementById('beadRead');
+        function piece(cls,count){
+          var d=document.createElement('div');d.className=cls+' bead-piece';
+          for(var i=0;i<count;i++){var b=document.createElement('span');b.className='bead';d.appendChild(b);}
+          return d;
+        }
+        function lay(n){
+          tray.innerHTML='';
+          var h=Math.floor(n/100), t=Math.floor((n%100)/10), u=n%10, idx=0;
+          for(var i=0;i<h;i++){var p=piece('bead-hundred',100);p.style.animationDelay=(idx++*60)+'ms';tray.appendChild(p);}
+          for(var j=0;j<t;j++){var q=piece('bead-ten',10);q.style.animationDelay=(idx++*60)+'ms';tray.appendChild(q);}
+          if(u>0){var r=piece('bead-units',u);r.style.animationDelay=(idx++*60)+'ms';tray.appendChild(r);}
+          var parts=[];
+          if(h)parts.push(h+(h>1?' hundred-squares':' hundred-square'));
+          if(t)parts.push(t+(t>1?' ten-bars':' ten-bar'));
+          if(u)parts.push(u+(u>1?' unit beads':' unit bead'));
+          read.textContent=n+' = '+(parts.join(' + ')||'0');
+        }
+        var btns=document.querySelectorAll('.bead-btn');
+        btns.forEach(function(b){
+          b.addEventListener('click',function(){
+            btns.forEach(function(x){x.classList.remove('is-on');x.setAttribute('aria-pressed','false');});
+            b.classList.add('is-on');b.setAttribute('aria-pressed','true');
+            lay(parseInt(b.dataset.n,10));
+          });
+        });
+        lay(605);
+      })();
+      </script>
+
       <p class="src">Sources: CEQAnet SCH&nbsp;#2003072142 (AVR/Esmeralda); Draft Esmeralda Specific Plan, Appendix B; City of Cloverdale Resolution&nbsp;085-2018; CEQAnet SCH&nbsp;#2020029033 (Baumgardner Ranch); CEQAnet SCH&nbsp;#2005042132 (Clover Springs Phase 3B); CEQAnet SCH&nbsp;#2003082078 (Sunrise Hills); CEQAnet SCH&nbsp;#2004062025 (Creekside); CEQAnet SCH&nbsp;#2003042014 (Cottage Phase IV). Clover Springs Del Webb unit and acreage figures from 55places.com; primary planning records not confirmed. &ldquo;Developed acres&rdquo; for AVR/Esmeralda are approximate, excluding the 93.4-ac OSC parcel per Esmeralda Specific Plan Appendix B.</p>
 
       <div class="sidebar-note">
@@ -564,6 +647,8 @@
         <a class="is-current" aria-current="page" href="https://groundtruth.watch/scale.html">The Scale of It</a>
         <a href="https://groundtruth.watch/review.html">The Environmental Review</a>
         <a href="https://groundtruth.watch/history.html">The Site Dossier</a>
+        <a href="https://groundtruth.watch/forgetting.html">The Covenant</a>
+        <a href="https://groundtruth.watch/threshold.html">The Risk Threshold</a>
       </div>
       <div class="sitefoot-col">
         <p class="sitefoot-head">II &middot; On the ground</p>
