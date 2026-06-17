@@ -84,6 +84,11 @@ strong{font-weight:600;color:var(--ink)}
 .facts .big{color:var(--amber-deep);font-weight:700}
 @keyframes learn{from{opacity:0;transform:translateX(-7px)}to{opacity:1;transform:none}}
 .facts li.just-learned{animation:learn .5s cubic-bezier(.2,.7,.3,1)}
+.claim{font-size:var(--fs-sm);line-height:1.5;color:var(--ink-soft);font-family:'DM Sans',sans-serif}
+.claim b{color:var(--amber-deep);font-weight:700}
+.claim[hidden]{display:none}
+.casefile.has-facts .claim{padding-bottom:.6rem;margin-bottom:.6rem;
+  border-bottom:1px dashed color-mix(in oklab,var(--amber) 50%,var(--rule))}
 
 /* progress */
 .progress{display:none;gap:.4rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
@@ -228,6 +233,7 @@ strong{font-weight:600;color:var(--ink)}
 
   <section class="casefile" id="casefile">
     <div class="casefile-h">What you know</div>
+    <div class="claim" id="claim" hidden>The city&rsquo;s <b>CEQA consultant</b> has concluded an addendum will do &mdash; no new study needed.</div>
     <ul class="facts" id="facts"></ul>
   </section>
 
@@ -276,14 +282,14 @@ const CARDS = {
     "The city still has to decide whether this project is adequately covered by the old study. Pointing at another agency's letter isn't analysis."
   ]},
   E:{sec:"§ 15164", t:"The addendum still has to hold up", b:[
-    "An addendum \u2014 the brief update \u2014 skips public comment, but it isn't a rubber stamp. Section 15164 requires the city to explain, in writing and on substantial evidence, why no new round is needed.",
-    "The decision-makers must weigh that explanation before they vote. If a real §15162 trigger exists, an addendum is the wrong document \u2014 and a court can say so."
+    "An addendum \u2014 the brief update \u2014 skips public comment, but it isn't a rubber stamp. Section 15164 requires a written explanation, resting on substantial evidence, for why no new round is needed. That explanation is typically the CEQA consultant's work, but the consultant doesn't decide anything.",
+    "The council is the only body that decides. It must weigh that explanation before it votes \u2014 and signing the consultant's conclusion without a record under it isn't weighing it. If a real §15162 trigger exists, an addendum is the wrong document, and a court can say so."
   ]}
 };
 
 /* ---------------- shared facts per node ---------------- */
 const FACTS = {
-  A:`<p>The likely path here is an <strong>addendum</strong> \u2014 a short update to the certified study. By law it doesn't go out for public comment. It's quick, and it's allowed \u2014 as long as nothing has changed enough to meet one of the §15162 triggers since the EIR was certified.</p>`,
+  A:`<p>The consultant's draft says the same thing the city wants to hear: the likely path is an <strong>addendum</strong> \u2014 a short update to the certified study. By law it doesn't go out for public comment. It's quick, and it's allowed \u2014 as long as nothing has changed enough to meet one of the §15162 triggers since the EIR was certified.</p>`,
   B:`<p>Here's the new test result for Compound&nbsp;X in the groundwater.</p>
      <div class="readout">
        <div class="row"><span class="lab">Safe limit</span><span class="v">1</span></div>
@@ -306,7 +312,7 @@ const FACTS = {
 /* ---------------- roles ---------------- */
 const ROLES = {
   cm:{name:"City Manager", who:"City Manager", color:"var(--cobalt)",
-      stake:"You write the city's recommendation. You want this done fast \u2014 and done right, so a judge can't undo it."},
+      stake:"You write the city's recommendation \u2014 you don't cast the vote; the council does. You want this fast, and built so the vote you tee up survives a judge."},
   cc:{name:"Councilmember", who:"Councilmember", color:"var(--slate)",
       stake:"You have to vote out loud. Then explain that vote to your neighbors."},
   dev:{name:"The Developer", who:"Developer \u00b7 Eutopia", color:"var(--azure)",
@@ -453,18 +459,18 @@ const ENDING_SPINE = {
 
 const ENDING_FLAVOR = {
   fragile:{
-    cm:"You got the win: the approval held, the project moved, the council was pleased. The bill, if it comes, comes years later and lands on someone else's desk \u2014 but the call that closed the public's one chance to look was yours.",
-    cc:"Your \u201cyes\u201d aged quietly \u2014 until it surfaced in a neighbor's water sample. You're not in a courtroom. You're at a town hall, holding a vote you can't take back, explaining why the one moment to look got waved through.",
+    cm:"You never cast a vote \u2014 you wrote the recommendation, and the council adopted it. The approval held, the project moved. The bill, if it comes, lands years later on someone else's desk. You didn't make the call. But you wrote the record the council leaned on to make it, and that record is where the public's one chance to look quietly closed.",
+    cc:"Your \u201cyes\u201d aged quietly \u2014 until it surfaced in a neighbor's water sample. Staff recommended, the consultant signed off, but the vote \u2014 the only act that actually decided this \u2014 was yours. You're not in a courtroom. You're at a town hall, holding a vote you can't take back, explaining why the one moment to look got waved through.",
     dev:"You built \u2014 and most of the time, that's the whole story. That's why everyone takes this path. But you're carrying latent exposure now: the covenant, future testing, the cleanup agency, even toxic-tort liability \u2014 the kind of risk a clean record and a real investigation would have insulated you from. The cheap entitlement can quietly become the expensive asset."
   },
   overcorrect:{
-    cm:"You took no risk, which was its own risk: public time and money poured into review the law didn't require. Defensible isn't the same as proportionate \u2014 and an agency can be second-guessed for demanding too much as well as too little.",
-    cc:"You can tell constituents you were thorough. You can't tell them you were necessary. A project that dies of caution is still dead, and someone tallied the housing and the jobs that went with it.",
+    cm:"You steered the council to the safe answer, which carried its own cost: public time and money poured into review the law didn't require. Defensible isn't the same as proportionate \u2014 and an agency can be second-guessed for demanding too much as well as too little.",
+    cc:"You can tell constituents you were thorough. You can't tell them you were necessary. Staff and the consultant could only advise; the vote that ordered the whole costly detour was yours alone. A project that dies of caution is still dead, and someone tallied the housing and the jobs that went with it.",
     dev:"You erased every doubt and most of your return. A subsequent EIR confirmed, slowly and expensively, what the old one already held. Certainty is real value \u2014 you just paid retail for it."
   },
   threaded:{
     cm:"You handed the council substantial evidence before you handed them a recommendation. It cost a season, not a year \u2014 and it's the rare staff work that's both fast enough to matter and sound enough to survive. That's the whole job.",
-    cc:"Your motion to continue wasn't popular \u2014 the developer grumbled, an editorial called it a stall. It's also the only vote you can still defend once everyone's read the file. The safe vote and the sound vote turned out to be the same vote.",
+    cc:"Your motion to continue wasn't popular \u2014 the developer grumbled, an editorial called it a stall. Staff and the consultant handed you a conclusion; casting the vote was yours alone, and you held it open until the record could carry it. It's the only vote you can still defend once everyone's read the file. The safe vote and the sound vote turned out to be the same vote.",
     dev:"You spent on evidence instead of speed \u2014 and evidence got you to a shovel faster, with an entitlement that doesn't unravel. You couldn't control what the sampling said, only whether the record could stand on it. It can."
   }
 };
@@ -499,6 +505,7 @@ const foot=document.getElementById("foot");
 const notesBtn=document.getElementById("notesBtn");
 const restartBtn=document.getElementById("restartBtn");
 const factsEl=document.getElementById("facts");
+const claimEl=document.getElementById("claim");
 
 /* facts the player has learned, in story order; revealed one node at a time */
 const FACT_ITEMS=[
@@ -508,11 +515,18 @@ const FACT_ITEMS=[
 ];
 const FACTS_AT={A:0,B:1,C:2,D:3,E:3}; // how much is known on entering each node
 
-function renderCaseFile(count,prev){
+function renderCaseFile(count,prev,inGame){
   prev=prev||0;
-  if(count<=0){ casefile.classList.remove("show"); factsEl.innerHTML=""; return; }
+  claimEl.hidden=!inGame;
+  if(count<=0){
+    factsEl.innerHTML="";
+    casefile.classList.remove("has-facts");
+    casefile.classList.toggle("show", !!inGame);
+    return;
+  }
   factsEl.innerHTML=FACT_ITEMS.slice(0,count)
     .map((h,i)=>`<li${i>=prev?' class="just-learned"':''}>${h}</li>`).join("");
+  casefile.classList.add("has-facts");
   casefile.classList.add("show");
 }
 
@@ -539,7 +553,7 @@ function renderProgress(activeIndex){
 function renderIntro(){
   state=null;
   document.documentElement.style.setProperty("--role","var(--cobalt)");
-  renderCaseFile(0,0);
+  renderCaseFile(0,0,false);
   progress.classList.remove("show");
   notesBtn.hidden=false; restartBtn.hidden=true; foot.hidden=false;
   stage.innerHTML=`
@@ -560,6 +574,8 @@ function renderIntro(){
         <div class="gloss"><b>EIR</b> \u2014 Environmental Impact Report: the study a city certifies before a big project, laying out its likely environmental harm and how to limit it. It happens under <b>CEQA</b>, California's environmental review law. Once an EIR is certified, it's meant to be final.</div>
         <p>That study already knew about the contamination \u2014 call it <strong>Compound&nbsp;X</strong>. The remedy on file: lock down the worst ground with a recorded <strong>covenant</strong> (a permanent deed restriction on what can be built there), and let the rest fade on its own over years while crews monitor it.</p>
         <p>Now a new developer wants to build Eutopia on that <em>same approval</em>, rather than start the review over.</p>
+        <p>To do that, the city leans on its <strong>CEQA consultant</strong> \u2014 an outside firm it pays to study the project and write the verdict on whether the old approval still covers it. The consultant's draft is already in: an addendum will do, it says. No new study needed.</p>
+        <div class="gloss"><b>The CEQA consultant</b> \u2014 the city doesn't write these reviews itself. It hires a firm to do the technical work and render the opinion on what passes muster under CEQA. The city and its council then rely on that opinion \u2014 which is only ever as good as the record beneath it.</div>
         <p>It's January 2026.</p>
       </div>
       ${statuteCard("intro")}
@@ -587,7 +603,7 @@ function go(to){ if(to.startsWith("end:")){ renderEnding(to.slice(4)); return; }
 function renderNode(node){
   const role=state.role, r=ROLES[role];
   renderProgress(NODES.indexOf(node));
-  const fc=FACTS_AT[node]; renderCaseFile(fc,state.factsShown); state.factsShown=fc;
+  const fc=FACTS_AT[node]; renderCaseFile(fc,state.factsShown,true); state.factsShown=fc;
   const choices=CHOICES[role][node];
   stage.innerHTML=`
     <div class="scene">
@@ -608,7 +624,7 @@ function renderNode(node){
 function renderEnding(key){
   const role=state.role, r=ROLES[role];
   renderProgress(NODES.length);
-  renderCaseFile(3,state.factsShown); state.factsShown=3;
+  renderCaseFile(3,state.factsShown,true); state.factsShown=3;
   const spine=ENDING_SPINE[key](state.flags);
   const t=ENDING_TITLE[key];
   stage.innerHTML=`
