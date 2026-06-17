@@ -17,6 +17,7 @@
   --slate:#2a4378; --slate-deep:#0f1f4a;
   --azure:#1860c4; --azure-deep:#0a4090;
   --rule:#c8cde0;
+  --amber:#c8932e; --amber-deep:#8a5d12; --cream:#fdf6e9; --cream-soft:#fffaf0;
   --role:var(--cobalt);
   --fs-xs:clamp(.74rem, .71rem + .14vw, .82rem);
   --fs-sm:clamp(.9rem, .86rem + .18vw, 1rem);
@@ -67,18 +68,20 @@ strong{font-weight:600;color:var(--ink)}
 .minibtn:hover{border-color:var(--cobalt);color:var(--cobalt)}
 
 /* case file */
-.casefile{display:none;border:1px solid var(--rule);border-radius:var(--radius-md);
-  background:linear-gradient(135deg,color-mix(in oklab,var(--slate) 6%,var(--paper-soft)),var(--paper-soft));
-  padding:.8rem 1rem;margin-bottom:1.4rem;box-shadow:var(--shadow-soft)}
+.casefile{display:none;border:1px solid color-mix(in oklab,var(--amber) 35%,var(--rule));
+  border-left:4px solid var(--amber);border-radius:var(--radius-md);
+  background:linear-gradient(135deg,var(--cream),var(--cream-soft));
+  padding:.85rem 1.05rem;margin-bottom:1.4rem;
+  box-shadow:0 1px 2px rgba(10,10,20,.06),0 8px 24px rgba(138,93,18,.13)}
 .casefile.show{display:block}
 .casefile-h{font-family:'DM Sans',sans-serif;font-size:var(--fs-xs);font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--cobalt);margin-bottom:.55rem}
+  text-transform:uppercase;color:var(--amber-deep);margin-bottom:.55rem}
 .facts{list-style:disc;padding-left:1.6rem;margin:0}
 .facts li{font-size:var(--fs-sm);line-height:1.5;color:var(--ink-soft);margin-bottom:.45rem;padding-left:.3rem}
 .facts li:last-child{margin-bottom:0}
-.facts li::marker{color:var(--cobalt)}
-.facts li b{color:var(--cobalt-deep);font-weight:700}
-.facts .big{color:var(--cobalt);font-weight:700}
+.facts li::marker{color:var(--amber)}
+.facts li b{color:var(--amber-deep);font-weight:700}
+.facts .big{color:var(--amber-deep);font-weight:700}
 @keyframes learn{from{opacity:0;transform:translateX(-7px)}to{opacity:1;transform:none}}
 .facts li.just-learned{animation:learn .5s cubic-bezier(.2,.7,.3,1)}
 
@@ -240,8 +243,8 @@ strong{font-weight:600;color:var(--ink)}
 
 <div class="overlay" id="overlay">
   <div class="sheet" role="dialog" aria-modal="true" aria-label="The rules">
-    <h3>The rule, plainly</h3>
-    <p class="sub">Six short ideas. Whatever role you pick, these don't change.</p>
+    <h3>The rules, plainly</h3>
+    <p class="sub">One rule decides it &mdash; <b>§15162</b>, and it&rsquo;s a tangle: it sets the high bar for forcing a new study. A second, <b>§15164</b>, comes into play once you&rsquo;re past that bar &mdash; it governs the short update you may do instead. Whatever role you pick, these don&rsquo;t change.</p>
     <div id="allnotes"></div>
     <button class="minibtn sheet-close" id="closeNotes">Close</button>
   </div>
@@ -542,7 +545,7 @@ function renderIntro(){
   stage.innerHTML=`
     <div class="scene">
       <div class="kicker">A short game about one real rule</div>
-      <h1>Everybody wants to build here. Something's <em>buried</em> in the ground.</h1>
+      <h1>The <em>Trigger</em></h1>
       <div class="telling">
         <p class="big-line">Cibola is beautiful \u2014 river, hills, sun. The kind of land people dream of turning into something perfect.</p>
         <p>A developer means to. A resort called <strong>Eutopia</strong>.</p>
