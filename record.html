@@ -398,37 +398,6 @@
 @media print { .sitenav { display: none; } .sitefoot { box-shadow: none; } }
 
 </style>
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-poEpyurL6cImhwUj3jfc8.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
-<!-- OpenReplay Tracking Code for my first project -->
-<script>
-  var initOpts = {
-    projectKey: "rUKheaVZkDhfPNFQRxVG",
-    // 0 - plain, 1 - obscured, 2 - ignored
-    defaultInputMode: 1,
-    obscureTextNumbers: true,
-    obscureTextEmails: true,
-  };
-  var startOpts = { userID: "" };
-  (function(A,s,a,y,e,r){
-    r=window.OpenReplay=[e,r,y,[s-1, e]];
-    s=document.createElement('script');s.src=A;s.async=!a;
-    document.getElementsByTagName('head')[0].appendChild(s);
-    r.start=function(v){r.push([0])};
-    r.stop=function(v){r.push([1])};
-    r.setUserID=function(id){r.push([2,id])};
-    r.setUserAnonymousID=function(id){r.push([3,id])};
-    r.setMetadata=function(k,v){r.push([4,k,v])};
-    r.event=function(k,p,i){r.push([5,k,p,i])};
-    r.issue=function(k,p){r.push([6,k,p])};
-    r.isActive=function(){return false};
-    r.getSessionToken=function(){};
-  })("//static.openreplay.com/latest/openreplay.js",1,0,initOpts,startOpts);
-</script>
 <style>
 /* supplemental tokens not in house sheet */
 :root{--amber:#b9770f;--amber-deep:#7d4a00;--amber-light:#e0a64a;--grid:#e3e7f4;--shell:#ffffff;}
@@ -577,7 +546,7 @@
       }
     ],
     "isBasedOn": "https://geotracker.waterboards.ca.gov/profile_report.asp?global_id=T0609793185",
-    "license" : "https://creativecommons.org/licenses/by/4.0"
+    "license": "https://creativecommons.org/licenses/by/4.0/"
   }
 ]</script>
 </head>
@@ -752,6 +721,7 @@
       <li><b>Dioxin/furan analysis:</b> EPA Method&nbsp;SW8290 (high-resolution), wells MW-25 and MW-27, May &amp; November 2008, within the GeoTracker chemistry file. TEQ computed with WHO-2005 toxic-equivalency factors, non-detects counted as zero.</li>
       <li><b>Comparison sites (EPA Superfund):</b> <a href="https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/bd170e27d45f120a852572ed0064292a.html">Escambia Wood Treating, Pensacola</a>; <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0602570">Koppers / Carver Terrace, Texarkana</a>; <a href="https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.cleanup&amp;id=0902061">SCE Visalia Pole Yard</a>.</li>
     </ul>
+    <p class="src"><b>Reuse:</b> the compiled monitoring data on this page (the <a href="https://groundtruth.watch/monitoring_pcp_arsenic_cs.csv">CSV</a>) is drawn from public state records and released under <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 (CC&nbsp;BY&nbsp;4.0)</a> — free to share and adapt with credit to Ground Truth. The underlying GeoTracker records are public documents in their own right.</p>
     <span class="sig">— Ground Truth Watch &middot; Cloverdale</span>
   </footer>
 
