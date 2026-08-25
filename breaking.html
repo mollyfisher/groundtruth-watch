@@ -147,9 +147,14 @@
   .slider.ext input[type=range]{accent-color:var(--red)}
   .slider-desc{font-family:'Newsreader',serif; font-style:italic; font-size:var(--fs-sm); line-height:1.45; color:var(--ink-faded)}
 
-  .legend{display:flex; gap:1.25rem; padding:0.6rem 1.1rem 0; flex-wrap:wrap}
-  .legend span{display:flex; align-items:center; gap:0.4rem; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); color:var(--ink-faded)}
-  .legend .sw{width:20px; height:3px; display:inline-block}
+  .chartcap{display:flex; gap:0.75rem 1.1rem; align-items:baseline; flex-wrap:wrap; padding:0.6rem 1.1rem 0}
+  .fillkey{display:inline-flex; align-items:center; gap:0.4rem; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); color:var(--ink-faded)}
+  .fillkey .sw{width:14px; height:14px; border-radius:3px; display:inline-block}
+  .sw-loss{background:color-mix(in oklab, var(--red) 22%, transparent); border:1px solid color-mix(in oklab, var(--red) 45%, transparent)}
+  .sw-profit{background:color-mix(in oklab, var(--green) 20%, transparent); border:1px solid color-mix(in oklab, var(--green) 45%, transparent)}
+  .capnote{font-family:'Newsreader',serif; font-style:italic; font-size:var(--fs-xs); line-height:1.5; color:var(--ink-faded); flex:1 1 16rem; min-width:12rem}
+  .capnote code{font-style:normal}
+  .capnote a{color:var(--clay-deep); text-decoration:underline; text-decoration-color:color-mix(in oklab, var(--clay) 40%, transparent); text-underline-offset:2px}
 
   .method{max-width:var(--measure-wide); margin:var(--space-md) auto 0; padding-top:var(--space-sm); border-top:1px dashed color-mix(in oklab, var(--ink) 20%, transparent); font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); line-height:1.7; color:var(--ink-soft)}
   .method-label{font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay); margin-bottom:0.5rem; display:block}
@@ -222,13 +227,13 @@
     <p>A first-order model for entitlement-driven development sets profit this way:</p>
     <div class="eqline">profit(N) = N&times;price_per_lot &minus; total_cost</div>
     <p>Total cost is land, infrastructure, and the interest carried while the infrastructure is built. Break-even is the number of lots that has to sell to clear that total; below it, the project loses money.</p>
-    <p>The sliders and their ranges below are the developer&rsquo;s own. One term is added&mdash;<code>covenant_cost</code>, the fixed capital a recorded environmental covenant adds to a contaminated site. The blue line is the model as published; the red line is the same model with that term switched on.</p>
+    <p>The sliders and their ranges below are the developer&rsquo;s own. One term is added&mdash;<code>covenant_cost</code>, the fixed capital a recorded environmental covenant adds to a contaminated site&mdash;and it is folded into total cost, so the line below is the developer&rsquo;s model carrying that cost. Red marks where the project runs at a loss; green, where it clears its costs.</p>
   </div>
 
   <div class="body">
     <div class="eqns">
-      <div class="eq base"><span class="tag">as published&nbsp;&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry</div>
-      <div class="eq ext"><span class="tag">with covenant&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry <span class="add">&minus; covenant_cost</span></div>
+      <div class="eq base"><span class="tag">as published&nbsp;&nbsp;&nbsp;&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry</div>
+      <div class="eq ext"><span class="tag">plotted here&nbsp;&nbsp;&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry <span class="add">&minus; covenant_cost</span></div>
     </div>
 
     <p class="defn prose"><b>covenant_cost</b> is the capital a recorded environmental covenant adds to the dirt-work. On the Asti Road parcel, the 2013 Covenant and Environmental Restriction (Sonoma County, Doc. 2013088084) bars any excavation within the Restricted Soil Area except in strict compliance with the approved Soil Management Plan, requires all excavated soil to be handled and disposed under that plan, and requires every remedial measure to be preserved&mdash;obligations that bind each successive owner and, by their own terms, run in perpetuity.</p>
@@ -245,13 +250,14 @@
           <div class="stat"><div class="stat-label">Margin</div><div class="stat-val" id="s-marg">&mdash;</div></div>
           <div class="stat"><div class="stat-label">carry_cost</div><div class="stat-val" id="s-carry">&mdash;</div></div>
           <div class="stat"><div class="stat-label">IRR</div><div class="stat-val" id="s-irr">&mdash;</div></div>
-          <div class="stat be"><div class="stat-label">Break-even &middot; covenant</div><div class="stat-val" id="s-be">&mdash;</div></div>
+          <div class="stat be"><div class="stat-label">Break-even</div><div class="stat-val" id="s-be">&mdash;</div></div>
         </div>
       </div>
 
-      <div class="legend">
-        <span><span class="sw" style="background:var(--clay)"></span>as published</span>
-        <span><span class="sw" style="background:var(--red)"></span>with covenant_cost</span>
+      <div class="chartcap">
+        <span class="fillkey"><span class="sw sw-loss"></span>loss</span>
+        <span class="fillkey"><span class="sw sw-profit"></span>profit</span>
+        <span class="capnote"><code>covenant_cost</code> is folded into total cost. Model after Devon Zuegel, <a href="https://devonzuegel.com/land-development-math-is-alchemy">&ldquo;Land development math is alchemy.&rdquo;</a></span>
       </div>
 
       <div class="controls">
@@ -295,8 +301,8 @@
 
     <div class="method">
       <span class="method-label">Method &amp; sources</span>
-      <p>The model, its sliders, their ranges, and every default value are copied from Devon Zuegel, <a href="https://devonzuegel.com/land-development-math-is-alchemy">&ldquo;Land development math is alchemy&rdquo;</a> (devonzuegel.com, April&nbsp;6,&nbsp;2026). Its identities: <code>carry_cost = total_infra_cost &times; interest_rate &times; years</code>; <code>total_cost = land + infra + carry</code>; <code>IRR = (revenue / total_cost)^(1/years) &minus; 1</code>. With every slider at its default the readout matches the source exactly&mdash;$210M revenue, $79M cost, $131M profit, 62.4% margin, $9.0M carry, 63.0% IRR.</p>
-      <p>The <code>covenant_cost</code> term is added here and appears in no version of that model. It is treated as un-financed capital added to total cost; the break-even shown for the red line is <code>(land + infra + carry + covenant_cost) / price_per_lot</code>. Every value is an illustrative default, not a figure from any project pro forma&mdash;the magnitude of the added term is a slider, not an estimate, and a one-time capital figure understates a covenant cost that recurs with each ground-disturbing phase.</p>
+      <p>The model, its sliders, their ranges, and every default value are copied from Devon Zuegel, <a href="https://devonzuegel.com/land-development-math-is-alchemy">&ldquo;Land development math is alchemy&rdquo;</a> (devonzuegel.com, April&nbsp;6,&nbsp;2026). Its identities: <code>carry_cost = total_infra_cost &times; interest_rate &times; years</code>; <code>total_cost = land + infra + carry + covenant_cost</code>; <code>IRR = (revenue / total_cost)^(1/years) &minus; 1</code>. The red area is loss (left of break-even), the green area is profit (right).</p>
+      <p>The <code>covenant_cost</code> term is added here and appears in no version of that model; it is folded into total cost, so the single line plotted is the developer&rsquo;s model carrying that cost. Break-even is <code>(land + infra + carry + covenant_cost) / price_per_lot</code>. With <code>covenant_cost</code> at $0 the readout reproduces the source exactly&mdash;$210M revenue, $79M cost, $131M profit, 62.4% margin, $9.0M carry, 63.0% IRR; above $0 the covenant capital lowers profit and pushes break-even right. Every value is an illustrative default, not a figure from any project pro forma&mdash;the magnitude of the added term is a slider, not an estimate, and a one-time capital figure understates a covenant cost that recurs with each ground-disturbing phase.</p>
       <p>Covenant terms: Covenant and Environmental Restriction on Property, Alexander Valley Resort, recorded Sonoma County Sept.&nbsp;13,&nbsp;2013 as Doc.&nbsp;2013088084, Art.&nbsp;III &sect;3.1(e) and Art.&nbsp;IV &sect;4.3.</p>
     </div>
   </div>
@@ -338,12 +344,11 @@
 </main>
 
 <script>
-const CLAY="#1340e0", CLAY_DEEP="#001a80", RED="#c0341d", MUTE="#4a4f63", RULE="#c8cde0", GREEN="#2e7d32";
+const INK="#0a0a14", CLAY="#1340e0", CLAY_DEEP="#001a80", RED="#c0341d", MUTE="#4a4f63", RULE="#c8cde0", GREEN="#2e7d32";
 const state={N:700, ppl:300, infra:50, land:20, rate:9, years:2, cov:15};
-// plot geometry (copies the source: y -200M..400M, x 0..1000)
-const W=560,H=360,padL=52,padR=14,padT=16,padB=40, nMax=1000, yLo=-200, yHi=400;
+const W=560,H=360,padL=54,padR=16,padT=18,padB=40, nMax=1000;
 
-const fmtM=x=>"$"+(x).toFixed(x>=100||x<=-100?0:1)+"M";
+const fmtM=x=>(x<0?"-$":"$")+Math.abs(x).toFixed(Math.abs(x)>=100?0:1)+"M";
 const fmtU=x=>isFinite(x)?Math.round(x).toLocaleString("en-US"):"\u221e";
 function label(k,v){
   if(k==="ppl") return "$"+v+"k";
@@ -359,37 +364,43 @@ document.querySelectorAll(".slider").forEach(s=>{
 });
 
 function render(){
-  const perUnit=state.ppl/1000;                              // $M per lot
-  const carry=state.infra*(state.rate/100)*state.years;      // $M
-  const totalBase=state.land+state.infra+carry;              // $M
-  const totalExt=totalBase+state.cov;                        // $M
+  const perUnit=state.ppl/1000;                                   // $M per lot
+  const carry=state.infra*(state.rate/100)*state.years;           // $M
+  const total=state.land+state.infra+carry+state.cov;             // covenant folded in
   const revenue=state.N*perUnit;
-  const profitBase=revenue-totalBase;
-  const margin=revenue>0?(profitBase/revenue)*100:NaN;
-  const irr=(revenue>0&&totalBase>0)?(Math.pow(revenue/totalBase,1/state.years)-1)*100:NaN;
-  const beBase=perUnit>0?totalBase/perUnit:Infinity;
-  const beExt=perUnit>0?totalExt/perUnit:Infinity;
+  const profit=revenue-total;
+  const margin=revenue>0?(profit/revenue)*100:NaN;
+  const irr=(revenue>0&&total>0)?(Math.pow(revenue/total,1/state.years)-1)*100:NaN;
+  const be=perUnit>0?total/perUnit:Infinity;
 
-  // stat panel — the published model (blue line)
+  // stat panel — single model, covenant folded into total cost
   document.getElementById("s-rev").textContent=fmtM(revenue);
-  document.getElementById("s-cost").textContent=fmtM(totalBase);
-  document.getElementById("s-prof").textContent=fmtM(profitBase);
+  document.getElementById("s-cost").textContent=fmtM(total);
+  const pEl=document.getElementById("s-prof"); pEl.textContent=fmtM(profit);
+  pEl.style.color = profit>=0 ? GREEN : RED;
   document.getElementById("s-marg").textContent=isFinite(margin)?margin.toFixed(1)+"%":"\u2014";
   document.getElementById("s-carry").textContent=fmtM(carry);
   document.getElementById("s-irr").textContent=isFinite(irr)?irr.toFixed(1)+"%":"\u2014";
-  document.getElementById("s-be").textContent=fmtU(beExt)+" units";
+  document.getElementById("s-be").textContent=fmtU(be)+" units";
 
-  // chart
+  // profit at the ends of the x-range
+  const p0=-total, pN=nMax*perUnit-total;
+  // auto-scaled y-range with padding, always including 0
+  let lo=Math.min(p0,0), hi=Math.max(pN,0);
+  const pad=(hi-lo)*0.08 || 20; lo-=pad; hi+=pad;
+
   const xToPx=n=>padL+(n/nMax)*(W-padL-padR);
-  const yToPx=v=>padT+(1-((v)-yLo)/(yHi-yLo))*(H-padT-padB);
-  const profitAt=(n,tot)=>n*perUnit-tot;
+  const yToPx=v=>padT+(1-((v)-lo)/(hi-lo))*(H-padT-padB);
   const zeroY=yToPx(0);
+  const xL=xToPx(0), xR=xToPx(nMax);
+
   let s="";
-  // y gridlines + ticks every 100M
-  for(let v=yLo; v<=yHi; v+=100){
+  // horizontal gridlines at round 100s within range
+  const g0=Math.ceil(lo/100)*100, g1=Math.floor(hi/100)*100;
+  for(let v=g0; v<=g1; v+=100){
     const y=yToPx(v);
-    s+=`<line x1="${padL}" x2="${W-padR}" y1="${y}" y2="${y}" stroke="${RULE}" stroke-width="1" opacity="${v===0?0.9:0.35}"/>`;
-    s+=`<text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="${MUTE}">$${v}M</text>`;
+    s+=`<line x1="${padL}" x2="${xR}" y1="${y}" y2="${y}" stroke="${RULE}" stroke-width="1" opacity="${v===0?0.9:0.3}"/>`;
+    s+=`<text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="${MUTE}">${fmtM(v)}</text>`;
   }
   // x ticks
   for(let n=0;n<=nMax;n+=200){
@@ -397,27 +408,45 @@ function render(){
     s+=`<line x1="${x}" x2="${x}" y1="${H-padB}" y2="${H-padB+4}" stroke="${MUTE}" stroke-width="1"/>`;
     s+=`<text x="${x}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="${MUTE}">${n.toLocaleString("en-US")}</text>`;
   }
-  // axis titles
-  s+=`<text x="${padL+(W-padL-padR)/2}" y="${H-4}" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">UNITS SOLD</text>`;
+  s+=`<text x="${padL+(xR-padL)/2}" y="${H-4}" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">UNITS SOLD</text>`;
   s+=`<text transform="translate(13 ${padT+(H-padT-padB)/2}) rotate(-90)" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">PROFIT</text>`;
-  // break-even vertical guides
-  const guide=(n,c)=>(isFinite(n)&&n<=nMax)?`<line x1="${xToPx(n)}" x2="${xToPx(n)}" y1="${padT}" y2="${zeroY}" stroke="${c}" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>`:"";
-  s+=guide(beBase,CLAY);
-  s+=guide(beExt,RED);
-  // profit lines: blue (published) + red (with covenant)
-  const lineBase=`${xToPx(0)},${yToPx(profitAt(0,totalBase))} ${xToPx(nMax)},${yToPx(profitAt(nMax,totalBase))}`;
-  const lineExt=`${xToPx(0)},${yToPx(profitAt(0,totalExt))} ${xToPx(nMax)},${yToPx(profitAt(nMax,totalExt))}`;
-  s+=`<polyline points="${lineExt}" fill="none" stroke="${RED}" stroke-width="2.5"/>`;
-  s+=`<polyline points="${lineBase}" fill="none" stroke="${CLAY}" stroke-width="2.5"/>`;
-  // break-even dots on zero line
-  const dot=(n,c)=>(isFinite(n)&&n<=nMax)?`<circle cx="${xToPx(n)}" cy="${zeroY}" r="3.5" fill="${c}"/>`:"";
-  s+=dot(beBase,CLAY);
-  s+=dot(beExt,RED);
-  // current-N marker on published line
-  if(state.N<=nMax){
-    const cy=yToPx(profitAt(state.N,totalBase));
-    s+=`<circle cx="${xToPx(state.N)}" cy="${cy}" r="4.5" fill="none" stroke="${GREEN}" stroke-width="2"/>`;
+
+  // fill: red where profit<0 (left of break-even), green where profit>0 (right)
+  const y0=yToPx(p0), yN=yToPx(pN);
+  if(isFinite(be) && be>0 && be<=nMax){
+    const xbe=xToPx(be);
+    // red loss triangle: (0,zero)-(be,zero)-(0,p0)
+    s+=`<polygon points="${xL},${zeroY} ${xbe},${zeroY} ${xL},${y0}" fill="${RED}" fill-opacity="0.14"/>`;
+    // green profit triangle: (be,zero)-(nMax,zero)-(nMax,pN)
+    s+=`<polygon points="${xbe},${zeroY} ${xR},${zeroY} ${xR},${yN}" fill="${GREEN}" fill-opacity="0.14"/>`;
+  } else if(pN<0){
+    // entirely loss across the range
+    s+=`<polygon points="${xL},${zeroY} ${xR},${zeroY} ${xR},${yN} ${xL},${y0}" fill="${RED}" fill-opacity="0.14"/>`;
+  } else if(p0>0){
+    // entirely profit across the range
+    s+=`<polygon points="${xL},${zeroY} ${xR},${zeroY} ${xR},${yN} ${xL},${y0}" fill="${GREEN}" fill-opacity="0.14"/>`;
   }
+
+  // the profit line (black, like the source)
+  s+=`<polyline points="${xL},${y0} ${xR},${yN}" fill="none" stroke="${INK}" stroke-width="2.25"/>`;
+
+  // current-N crosshair + hollow marker
+  if(state.N<=nMax){
+    const cx=xToPx(state.N), cy=yToPx(profit);
+    s+=`<line x1="${cx}" x2="${cx}" y1="${cy}" y2="${H-padB}" stroke="${MUTE}" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
+    s+=`<line x1="${padL}" x2="${cx}" y1="${cy}" y2="${cy}" stroke="${MUTE}" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--paper-soft)" stroke="${profit>=0?GREEN:RED}" stroke-width="2"/>`;
+  }
+
+  // break-even dot + label
+  if(isFinite(be) && be>0 && be<=nMax){
+    const xbe=xToPx(be);
+    s+=`<circle cx="${xbe}" cy="${zeroY}" r="4" fill="${INK}"/>`;
+    const lx=xbe+8, ly=zeroY-14;
+    s+=`<path d="M${xbe+2},${zeroY-4} q6,-6 12,-7" fill="none" stroke="${INK}" stroke-width="1"/>`;
+    s+=`<text x="${lx+12}" y="${ly}" font-size="10" fill="${INK}">break-even</text>`;
+  }
+
   document.getElementById("chart").innerHTML=s;
 }
 render();
