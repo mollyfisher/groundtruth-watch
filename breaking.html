@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Break-Even · Ground Truth</title>
+<meta name="description" content="A first-order land-development profit model — copied from the developer's own interactive — extended with the one fixed cost a recorded environmental covenant adds to the site, and what it does to the break-even.">
+<meta name="theme-color" content="#fcfcff">
+<link rel="canonical" href="https://groundtruth.watch/break-even">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@layer reset, tokens, base, type, layout, components;
+@layer reset{ *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0} }
+@layer tokens{
+  :root{
+    --paper:#fcfcff; --paper-soft:#ffffff; --paper-deep:#eef0fa; --shell:#ffffff;
+    --ink:#0a0a14; --ink-soft:#1a1d2e; --ink-faded:#4a4f63;
+    --clay:#1340e0; --clay-deep:#001a80; --clay-light:color-mix(in oklab, var(--clay) 55%, var(--paper));
+    --cobalt:#1340e0; --cobalt-deep:#001a80;
+    --sage:#2a4378; --sage-deep:#0f1f4a; --sage-light:color-mix(in oklab, var(--sage) 35%, var(--paper));
+    --ochre:#1860c4; --ochre-deep:#0a4090;
+    --amber:#b9770f; --amber-soft:color-mix(in oklab, #b9770f 14%, var(--paper));
+    --red:#c0341d; --red-soft:color-mix(in oklab, #c0341d 12%, var(--paper));
+    --green:#2e7d32;
+    --rule:#c8cde0;
+    --fs-xs:clamp(0.75rem, 0.72rem + 0.15vw, 0.825rem);
+    --fs-sm:clamp(0.875rem, 0.85rem + 0.15vw, 0.95rem);
+    --fs-base:clamp(1.0625rem, 1.0rem + 0.35vw, 1.2rem);
+    --fs-md:clamp(1.2rem, 1.1rem + 0.5vw, 1.35rem);
+    --fs-lg:clamp(1.5rem, 1.3rem + 1vw, 1.85rem);
+    --fs-xl:clamp(1.85rem, 1.5rem + 1.75vw, 2.6rem);
+    --fs-2xl:clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+    --fs-3xl:clamp(3.25rem, 2.5rem + 3.75vw, 5.5rem);
+    --space-xs:0.5rem; --space-sm:1rem; --space-md:1.75rem; --space-lg:3rem; --space-xl:5rem; --space-2xl:7rem;
+    --radius-sm:6px; --radius-md:14px; --radius-lg:24px;
+    --radius-organic:28px 36px 32px 24px / 36px 28px 40px 30px;
+    --measure:38rem; --measure-wide:52rem; --measure-narrow:30rem;
+    --shadow-soft:0 1px 2px rgba(74,50,30,.06), 0 8px 24px rgba(74,50,30,.08);
+  }
+}
+@layer base{
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, color-mix(in oklab, var(--clay) 3%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 88% 78%, color-mix(in oklab, var(--sage) 3%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 50% 110%, color-mix(in oklab, var(--ochre) 2%, transparent) 0%, transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0 0.08 0 0 0 0.025 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-attachment:fixed; color:var(--ink);
+    font-family:'Newsreader','Iowan Old Style',Georgia,serif;
+    font-optical-sizing:auto; font-variation-settings:"opsz" 18;
+    font-size:var(--fs-base); line-height:1.7;
+    font-feature-settings:"kern" 1,"liga" 1;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  ::selection{background:color-mix(in oklab, var(--clay) 30%, transparent); color:var(--ink)}
+  :focus-visible{outline:2px solid var(--clay); outline-offset:3px; border-radius:2px}
+}
+@layer type{
+  h1,h2,h3,h4{font-family:'Fraunces',serif; color:var(--ink); text-wrap:balance; line-height:1.1}
+  p{text-wrap:pretty; hyphens:auto}
+  em{font-style:italic} strong{font-weight:600; color:var(--ink)}
+  a:not([class]){color:var(--clay-deep); text-decoration:underline; text-decoration-color:color-mix(in oklab, var(--clay) 50%, transparent); text-decoration-thickness:1.5px; text-underline-offset:3px; transition:text-decoration-color .2s ease}
+  a:not([class]):hover{text-decoration-color:var(--clay)}
+}
+@layer layout{
+  .page{max-width:70rem; margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem); padding-block:clamp(2rem,5vw,4rem) var(--space-2xl)}
+  .col{max-width:var(--measure); margin-inline:auto}
+  .col-wide{max-width:var(--measure-wide); margin-inline:auto}
+  /* threshold-style centering: prose at reading measure, interactive wider, all centered */
+  .prose{max-width:var(--measure); margin-inline:auto}
+}
+@layer components{
+  /* site nav — copied from dispatch template */
+  .sitenav{display:flex; align-items:baseline; justify-content:space-between; gap:0.75rem var(--space-md); flex-wrap:wrap; margin-bottom:var(--space-md); padding-bottom:var(--space-sm); border-bottom:1px solid var(--rule)}
+  .sitenav-brand{font-family:'Fraunces',serif; font-variation-settings:"opsz" 40,"wght" 700,"SOFT" 30; font-size:var(--fs-md); letter-spacing:-0.01em; color:var(--ink); text-decoration:none}
+  .sitenav-brand em{font-style:italic; color:var(--clay); font-variation-settings:"opsz" 40,"wght" 500,"SOFT" 100}
+  .sitenav-menu{position:relative}
+  .sitenav-menu > summary{list-style:none; cursor:pointer; user-select:none; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay); display:inline-flex; align-items:center; gap:0.5rem}
+  .sitenav-menu > summary::-webkit-details-marker{display:none}
+  .sitenav-menu > summary::after{content:"\25BE"; font-size:0.78em; transition:transform .2s ease}
+  .sitenav-menu[open] > summary::after{transform:rotate(180deg)}
+  .sitenav-panel{position:absolute; right:0; top:calc(100% + 0.7rem); z-index:30; width:max-content; max-width:calc(100vw - 2.5rem); display:flex; flex-direction:column; background:var(--paper-soft); border:1px solid var(--rule); border-radius:var(--radius-md); box-shadow:0 2px 4px rgba(19,64,224,.10),0 12px 32px rgba(0,26,128,.12); padding:var(--space-sm) var(--space-md)}
+  .sitenav-panel a{font-family:'Newsreader',serif; font-size:var(--fs-base); color:var(--ink-soft); text-decoration:none; padding:0.32rem 0}
+  .sitenav-panel a:hover{color:var(--clay-deep)}
+  .sitenav-panel a.is-current{color:var(--clay); font-style:italic}
+  .sitenav-group{font-family:'JetBrains Mono',monospace; font-size:var(--fs-xs); letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-faded); margin:0.7rem 0 0.25rem}
+  .sitenav-group:first-child{margin-top:0}
+
+  /* masthead — copied from dispatch template */
+  .masthead{position:relative; padding-block:var(--space-md); margin-bottom:var(--space-lg)}
+  .masthead-meta{display:flex; flex-wrap:wrap; gap:var(--space-sm) var(--space-md); justify-content:space-between; align-items:baseline; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-faded); padding-bottom:var(--space-sm); border-bottom:1px solid var(--rule)}
+  .masthead-meta > :first-child{color:var(--clay)}
+  .masthead .title{font-size:var(--fs-3xl); font-variation-settings:"opsz" 144,"wght" 800,"SOFT" 60; letter-spacing:-0.025em; line-height:0.92; color:var(--ink); margin-block:clamp(1.5rem,4vw,2.5rem) var(--space-sm)}
+  .masthead .title em{font-style:italic; color:var(--clay); font-variation-settings:"opsz" 144,"wght" 500,"SOFT" 100}
+  .masthead .subtitle{font-family:'Fraunces',serif; font-size:var(--fs-md); font-variation-settings:"opsz" 32,"wght" 400,"SOFT" 70; font-style:italic; line-height:1.4; color:var(--ink-soft); max-width:var(--measure); margin-bottom:var(--space-md)}
+  .masthead .dateline{display:inline-block; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage-deep); border-left:4px solid var(--clay); padding:0.5em 1em 0.5em 1em; margin-top:var(--space-xs)}
+
+  .telling p{font-size:var(--fs-base); margin-bottom:0.95em; color:var(--ink-soft)}
+  .telling p:last-child{margin-bottom:0}
+  .telling strong{color:var(--ink); font-weight:600}
+  .telling em{color:var(--clay-deep)}
+  .telling code, .defn code, .method code{font-family:'JetBrains Mono',monospace; font-size:0.86em}
+
+  /* standalone identity, on its own line */
+  .eqline{margin:0.9rem 0; font-family:'JetBrains Mono',monospace; font-size:var(--fs-sm); color:var(--ink-soft); padding:0.7rem 0.9rem; background:var(--paper-deep); border-radius:var(--radius-sm); text-align:center}
+  /* equations */
+  .eqns{margin:var(--space-md) auto; max-width:var(--measure-wide); display:grid; gap:0.5rem}
+  .eq{font-family:'JetBrains Mono',monospace; font-size:var(--fs-sm); padding:0.7rem 0.9rem; line-height:1.6}
+  .eq .tag{color:var(--ink-faded)}
+  .eq.base{background:var(--paper-deep); border-left:3px solid var(--clay); border-radius:0 var(--radius-md) var(--radius-md) 0}
+  .eq.ext{background:var(--red-soft); border-left:3px solid var(--red); border-radius:0 var(--radius-md) var(--radius-md) 0}
+  .eq.ext .add{color:var(--red)}
+
+  .defn{max-width:var(--measure); margin:var(--space-md) auto 0; font-family:'Newsreader',serif; font-size:var(--fs-base); line-height:1.6; color:var(--ink-soft)}
+  .defn b{color:var(--red); font-weight:700}
+
+  /* ---- interactive: copied from the source model's layout ---- */
+  .model{max-width:var(--measure-wide); margin:var(--space-lg) auto; background:var(--paper-soft); border:1px solid var(--rule); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden}
+  .model-top{display:grid; grid-template-columns:1fr 150px; gap:0; border-bottom:1px solid var(--rule)}
+  @media(max-width:560px){.model-top{grid-template-columns:1fr}}
+  .plot{padding:0.75rem 0.5rem 0.25rem}
+  svg{width:100%; height:auto; display:block}
+  #chart text{font-family:'DM Sans',sans-serif}
+  .statcol{display:flex; flex-direction:column; border-left:1px solid var(--rule)}
+  @media(max-width:560px){.statcol{flex-direction:row; flex-wrap:wrap; border-left:0; border-top:1px solid var(--rule)}}
+  .stat{padding:0.6rem 0.9rem; border-bottom:1px solid var(--paper-deep); text-align:right; flex:1 1 auto}
+  @media(max-width:560px){.stat{flex:1 1 33%; border-bottom:1px solid var(--paper-deep)}}
+  .stat-label{font-family:'DM Sans',sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faded); margin-bottom:0.15rem}
+  .stat-val{font-family:'JetBrains Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--ink-soft); line-height:1}
+  .stat.profit .stat-val{color:var(--green)}
+  .stat.be .stat-val{color:var(--red)}
+
+  .controls{padding:1rem 1.1rem 1.15rem}
+  .slider{padding:0.7rem 0; border-bottom:1px solid var(--paper-deep)}
+  .slider:last-child{border-bottom:0}
+  .slider-head{font-family:'JetBrains Mono',monospace; font-size:var(--fs-sm); color:var(--ink-soft)}
+  .slider-head .nm{color:var(--ink-soft)}
+  .slider-head .vv{font-weight:700; color:var(--clay-deep)}
+  .slider.ext .slider-head .vv{color:var(--red)}
+  .slider-row{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:0.6rem; margin:0.35rem 0 0.25rem}
+  .slider-row .end{font-family:'JetBrains Mono',monospace; font-size:var(--fs-xs); color:var(--ink-faded); white-space:nowrap}
+  input[type=range]{width:100%; accent-color:var(--clay)}
+  .slider.ext input[type=range]{accent-color:var(--red)}
+  .slider-desc{font-family:'Newsreader',serif; font-style:italic; font-size:var(--fs-sm); line-height:1.45; color:var(--ink-faded)}
+
+  .legend{display:flex; gap:1.25rem; padding:0.6rem 1.1rem 0; flex-wrap:wrap}
+  .legend span{display:flex; align-items:center; gap:0.4rem; font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); color:var(--ink-faded)}
+  .legend .sw{width:20px; height:3px; display:inline-block}
+
+  .method{max-width:var(--measure-wide); margin:var(--space-md) auto 0; padding-top:var(--space-sm); border-top:1px dashed color-mix(in oklab, var(--ink) 20%, transparent); font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); line-height:1.7; color:var(--ink-soft)}
+  .method-label{font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay); margin-bottom:0.5rem; display:block}
+  .method p{margin-bottom:0.55em}
+  .method a{color:var(--clay-deep); text-decoration:underline; text-decoration-color:color-mix(in oklab, var(--clay) 40%, transparent); text-underline-offset:2px}
+
+  /* site foot — copied from dispatch template */
+  .sitefoot{max-width:var(--measure-wide); margin-inline:auto; margin-top:var(--space-2xl); padding-top:var(--space-lg); border-top:1px solid var(--rule)}
+  .sitefoot-top{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:0.4rem 1rem; margin-bottom:var(--space-lg)}
+  .sitefoot-brand{font-family:'Fraunces',serif; font-variation-settings:"opsz" 48,"wght" 700,"SOFT" 30; font-size:var(--fs-lg); letter-spacing:-0.015em; color:var(--ink); text-decoration:none}
+  .sitefoot-brand em{font-style:italic; color:var(--clay); font-variation-settings:"opsz" 48,"wght" 500,"SOFT" 100}
+  .sitefoot-tag{font-family:'Newsreader',serif; font-style:italic; font-size:var(--fs-base); color:var(--ink-faded)}
+  .sitefoot-cols{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-md) var(--space-lg)}
+  .sitefoot-head{font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay); margin-bottom:0.6rem; padding-bottom:0.4rem; border-bottom:1px solid var(--rule)}
+  .sitefoot-col a{display:block; font-family:'Newsreader',serif; font-size:var(--fs-base); color:var(--ink-soft); text-decoration:none; padding:0.34rem 0}
+  .sitefoot-col a:hover{color:var(--clay-deep); text-decoration:underline; text-underline-offset:3px}
+  .sitefoot-col a.is-current{color:var(--clay); font-style:italic}
+  .sitefoot-note{margin-top:var(--space-lg); font-family:'DM Sans',sans-serif; font-size:var(--fs-xs); letter-spacing:0.04em; color:var(--ink-faded)}
+  @media(max-width:34rem){.sitefoot-cols{grid-template-columns:1fr}}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important} html{scroll-behavior:auto}}
+@media print{.sitenav{display:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <nav class="sitenav" aria-label="Ground Truth dispatches">
+    <a class="sitenav-brand" href="https://groundtruth.watch/">Ground <em>Truth</em></a>
+    <details class="sitenav-menu">
+      <summary>Dispatches</summary>
+      <div class="sitenav-panel">
+        <p class="sitenav-group">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda">We Asked the Binder</a>
+        <a href="https://groundtruth.watch/write">Write to City Hall</a>
+        <a href="https://groundtruth.watch/record">The Monitoring Record</a>
+        <a href="https://groundtruth.watch/oaktree">The Oak Tree</a>
+        <a href="https://groundtruth.watch/scale">The Scale of It</a>
+        <a href="https://groundtruth.watch/review">The Environmental Review</a>
+        <a href="https://groundtruth.watch/history">The Site Dossier</a>
+        <a href="https://groundtruth.watch/forgetting">The Covenant</a>
+        <a href="https://groundtruth.watch/threshold">The Risk Threshold</a>
+        <a href="https://groundtruth.watch/drift">The Drift</a>
+        <p class="sitenav-group">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed">The Wells</a>
+        <a href="https://groundtruth.watch/viewing">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust">About Construction Dust</a>
+      </div>
+    </details>
+  </nav>
+
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>An interactive model</span>
+      <span>Cloverdale, Sonoma County</span>
+      <span>Development math &middot; one added term</span>
+    </div>
+    <h1 class="title">The Break-<em>Even</em></h1>
+    <p class="subtitle">A fixed cost that scales with neither the number of lots nor the passage of time still moves the point where a project first turns a profit. The developer&rsquo;s own model, with one line added.</p>
+    <p class="dateline">Compiled August 2026</p>
+  </header>
+
+  <div class="prose telling">
+    <p>A first-order model for entitlement-driven development sets profit this way:</p>
+    <div class="eqline">profit(N) = N&times;price_per_lot &minus; total_cost</div>
+    <p>Total cost is land, infrastructure, and the interest carried while the infrastructure is built. Break-even is the number of lots that has to sell to clear that total; below it, the project loses money.</p>
+    <p>The sliders and their ranges below are the developer&rsquo;s own. One term is added&mdash;<code>covenant_cost</code>, the fixed capital a recorded environmental covenant adds to a contaminated site. The blue line is the model as published; the red line is the same model with that term switched on.</p>
+  </div>
+
+  <div class="body">
+    <div class="eqns">
+      <div class="eq base"><span class="tag">as published&nbsp;&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry</div>
+      <div class="eq ext"><span class="tag">with covenant&nbsp;</span>profit(N) = N&times;price_per_lot &minus; land &minus; infra &minus; carry <span class="add">&minus; covenant_cost</span></div>
+    </div>
+
+    <p class="defn prose"><b>covenant_cost</b> is the capital a recorded environmental covenant adds to the dirt-work. On the Asti Road parcel, the 2013 Covenant and Environmental Restriction (Sonoma County, Doc. 2013088084) bars any excavation within the Restricted Soil Area except in strict compliance with the approved Soil Management Plan, requires all excavated soil to be handled and disposed under that plan, and requires every remedial measure to be preserved&mdash;obligations that bind each successive owner and, by their own terms, run in perpetuity.</p>
+
+    <div class="model">
+      <div class="model-top">
+        <div class="plot">
+          <svg id="chart" viewBox="0 0 560 360" role="img" aria-label="Profit versus units sold, as published versus with covenant cost"></svg>
+        </div>
+        <div class="statcol">
+          <div class="stat"><div class="stat-label">Revenue</div><div class="stat-val" id="s-rev">&mdash;</div></div>
+          <div class="stat"><div class="stat-label">Total cost</div><div class="stat-val" id="s-cost">&mdash;</div></div>
+          <div class="stat profit"><div class="stat-label">Profit</div><div class="stat-val" id="s-prof">&mdash;</div></div>
+          <div class="stat"><div class="stat-label">Margin</div><div class="stat-val" id="s-marg">&mdash;</div></div>
+          <div class="stat"><div class="stat-label">carry_cost</div><div class="stat-val" id="s-carry">&mdash;</div></div>
+          <div class="stat"><div class="stat-label">IRR</div><div class="stat-val" id="s-irr">&mdash;</div></div>
+          <div class="stat be"><div class="stat-label">Break-even &middot; covenant</div><div class="stat-val" id="s-be">&mdash;</div></div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><span class="sw" style="background:var(--clay)"></span>as published</span>
+        <span><span class="sw" style="background:var(--red)"></span>with covenant_cost</span>
+      </div>
+
+      <div class="controls">
+        <div class="slider" data-key="N">
+          <div class="slider-head"><span class="nm">N (units)</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">50</span><input type="range" min="50" max="1000" step="10" value="700"><span class="end">1,000</span></div>
+          <div class="slider-desc">The number of entitled units you can build &mdash; the single most important factor; if you can&rsquo;t build many units, the land is essentially worthless</div>
+        </div>
+        <div class="slider" data-key="ppl">
+          <div class="slider-head"><span class="nm">price_per_lot</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">$100k</span><input type="range" min="100" max="500" step="10" value="300"><span class="end">$500k</span></div>
+          <div class="slider-desc">How much each entitled lot is worth to a buyer</div>
+        </div>
+        <div class="slider" data-key="infra">
+          <div class="slider-head"><span class="nm">total_infra_cost</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">$10M</span><input type="range" min="10" max="200" step="5" value="50"><span class="end">$200M</span></div>
+          <div class="slider-desc">The cost of building the roads, utilities, and grading to make the land developable</div>
+        </div>
+        <div class="slider" data-key="land">
+          <div class="slider-head"><span class="nm">land_cost</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">$0</span><input type="range" min="0" max="80" step="5" value="20"><span class="end">$80M</span></div>
+          <div class="slider-desc">The price you pay for the land itself &mdash; often a smaller portion of total cost than the infrastructure</div>
+        </div>
+        <div class="slider" data-key="rate">
+          <div class="slider-head"><span class="nm">interest_rate</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">3%</span><input type="range" min="3" max="20" step="1" value="9"><span class="end">20%</span></div>
+          <div class="slider-desc">The rate of interest charged on the infrastructure loan</div>
+        </div>
+        <div class="slider" data-key="years">
+          <div class="slider-head"><span class="nm">years to build infra</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">1</span><input type="range" min="1" max="8" step="1" value="2"><span class="end">8</span></div>
+          <div class="slider-desc">How long it takes to build the infrastructure and sell the lots, which affects both the IRR and how much interest you pay</div>
+        </div>
+        <div class="slider ext" data-key="cov">
+          <div class="slider-head"><span class="nm">covenant_cost</span> = <span class="vv"></span></div>
+          <div class="slider-row"><span class="end">$0</span><input type="range" min="0" max="40" step="1" value="15"><span class="end">$40M</span></div>
+          <div class="slider-desc">Soil-management capital added by the recorded covenant &mdash; the one term the published model has no line for</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="method">
+      <span class="method-label">Method &amp; sources</span>
+      <p>The model, its sliders, their ranges, and every default value are copied from Devon Zuegel, <a href="https://devonzuegel.com/land-development-math-is-alchemy">&ldquo;Land development math is alchemy&rdquo;</a> (devonzuegel.com, April&nbsp;6,&nbsp;2026). Its identities: <code>carry_cost = total_infra_cost &times; interest_rate &times; years</code>; <code>total_cost = land + infra + carry</code>; <code>IRR = (revenue / total_cost)^(1/years) &minus; 1</code>. With every slider at its default the readout matches the source exactly&mdash;$210M revenue, $79M cost, $131M profit, 62.4% margin, $9.0M carry, 63.0% IRR.</p>
+      <p>The <code>covenant_cost</code> term is added here and appears in no version of that model. It is treated as un-financed capital added to total cost; the break-even shown for the red line is <code>(land + infra + carry + covenant_cost) / price_per_lot</code>. Every value is an illustrative default, not a figure from any project pro forma&mdash;the magnitude of the added term is a slider, not an estimate, and a one-time capital figure understates a covenant cost that recurs with each ground-disturbing phase.</p>
+      <p>Covenant terms: Covenant and Environmental Restriction on Property, Alexander Valley Resort, recorded Sonoma County Sept.&nbsp;13,&nbsp;2013 as Doc.&nbsp;2013088084, Art.&nbsp;III &sect;3.1(e) and Art.&nbsp;IV &sect;4.3.</p>
+    </div>
+  </div>
+
+  <footer class="sitefoot">
+    <div class="sitefoot-top">
+      <a class="sitefoot-brand" href="https://groundtruth.watch/">Ground <em>Truth</em></a>
+      <span class="sitefoot-tag">A citizen&rsquo;s documentary record &middot; 266 acres south of Cloverdale</span>
+    </div>
+    <div class="sitefoot-cols">
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">I &middot; In the record</p>
+        <a href="https://groundtruth.watch/chronicle">The Chronicle</a>
+        <a href="https://groundtruth.watch/telling">Telling the Ground Truth</a>
+        <a href="https://groundtruth.watch/sources">Sources &amp; Documents</a>
+        <a href="https://groundtruth.watch/comments">The Public Record</a>
+        <a href="https://groundtruth.watch/faqanda">We Asked the Binder</a>
+        <a href="https://groundtruth.watch/write">Write to City Hall</a>
+        <a href="https://groundtruth.watch/record">The Monitoring Record</a>
+        <a href="https://groundtruth.watch/oaktree">The Oak Tree</a>
+        <a href="https://groundtruth.watch/scale">The Scale of It</a>
+        <a href="https://groundtruth.watch/review">The Environmental Review</a>
+        <a href="https://groundtruth.watch/history">The Site Dossier</a>
+        <a href="https://groundtruth.watch/forgetting">The Covenant</a>
+        <a href="https://groundtruth.watch/threshold">The Risk Threshold</a>
+        <a href="https://groundtruth.watch/drift">The Drift</a>
+      </div>
+      <div class="sitefoot-col">
+        <p class="sitefoot-head">II &middot; On the ground</p>
+        <a href="https://groundtruth.watch/destroyed">The Wells</a>
+        <a href="https://groundtruth.watch/viewing">A View from Above</a>
+        <a href="https://groundtruth.watch/underfoot">Masonite Mill, 1965</a>
+        <a href="https://groundtruth.watch/status-quo">Cloverdale, 2018 / 2024</a>
+        <a href="https://groundtruth.watch/dust">About Construction Dust</a>
+      </div>
+    </div>
+    <p class="sitefoot-note">Public records only. Distribute freely; correct generously.</p>
+  </footer>
+</main>
+
+<script>
+const CLAY="#1340e0", CLAY_DEEP="#001a80", RED="#c0341d", MUTE="#4a4f63", RULE="#c8cde0", GREEN="#2e7d32";
+const state={N:700, ppl:300, infra:50, land:20, rate:9, years:2, cov:15};
+// plot geometry (copies the source: y -200M..400M, x 0..1000)
+const W=560,H=360,padL=52,padR=14,padT=16,padB=40, nMax=1000, yLo=-200, yHi=400;
+
+const fmtM=x=>"$"+(x).toFixed(x>=100||x<=-100?0:1)+"M";
+const fmtU=x=>isFinite(x)?Math.round(x).toLocaleString("en-US"):"\u221e";
+function label(k,v){
+  if(k==="ppl") return "$"+v+"k";
+  if(k==="infra"||k==="land"||k==="cov") return "$"+v+"M";
+  if(k==="rate") return v+"%";
+  if(k==="N") return v.toLocaleString("en-US");
+  return ""+v;
+}
+document.querySelectorAll(".slider").forEach(s=>{
+  const k=s.dataset.key, inp=s.querySelector("input"), vv=s.querySelector(".vv");
+  const on=()=>{state[k]=parseFloat(inp.value); vv.textContent=label(k,state[k]); render();};
+  inp.addEventListener("input",on); vv.textContent=label(k,state[k]);
+});
+
+function render(){
+  const perUnit=state.ppl/1000;                              // $M per lot
+  const carry=state.infra*(state.rate/100)*state.years;      // $M
+  const totalBase=state.land+state.infra+carry;              // $M
+  const totalExt=totalBase+state.cov;                        // $M
+  const revenue=state.N*perUnit;
+  const profitBase=revenue-totalBase;
+  const margin=revenue>0?(profitBase/revenue)*100:NaN;
+  const irr=(revenue>0&&totalBase>0)?(Math.pow(revenue/totalBase,1/state.years)-1)*100:NaN;
+  const beBase=perUnit>0?totalBase/perUnit:Infinity;
+  const beExt=perUnit>0?totalExt/perUnit:Infinity;
+
+  // stat panel — the published model (blue line)
+  document.getElementById("s-rev").textContent=fmtM(revenue);
+  document.getElementById("s-cost").textContent=fmtM(totalBase);
+  document.getElementById("s-prof").textContent=fmtM(profitBase);
+  document.getElementById("s-marg").textContent=isFinite(margin)?margin.toFixed(1)+"%":"\u2014";
+  document.getElementById("s-carry").textContent=fmtM(carry);
+  document.getElementById("s-irr").textContent=isFinite(irr)?irr.toFixed(1)+"%":"\u2014";
+  document.getElementById("s-be").textContent=fmtU(beExt)+" units";
+
+  // chart
+  const xToPx=n=>padL+(n/nMax)*(W-padL-padR);
+  const yToPx=v=>padT+(1-((v)-yLo)/(yHi-yLo))*(H-padT-padB);
+  const profitAt=(n,tot)=>n*perUnit-tot;
+  const zeroY=yToPx(0);
+  let s="";
+  // y gridlines + ticks every 100M
+  for(let v=yLo; v<=yHi; v+=100){
+    const y=yToPx(v);
+    s+=`<line x1="${padL}" x2="${W-padR}" y1="${y}" y2="${y}" stroke="${RULE}" stroke-width="1" opacity="${v===0?0.9:0.35}"/>`;
+    s+=`<text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="${MUTE}">$${v}M</text>`;
+  }
+  // x ticks
+  for(let n=0;n<=nMax;n+=200){
+    const x=xToPx(n);
+    s+=`<line x1="${x}" x2="${x}" y1="${H-padB}" y2="${H-padB+4}" stroke="${MUTE}" stroke-width="1"/>`;
+    s+=`<text x="${x}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="${MUTE}">${n.toLocaleString("en-US")}</text>`;
+  }
+  // axis titles
+  s+=`<text x="${padL+(W-padL-padR)/2}" y="${H-4}" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">UNITS SOLD</text>`;
+  s+=`<text transform="translate(13 ${padT+(H-padT-padB)/2}) rotate(-90)" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">PROFIT</text>`;
+  // break-even vertical guides
+  const guide=(n,c)=>(isFinite(n)&&n<=nMax)?`<line x1="${xToPx(n)}" x2="${xToPx(n)}" y1="${padT}" y2="${zeroY}" stroke="${c}" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>`:"";
+  s+=guide(beBase,CLAY);
+  s+=guide(beExt,RED);
+  // profit lines: blue (published) + red (with covenant)
+  const lineBase=`${xToPx(0)},${yToPx(profitAt(0,totalBase))} ${xToPx(nMax)},${yToPx(profitAt(nMax,totalBase))}`;
+  const lineExt=`${xToPx(0)},${yToPx(profitAt(0,totalExt))} ${xToPx(nMax)},${yToPx(profitAt(nMax,totalExt))}`;
+  s+=`<polyline points="${lineExt}" fill="none" stroke="${RED}" stroke-width="2.5"/>`;
+  s+=`<polyline points="${lineBase}" fill="none" stroke="${CLAY}" stroke-width="2.5"/>`;
+  // break-even dots on zero line
+  const dot=(n,c)=>(isFinite(n)&&n<=nMax)?`<circle cx="${xToPx(n)}" cy="${zeroY}" r="3.5" fill="${c}"/>`:"";
+  s+=dot(beBase,CLAY);
+  s+=dot(beExt,RED);
+  // current-N marker on published line
+  if(state.N<=nMax){
+    const cy=yToPx(profitAt(state.N,totalBase));
+    s+=`<circle cx="${xToPx(state.N)}" cy="${cy}" r="4.5" fill="none" stroke="${GREEN}" stroke-width="2"/>`;
+  }
+  document.getElementById("chart").innerHTML=s;
+}
+render();
+</script>
+</body>
+</html>
