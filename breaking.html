@@ -143,6 +143,8 @@
   .slider.ext .slider-head .vv{color:var(--red)}
   .slider-row{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:0.6rem; margin:0.35rem 0 0.25rem}
   .slider-row .end{font-family:'JetBrains Mono',monospace; font-size:var(--fs-xs); color:var(--ink-faded); white-space:nowrap}
+  .slider-head .vv{cursor:text}
+  .val-input{font-family:'JetBrains Mono',monospace; font-size:var(--fs-sm); font-weight:700; color:var(--clay-deep); width:6.5ch; background:var(--paper-deep); border:1px solid var(--rule); border-radius:3px; padding:0 0.2rem}
   input[type=range]{width:100%; accent-color:var(--clay)}
   .slider.ext input[type=range]{accent-color:var(--red)}
   .slider-desc{font-family:'Newsreader',serif; font-style:italic; font-size:var(--fs-sm); line-height:1.45; color:var(--ink-faded)}
@@ -273,17 +275,17 @@
         </div>
         <div class="slider" data-key="infra">
           <div class="slider-head"><span class="nm">total_infra_cost</span> = <span class="vv"></span></div>
-          <div class="slider-row"><span class="end">$10M</span><input type="range" min="10" max="200" step="5" value="50"><span class="end">$200M</span></div>
+          <div class="slider-row"><span class="end">$10M</span><input type="range" min="10" max="200" step="1" value="50"><span class="end">$200M</span></div>
           <div class="slider-desc">The cost of building the roads, utilities, and grading to make the land developable</div>
         </div>
         <div class="slider" data-key="land">
           <div class="slider-head"><span class="nm">land_cost</span> = <span class="vv"></span></div>
-          <div class="slider-row"><span class="end">$0</span><input type="range" min="0" max="80" step="5" value="20"><span class="end">$80M</span></div>
+          <div class="slider-row"><span class="end">$0</span><input type="range" min="0" max="80" step="1" value="20"><span class="end">$80M</span></div>
           <div class="slider-desc">The price you pay for the land itself &mdash; often a smaller portion of total cost than the infrastructure</div>
         </div>
         <div class="slider" data-key="rate">
           <div class="slider-head"><span class="nm">interest_rate</span> = <span class="vv"></span></div>
-          <div class="slider-row"><span class="end">3%</span><input type="range" min="3" max="20" step="1" value="9"><span class="end">20%</span></div>
+          <div class="slider-row"><span class="end">3%</span><input type="range" min="3" max="20" step="0.25" value="9"><span class="end">20%</span></div>
           <div class="slider-desc">The rate of interest charged on the infrastructure loan</div>
         </div>
         <div class="slider" data-key="years">
@@ -344,23 +346,46 @@
 </main>
 
 <script>
-const INK="#0a0a14", CLAY="#1340e0", CLAY_DEEP="#001a80", RED="#c0341d", MUTE="#4a4f63", RULE="#c8cde0", GREEN="#2e7d32";
+const INK="#0a0a14", RED="#c0341d", MUTE="#4a4f63", RULE="#c8cde0", GREEN="#2e7d32";
+const GRID="rgba(10,10,20,0.05)", ZEROAX="rgba(10,10,20,0.18)", ANNOT="rgba(10,10,20,0.25)";
 const state={N:700, ppl:300, infra:50, land:20, rate:9, years:2, cov:15};
 const W=560,H=360,padL=54,padR=16,padT=18,padB=40, nMax=1000;
 
-const fmtM=x=>(x<0?"-$":"$")+Math.abs(x).toFixed(Math.abs(x)>=100?0:1)+"M";
+// y-window is fixed and SHIFTS with total cost — copied from the source model,
+// so the profit line stays visually fixed and the zero-profit level moves.
+let yMin=-200, yMax=400, prevBaseCost=null;
+
+const fmtM=x=>(x<0?"-$":"$")+(Math.abs(x)>=10?Math.round(Math.abs(x)):Math.abs(x).toFixed(1))+"M";
 const fmtU=x=>isFinite(x)?Math.round(x).toLocaleString("en-US"):"\u221e";
 function label(k,v){
   if(k==="ppl") return "$"+v+"k";
   if(k==="infra"||k==="land"||k==="cov") return "$"+v+"M";
-  if(k==="rate") return v+"%";
-  if(k==="N") return v.toLocaleString("en-US");
+  if(k==="rate") return v.toFixed(2).replace(/\.?0+$/,"")+"%";
   return ""+v;
 }
 document.querySelectorAll(".slider").forEach(s=>{
   const k=s.dataset.key, inp=s.querySelector("input"), vv=s.querySelector(".vv");
-  const on=()=>{state[k]=parseFloat(inp.value); vv.textContent=label(k,state[k]); render();};
-  inp.addEventListener("input",on); vv.textContent=label(k,state[k]);
+  inp.addEventListener("input",()=>{state[k]=parseFloat(inp.value); vv.textContent=label(k,state[k]); render();});
+  vv.textContent=label(k,state[k]);
+  // click-to-edit on the value readout — copied from the source model
+  vv.addEventListener("click",()=>{
+    const box=document.createElement("input");
+    box.type="number"; box.className="val-input";
+    box.min=inp.min; box.max=inp.max; box.step=inp.step; box.value=inp.value;
+    vv.replaceWith(box); box.focus(); box.select();
+    const commit=()=>{
+      let v=parseFloat(box.value);
+      if(isNaN(v)) v=parseFloat(inp.value);
+      v=Math.min(Math.max(v,parseFloat(inp.min)),parseFloat(inp.max));
+      inp.value=v; state[k]=v;
+      box.replaceWith(vv); vv.textContent=label(k,state[k]); render();
+    };
+    box.addEventListener("blur",commit);
+    box.addEventListener("keydown",e=>{
+      if(e.key==="Enter"){e.preventDefault(); commit();}
+      if(e.key==="Escape"){box.replaceWith(vv);}
+    });
+  });
 });
 
 function render(){
@@ -373,7 +398,10 @@ function render(){
   const irr=(revenue>0&&total>0)?(Math.pow(revenue/total,1/state.years)-1)*100:NaN;
   const be=perUnit>0?total/perUnit:Infinity;
 
-  // stat panel — single model, covenant folded into total cost
+  // shift the y-window by the change in total cost (source behavior)
+  if(prevBaseCost!==null){ const d=total-prevBaseCost; yMin-=d; yMax-=d; }
+  prevBaseCost=total;
+
   document.getElementById("s-rev").textContent=fmtM(revenue);
   document.getElementById("s-cost").textContent=fmtM(total);
   const pEl=document.getElementById("s-prof"); pEl.textContent=fmtM(profit);
@@ -383,71 +411,68 @@ function render(){
   document.getElementById("s-irr").textContent=isFinite(irr)?irr.toFixed(1)+"%":"\u2014";
   document.getElementById("s-be").textContent=fmtU(be)+" units";
 
-  // profit at the ends of the x-range
-  const p0=-total, pN=nMax*perUnit-total;
-  // auto-scaled y-range with padding, always including 0
-  let lo=Math.min(p0,0), hi=Math.max(pN,0);
-  const pad=(hi-lo)*0.08 || 20; lo-=pad; hi+=pad;
-
   const xToPx=n=>padL+(n/nMax)*(W-padL-padR);
-  const yToPx=v=>padT+(1-((v)-lo)/(hi-lo))*(H-padT-padB);
-  const zeroY=yToPx(0);
-  const xL=xToPx(0), xR=xToPx(nMax);
+  const yToPx=v=>padT+(1-(v-yMin)/(yMax-yMin))*(H-padT-padB);
+  const zeroY=yToPx(0), xL=xToPx(0), xR=xToPx(nMax);
+  const p0=-total, pN=nMax*perUnit-total;
+  const y0=yToPx(p0), yN=yToPx(pN);
+  const plotTop=padT, plotBot=H-padB;
 
-  let s="";
-  // horizontal gridlines at round 100s within range
-  const g0=Math.ceil(lo/100)*100, g1=Math.floor(hi/100)*100;
+  let s=`<defs><clipPath id="plotclip"><rect x="${padL}" y="${plotTop}" width="${xR-padL}" height="${plotBot-plotTop}"/></clipPath></defs>`;
+
+  // gridlines
+  const g0=Math.ceil(yMin/100)*100, g1=Math.floor(yMax/100)*100;
   for(let v=g0; v<=g1; v+=100){
     const y=yToPx(v);
-    s+=`<line x1="${padL}" x2="${xR}" y1="${y}" y2="${y}" stroke="${RULE}" stroke-width="1" opacity="${v===0?0.9:0.3}"/>`;
-    s+=`<text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="${MUTE}">${fmtM(v)}</text>`;
+    s+=`<line x1="${padL}" x2="${xR}" y1="${y}" y2="${y}" stroke="${GRID}" stroke-width="1"/>`;
+    s+=`<text x="${padL-6}" y="${y+3}" text-anchor="end" font-size="9" fill="${MUTE}">$${v.toFixed(0)}M</text>`;
   }
-  // x ticks
   for(let n=0;n<=nMax;n+=200){
     const x=xToPx(n);
-    s+=`<line x1="${x}" x2="${x}" y1="${H-padB}" y2="${H-padB+4}" stroke="${MUTE}" stroke-width="1"/>`;
-    s+=`<text x="${x}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="${MUTE}">${n.toLocaleString("en-US")}</text>`;
+    s+=`<line x1="${x}" x2="${x}" y1="${plotTop}" y2="${plotBot}" stroke="${GRID}" stroke-width="1"/>`;
+    s+=`<text x="${x}" y="${plotBot+16}" text-anchor="middle" font-size="9" fill="${MUTE}">${n.toLocaleString("en-US")}</text>`;
   }
+  s+=`<line x1="${padL}" x2="${padL}" y1="${plotTop}" y2="${plotBot}" stroke="${ZEROAX}" stroke-width="2"/>`;
   s+=`<text x="${padL+(xR-padL)/2}" y="${H-4}" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">UNITS SOLD</text>`;
   s+=`<text transform="translate(13 ${padT+(H-padT-padB)/2}) rotate(-90)" text-anchor="middle" font-size="9.5" fill="${MUTE}" letter-spacing="1">PROFIT</text>`;
 
-  // fill: red where profit<0 (left of break-even), green where profit>0 (right)
-  const y0=yToPx(p0), yN=yToPx(pN);
-  if(isFinite(be) && be>0 && be<=nMax){
+  let c=`<g clip-path="url(#plotclip)">`;
+  // fills: red below zero, green above
+  if(isFinite(be) && be>0 && be<nMax){
     const xbe=xToPx(be);
-    // red loss triangle: (0,zero)-(be,zero)-(0,p0)
-    s+=`<polygon points="${xL},${zeroY} ${xbe},${zeroY} ${xL},${y0}" fill="${RED}" fill-opacity="0.14"/>`;
-    // green profit triangle: (be,zero)-(nMax,zero)-(nMax,pN)
-    s+=`<polygon points="${xbe},${zeroY} ${xR},${zeroY} ${xR},${yN}" fill="${GREEN}" fill-opacity="0.14"/>`;
-  } else if(pN<0){
-    // entirely loss across the range
-    s+=`<polygon points="${xL},${zeroY} ${xR},${zeroY} ${xR},${yN} ${xL},${y0}" fill="${RED}" fill-opacity="0.14"/>`;
-  } else if(p0>0){
-    // entirely profit across the range
-    s+=`<polygon points="${xL},${zeroY} ${xR},${zeroY} ${xR},${yN} ${xL},${y0}" fill="${GREEN}" fill-opacity="0.14"/>`;
+    const lf=p0<0?RED:GREEN, lo=p0<0?0.15:0.12;
+    const rf=pN<0?RED:GREEN, ro=pN<0?0.15:0.12;
+    c+=`<polygon points="${xL},${zeroY} ${xbe},${zeroY} ${xL},${y0}" fill="${lf}" fill-opacity="${lo}"/>`;
+    c+=`<polygon points="${xbe},${zeroY} ${xR},${zeroY} ${xR},${yN}" fill="${rf}" fill-opacity="${ro}"/>`;
+  } else {
+    const f=pN<0?RED:GREEN, o=pN<0?0.15:0.12;
+    c+=`<polygon points="${xL},${zeroY} ${xR},${zeroY} ${xR},${yN} ${xL},${y0}" fill="${f}" fill-opacity="${o}"/>`;
   }
-
-  // the profit line (black, like the source)
-  s+=`<polyline points="${xL},${y0} ${xR},${yN}" fill="none" stroke="${INK}" stroke-width="2.25"/>`;
-
-  // current-N crosshair + hollow marker
-  if(state.N<=nMax){
-    const cx=xToPx(state.N), cy=yToPx(profit);
-    s+=`<line x1="${cx}" x2="${cx}" y1="${cy}" y2="${H-padB}" stroke="${MUTE}" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
-    s+=`<line x1="${padL}" x2="${cx}" y1="${cy}" y2="${cy}" stroke="${MUTE}" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
-    s+=`<circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--paper-soft)" stroke="${profit>=0?GREEN:RED}" stroke-width="2"/>`;
-  }
-
-  // break-even dot + label
-  if(isFinite(be) && be>0 && be<=nMax){
+  // zero-profit line
+  c+=`<line x1="${xL}" x2="${xR}" y1="${zeroY}" y2="${zeroY}" stroke="${ZEROAX}" stroke-width="2"/>`;
+  // profit line
+  c+=`<polyline points="${xL},${y0} ${xR},${yN}" fill="none" stroke="${INK}" stroke-width="1.5"/>`;
+  // full-width / full-height dashed crosshair at current N
+  const cx=xToPx(state.N), cy=yToPx(profit);
+  c+=`<line x1="${cx}" x2="${cx}" y1="${plotTop}" y2="${plotBot}" stroke="${ANNOT}" stroke-width="1" stroke-dasharray="4 4"/>`;
+  c+=`<line x1="${padL}" x2="${xR}" y1="${cy}" y2="${cy}" stroke="${ANNOT}" stroke-width="1" stroke-dasharray="4 4"/>`;
+  c+=`<circle cx="${cx}" cy="${cy}" r="6" fill="var(--paper-soft)" stroke="${profit>=0?GREEN:RED}" stroke-width="2"/>`;
+  // break-even: dot, label 44px above, curved arrow down to the dot
+  if(isFinite(be)){
     const xbe=xToPx(be);
-    s+=`<circle cx="${xbe}" cy="${zeroY}" r="4" fill="${INK}"/>`;
-    const lx=xbe+8, ly=zeroY-14;
-    s+=`<path d="M${xbe+2},${zeroY-4} q6,-6 12,-7" fill="none" stroke="${INK}" stroke-width="1"/>`;
-    s+=`<text x="${lx+12}" y="${ly}" font-size="10" fill="${INK}">break-even</text>`;
+    c+=`<circle cx="${xbe}" cy="${zeroY}" r="5" fill="${INK}"/>`;
+    const y1=zeroY-30, y2=zeroY-8, cpx=xbe+8, cpy=(y1+y2)/2;
+    c+=`<path d="M${xbe},${y1} Q${cpx},${cpy} ${xbe},${y2}" fill="none" stroke="${INK}" stroke-width="1"/>`;
+    const t=0.98;
+    const tx=(1-t)*(1-t)*xbe+2*(1-t)*t*cpx+t*t*xbe;
+    const ty=(1-t)*(1-t)*y1+2*(1-t)*t*cpy+t*t*y2;
+    const a=Math.atan2(y2-ty,xbe-tx), hl=7;
+    c+=`<polygon points="${xbe},${y2} ${xbe-hl*Math.cos(a-0.4)},${y2-hl*Math.sin(a-0.4)} ${xbe-hl*Math.cos(a+0.4)},${y2-hl*Math.sin(a+0.4)}" fill="${INK}"/>`;
+    c+=`<text x="${xbe}" y="${zeroY-40.5}" text-anchor="middle" font-size="10" font-family="'JetBrains Mono',monospace" fill="${INK}">break-even</text>`;
   }
+  c+=`</g>`;
 
-  document.getElementById("chart").innerHTML=s;
+  document.getElementById("chart").innerHTML=s+c;
 }
 render();
 </script>
